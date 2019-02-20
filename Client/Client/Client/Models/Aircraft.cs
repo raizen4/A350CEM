@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Client.Models
 {
-    class Aircraft
+    public class Aircraft
     {
     }
 }
