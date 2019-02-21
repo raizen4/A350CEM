@@ -9,7 +9,19 @@ namespace Client.Interfaces
 {
    public interface IApiWrapper
     {
-        void InitializeApi();
+        void InitialiseApi();
+
+        // Login
+        Task<HttpResponseMessage> Login(string password);
+
         Task<HttpResponseMessage> GetEmployees();
+
+        Task<HttpResponseMessage> GetAircrafts();
+
+        Task<HttpResponseMessage> GetTeams();
+
+        Task<HttpResponseMessage> GetMembers();
+
+        Task<HttpResponseMessage> GetTasks();
     }
 }
