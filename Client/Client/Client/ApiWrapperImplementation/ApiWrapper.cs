@@ -58,10 +58,9 @@ namespace Client.ApiWrapperImplementation
         }
 
         /// <inheritdoc />
-        public async Task<HttpResponseMessage> Login()
+        public async Task<HttpResponseMessage> Login(string password)
         {
-            this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Constants.Token);
-            var result = await this.API.Login();
+            var result = await this.API.Login(password);
             return result;
         }
 
@@ -89,6 +88,13 @@ namespace Client.ApiWrapperImplementation
             return result;
         }
 
+        /// <inheritdoc />
+        public async Task<HttpResponseMessage> GetTeam(string teamId)
+        {
+            this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Constants.Token);
+            var result = await this.API.GetTeams(teamId);
+            return result;
+        }
 
         /// <inheritdoc />
         public async Task<HttpResponseMessage> GetMembers()
@@ -98,12 +104,19 @@ namespace Client.ApiWrapperImplementation
             return result;
         }
 
-
         /// <inheritdoc />
-        public async Task<HttpResponseMessage> GetTasks()
+        public async Task<HttpResponseMessage> AddMemberToTeam(string teamId)
         {
             this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Constants.Token);
-            var result = await this.API.GetTasks();
+            var result = await this.API.AddMemberToTeam(teamId);
+            return result;
+        }
+
+        /// <inheritdoc />
+        public async Task<HttpResponseMessage> CreateTask(string aircraftId, string teamId, string description)
+        {
+            this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Constants.Token);
+            var result = await this.API.GetTasks(aircraftId, teamId, description);
             return result;
         }
     }
