@@ -14,14 +14,21 @@ namespace Client.Interfaces
         // Login
         Task<HttpResponseMessage> Login(string password);
 
+        // Employees
         Task<HttpResponseMessage> GetEmployees();
 
+        // Aircraft
         Task<HttpResponseMessage> GetAircrafts();
 
+        // Team
         Task<HttpResponseMessage> GetTeams();
+        Task<HttpResponseMessage> GetTeam(string teamId);
+        Task<HttpResponseMessage> GetMembers(string teamId);
+        Task<HttpResponseMessage> AddMemberToTeam(string teamId);
 
-        Task<HttpResponseMessage> GetMembers();
+        // Task
+        Task<HttpResponseMessage> CreateTask(string aircraftId, string teamId, string description);
+        Task<HttpResponseMessage> GetTasksForAircraft(string aircraftId);
 
-        Task<HttpResponseMessage> GetTasks();
     }
 }

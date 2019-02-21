@@ -24,13 +24,18 @@ namespace Client.Interfaces
         // Teams endpoint
         [Get("/Api/Team/GetTeams")]
         Task<HttpResponseMessage> GetTeams();
+        [Get("/Api/Team/GetTeam")]
+        Task<HttpResponseMessage> GetTeam(string teamId);
         [Get("/Api/Team/GetMembers")]
         Task<HttpResponseMessage> GetMembers(string teamId);
         [Get("/Api/Team/AddMemberToTeam")]
         Task<HttpResponseMessage> AddMemberToTeam(string teamId);
 
         // Tasks endpoint
-        [Get("/Api/Team/CreateTask")]
-        Task<HttpResponseMessage> GetMembers(string aircraftId, string teamId, string description);
+        [Get("/Api/Task/CreateTask")]
+        Task<HttpResponseMessage> CreateTask(string aircraftId, string teamId, string description);
+        [Get("/Api/Task/GetTasksForAircraft")]
+        Task<HttpResponseMessage> GetTasksForAircraft(string aircraftId);
+
     }
 }
