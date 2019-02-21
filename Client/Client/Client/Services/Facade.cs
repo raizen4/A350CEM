@@ -135,8 +135,11 @@ namespace Client.Services
                     return responseData;
                 }
             }
-            throw new NotImplementedException();
-            
+            responseData.HasBeenSuccessful = false;
+            responseData.Content = null;
+            responseData.Error = "Internal server Error";
+            return responseData;
+
         }
 
         public async Task<ResponseData<IEnumerable<Employee>>> GetEmployees()
