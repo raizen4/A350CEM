@@ -19,7 +19,7 @@ namespace Client.Interfaces
 
         // Aircraft endpoint
         [Get("/Api/Aircraft/GetAricrafts")]
-        Task<HttpResponseMessage> GetAricrafts();
+        Task<HttpResponseMessage> GetAircrafts();
 
         // Teams endpoint
         [Get("/Api/Team/GetTeams")]

@@ -2,22 +2,17 @@
 using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
-using ApiWrapper;
-using Client.Dtos;
-using Client.Models;
 using ModernHttpClient;
 using Refit;
 
 namespace Client.ApiWrapperImplementation
 {
-    using System.Collections.Generic;
     using System.Net.Http.Headers;
-    using Newtonsoft.Json;
-    using ServicesModels;
+    using Client.Interfaces;
 
-    class ApiWrapper : IApiWrapperImplementation
+    class ApiWrapper : IApiWrapper
     {
-        private IApiMatchingMethods API;
+        private IApiEndpoints API;
         /// <summary>
         /// The HTTP client
         /// </summary>
@@ -42,13 +37,13 @@ namespace Client.ApiWrapperImplementation
             this.client = new HttpClient(new NativeMessageHandler())
             {
 
-                DefaultRequestHeaders = { Authorization = new AuthenticationHeaderValue("Bearer", Constants.Token) },
+                DefaultRequestHeaders = { Authorization = new AuthenticationHeaderValue("Bearer", Constants.LoggedUser.Token) },
                 BaseAddress = new Uri(Constants.WebApiEndpoint),
 
             };
             try
             {
-                this.API = RestService.For<IApiMatchingMethods>(this.client);
+                this.API = RestService.For<IApiEndpoints>(this.client);
             }
             catch (Exception ex)
             {
@@ -67,7 +62,7 @@ namespace Client.ApiWrapperImplementation
         /// <inheritdoc />
         public async Task<HttpResponseMessage> GetEmployees()
         {
-            this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Constants.Token);
+            this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Constants.LoggedUser.Token);
             var result = await this.API.GetEmployees();
             return result;
         }
@@ -75,7 +70,7 @@ namespace Client.ApiWrapperImplementation
         /// <inheritdoc />
         public async Task<HttpResponseMessage> GetAircrafts()
         {
-            this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Constants.Token);
+            this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Constants.LoggedUser.Token);
             var result = await this.API.GetAircrafts();
             return result;
         }
@@ -83,7 +78,7 @@ namespace Client.ApiWrapperImplementation
         /// <inheritdoc />
         public async Task<HttpResponseMessage> GetTeams()
         {
-            this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Constants.Token);
+            this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Constants.LoggedUser.Token);
             var result = await this.API.GetTeams();
             return result;
         }
@@ -91,23 +86,23 @@ namespace Client.ApiWrapperImplementation
         /// <inheritdoc />
         public async Task<HttpResponseMessage> GetTeam(string teamId)
         {
-            this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Constants.Token);
-            var result = await this.API.GetTeams(teamId);
+            this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Constants.LoggedUser.Token);
+            var result = await this.API.GetTeam(teamId);
             return result;
         }
 
         /// <inheritdoc />
-        public async Task<HttpResponseMessage> GetMembers()
+        public async Task<HttpResponseMessage> GetMembers(string teamId)
         {
-            this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Constants.Token);
-            var result = await this.API.GetMembers();
+            this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Constants.LoggedUser.Token);
+            var result = await this.API.GetMembers(teamId);
             return result;
         }
 
         /// <inheritdoc />
         public async Task<HttpResponseMessage> AddMemberToTeam(string teamId)
         {
-            this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Constants.Token);
+            this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Constants.LoggedUser.Token);
             var result = await this.API.AddMemberToTeam(teamId);
             return result;
         }
@@ -115,10 +110,19 @@ namespace Client.ApiWrapperImplementation
         /// <inheritdoc />
         public async Task<HttpResponseMessage> CreateTask(string aircraftId, string teamId, string description)
         {
-            this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Constants.Token);
-            var result = await this.API.GetTasks(aircraftId, teamId, description);
+            this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Constants.LoggedUser.Token);
+            var result = await this.API.CreateTask(aircraftId, teamId, description);
             return result;
         }
+
+        /// <inheritdoc />
+        public async Task<HttpResponseMessage> GetTasksForAircraft(string aircraftId)
+        {
+            this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Constants.LoggedUser.Token);
+            var result = await this.API.GetTasksForAircraft(aircraftId);
+            return result;
+        }
+     
     }
 }
 
