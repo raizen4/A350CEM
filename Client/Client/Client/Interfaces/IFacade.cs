@@ -10,20 +10,20 @@ namespace Client.Interfaces
     public interface IFacade
     {
         //Employees methods
-        Task<ResponseData<Employee>> GetEmployees();
+        Task<ResponseData<IEnumerable<Employee>>> GetEmployees();
 
         //Aircrafts methods
-        Task<ResponseData<Aircraft>> GetAircrafts();
+        Task<ResponseData<IEnumerable<Aircraft>>> GetAircrafts();
 
         //Teams methods
-        Task<ResponseData<Team>> GetTeams();
-        Task<ResponseData<Team>> GetTeam(string teamId);
-        Task<ResponseData<Team>> GetMembers(string teamId);
-        Task<ResponseData<Team>> AddMemberToTeam(string teamId);
+        Task<ResponseData<IEnumerable<Team>>> GetTeams();
+        Task<ResponseData<IEnumerable<Team>>> GetTeam(string teamId);
+        Task<ResponseData<IEnumerable<Team>>> GetMembers(string teamId);
+        Task<ResponseData<IEnumerable<Team>>> AddMemberToTeam(string teamId);
 
         //Tasks methods
         Task<ResponseBase> CreateTask(string aircraftId, string teamId, string description);
-        Task<ResponseData<ServiceTask>> GetTasksForAircraft(string aircraftId);
+        Task<ResponseData<IEnumerable<ServiceTask>>> GetTasksForAircraft(string aircraftId);
 
         //Login methods
         Task<ResponseBase> Login(string password);
