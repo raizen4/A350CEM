@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Client.Models
 {
-    public class Task
+    public class ServiceTask
     {
         private string _id;
         private string _name;
