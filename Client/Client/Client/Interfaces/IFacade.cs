@@ -10,7 +10,7 @@ namespace Client.Interfaces
     public interface IFacade
     {
         //Employees methods
-        Task <ResponseData<Employee>> GetEmployees();
+        Task<ResponseData<Employee>> GetEmployees();
 
         //Aircrafts methods
         Task<ResponseData<Aircraft>> GetAircrafts();
