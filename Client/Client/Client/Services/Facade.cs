@@ -19,7 +19,7 @@ namespace Client.Services
             this.apiWrapper = apiWrapper;
         }
 
-        public async Task<ResponseData<IEnumerable<Team>>> AddMemberToTeamAsync(string teamId)
+        public async Task<ResponseData<IEnumerable<Team>>> AddMemberToTeam(string teamId)
         {
             var responseData = new ResponseData<IEnumerable<Team>>()
             {
