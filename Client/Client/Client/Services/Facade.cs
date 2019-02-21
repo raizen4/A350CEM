@@ -25,7 +25,7 @@ namespace Client.Services
             {
                 HasBeenSuccessful = false
             };
-            var result = await this.apiWrapper.AddMemberToTeam(string teamId);
+            var result = await this.apiWrapper.AddMemberToTeam(teamId);
             string content = await result.Content.ReadAsStringAsync();
             if(result.StatusCode == HttpStatusCode.OK)
             {
@@ -55,7 +55,11 @@ namespace Client.Services
                     return responseData;
                 }
             }
-            throw new NotImplementedException();
+            responseData.HasBeenSuccessful = false;
+            responseData.Content = null;
+            responseData.Error = "Internal server Error";
+            return responseData;
+
         }
 
         public async Task<ResponseBase> CreateTask(string aircraftId, string teamId, string description)
@@ -65,7 +69,7 @@ namespace Client.Services
                 HasBeenSuccessful = false
             };
 
-            var result = await this.apiWrapper.CreateTask(string aircraftId, string teamId, string description);
+            var result = await this.apiWrapper.CreateTask(aircraftId, teamId, description);
             string content = await result.Content.ReadAsStringAsync();
             if (result.StatusCode == HttpStatusCode.OK)
             {
@@ -97,7 +101,7 @@ namespace Client.Services
 
         public async Task<ResponseData<IEnumerable<Aircraft>>> GetAircrafts()
         {
-            var responseData = new ResponseData<IEnumerable<Aircraft>()
+            var responseData = new ResponseData<IEnumerable<Aircraft>>()
             {
                 HasBeenSuccessful = false
             };
@@ -171,8 +175,11 @@ namespace Client.Services
                     return responseData;
                 }
             }
-            
-            throw new NotImplementedException();
+            responseData.HasBeenSuccessful = false;
+            responseData.Content = null;
+            responseData.Error = "Internal server Error";
+            return responseData;
+
         }
 
         public async Task<ResponseData<IEnumerable<Team>>> GetMembers(string teamId)
