@@ -9,8 +9,28 @@ namespace Client.Interfaces
 {
     interface IApiEndpoints
     {
+        // Login endpoint
+        [Get("/Api/Login/Login")]
+        Task<HttpResponseMessage> Login(string password);
+
+        // Employees endpoint
         [Get("/Api/Employee/GetEmployees")]
         Task<HttpResponseMessage> GetEmployees();
 
+        // Aircraft endpoint
+        [Get("/Api/Aircraft/GetAricrafts")]
+        Task<HttpResponseMessage> GetAricrafts();
+
+        // Teams endpoint
+        [Get("/Api/Team/GetTeams")]
+        Task<HttpResponseMessage> GetTeams();
+        [Get("/Api/Team/GetMembers")]
+        Task<HttpResponseMessage> GetMembers(string teamId);
+        [Get("/Api/Team/AddMemberToTeam")]
+        Task<HttpResponseMessage> AddMemberToTeam(string teamId);
+
+        // Tasks endpoint
+        [Get("/Api/Team/CreateTask")]
+        Task<HttpResponseMessage> GetMembers(string aircraftId, string teamId, string description);
     }
 }
