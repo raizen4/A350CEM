@@ -1,4 +1,5 @@
 ﻿using Client.Models;
+using Client.ServiceModels;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -12,7 +13,7 @@ namespace Client.Interfaces
         void InitialiseApi();
 
         // Login
-        Task<HttpResponseMessage> Login(string password);
+        Task<HttpResponseMessage> Login(LoginRequest req);
 
         // Employees
         Task<HttpResponseMessage> GetEmployees();

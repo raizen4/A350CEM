@@ -1,4 +1,5 @@
-﻿using Refit;
+﻿using Client.ServiceModels;
+using Refit;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -10,8 +11,8 @@ namespace Client.Interfaces
     interface IApiEndpoints
     {
         // Login endpoint
-        [Get("/Api/Login/Login")]
-        Task<HttpResponseMessage> Login(string password);
+        [Post("/Api/Login/Login")]
+        Task<HttpResponseMessage> Login([Header("Accept")] string applicationJson, [Body(BodySerializationMethod.Serialized)] string body);
 
         // Employees endpoint
         [Get("/Api/Employee/GetEmployees")]

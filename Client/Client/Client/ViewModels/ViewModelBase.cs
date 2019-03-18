@@ -10,7 +10,7 @@ namespace Client.ViewModels
     public class ViewModelBase : BindableBase, INavigationAware, IDestructible
     {
         protected INavigationService NavigationService { get; private set; }
-
+        public bool IsLoading;
         private string _title;
         public string Title
         {

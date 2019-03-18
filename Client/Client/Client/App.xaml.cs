@@ -4,6 +4,9 @@ using Client.ViewModels;
 using Client.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Client.Interfaces;
+using Client.Services;
+using Client.ApiWrapperImplementation;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Client
@@ -29,7 +32,11 @@ namespace Client
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<NavigationPage>();
+            containerRegistry.Register<IFacade, Facade>();
+            containerRegistry.Register<IApiWrapper, ApiWrapper>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
+            containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
+            containerRegistry.RegisterForNavigation<Task, TaskViewModel>();
         }
     }
 }
