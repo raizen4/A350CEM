@@ -10,7 +10,7 @@ namespace Client.Models
         private string _name;
         private string _engTeam;
         private string _flyHours;
-        private string _taskHistory;
+        private  List<ServiceTask> _taskHistory;
 
         public string ID
         {
@@ -32,7 +32,7 @@ namespace Client.Models
             get => this._flyHours;
             set => this._flyHours = value;
         }
-        public string TaskHistory
+        public List<ServiceTask> TaskHistory
         {
             get => this._taskHistory;
             set => this._taskHistory = value;

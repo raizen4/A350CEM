@@ -9,7 +9,6 @@ namespace Client.Models
         private string _id;
         private string _name;
         private string _description;
-        private string _team;
         private string _status;
         private string _date;
 
@@ -29,11 +28,7 @@ namespace Client.Models
             get => this._description;
             set => this._description = value;
         }
-        public string Team
-        {
-            get => this._team;
-            set => this._team = value;
-        }
+       
         public string Status
         {
             get => this._status;

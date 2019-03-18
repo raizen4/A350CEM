@@ -26,8 +26,7 @@ namespace Client.Interfaces
         Task<ResponseData<IEnumerable<ServiceTask>>> GetTasksForAircraft(string aircraftId);
        
         //Login methods
-        Task<ResponseBase> Login(string password);
-
-
+        Task<ResponseData<User>> Login(string password);
+        Task<ResponseBase> MarkTaskAsCompleted(ServiceTask taskToBeCompleted);
     }
 }

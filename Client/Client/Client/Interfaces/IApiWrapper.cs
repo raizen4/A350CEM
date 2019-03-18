@@ -1,4 +1,5 @@
 ﻿using Client.Models;
+using Client.ServiceModels;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -12,7 +13,7 @@ namespace Client.Interfaces
         void InitialiseApi();
 
         // Login
-        Task<HttpResponseMessage> Login(string password);
+        Task<HttpResponseMessage> Login(LoginRequest req);
 
         // Employees
         Task<HttpResponseMessage> GetEmployees();
@@ -25,6 +26,9 @@ namespace Client.Interfaces
         Task<HttpResponseMessage> GetTeam(string teamId);
         Task<HttpResponseMessage> GetMembers(string teamId);
         Task<HttpResponseMessage> AddMemberToTeam(string teamId);
+
+        Task<HttpResponseMessage> MarkTaskAsCompleted(TaskRequest req);
+
 
         // Task
         Task<HttpResponseMessage> CreateTask(string aircraftId, string teamId, string description);

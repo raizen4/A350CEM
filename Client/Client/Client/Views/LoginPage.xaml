@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="Client.Views.LoginPage"
+             Title="{Binding Title}"
+             BackgroundColor="FloralWhite">
+
+    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+
+        
+
+        
+        <StackLayout Orientation="Vertical" Margin="0,30,0,0">
+            <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Padding="0,20,0,0">
+                <Label   HorizontalOptions="Center" TextColor="Black" Text="Pin:" VerticalOptions="Center" FontSize="35" Margin="0,5,0,0" ></Label>
+                <Entry   FontSize="30" TextColor="Black"  Placeholder="Pin goes here" Text="{Binding Password}"></Entry>
+            </StackLayout>
+            
+            <StackLayout   Margin="0,120,0,0">
+                <Button  Text="Sign In" BackgroundColor="Transparent" FontSize="20" TextColor="Black" BorderWidth="2"  BorderColor="CornflowerBlue" Command="{Binding LogInCommand}" CornerRadius="15"></Button>
+            </StackLayout>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>
