@@ -18,6 +18,9 @@ namespace Client.Interfaces
         [Get("/Api/Employee/GetEmployees")]
         Task<HttpResponseMessage> GetEmployees();
 
+        [Put("/Api/Task/MarkTaskAsCompleted")]
+        Task<HttpResponseMessage> MarkTaskAsCompleted([Header("Accept")] string applicationJson, [Body(BodySerializationMethod.Serialized)] string body);
+
         // Aircraft endpoint
         [Get("/Api/Aircraft/GetAricrafts")]
         Task<HttpResponseMessage> GetAircrafts();

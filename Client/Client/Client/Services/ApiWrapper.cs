@@ -125,7 +125,14 @@ namespace Client.ApiWrapperImplementation
             var result = await this.API.GetTasksForAircraft(aircraftId);
             return result;
         }
-     
+
+        public async Task<HttpResponseMessage> MarkTaskAsCompleted(TaskRequest req)
+        {
+            this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Constants.Token);
+            var jsonToSend = JsonConvert.SerializeObject(req);
+            var result = await this.API.Login(Constants.Headers.ContentType, jsonToSend);
+            return result;
+        }
     }
 }
 

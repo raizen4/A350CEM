@@ -27,6 +27,9 @@ namespace Client.Interfaces
         Task<HttpResponseMessage> GetMembers(string teamId);
         Task<HttpResponseMessage> AddMemberToTeam(string teamId);
 
+        Task<HttpResponseMessage> MarkTaskAsCompleted(TaskRequest req);
+
+
         // Task
         Task<HttpResponseMessage> CreateTask(string aircraftId, string teamId, string description);
         Task<HttpResponseMessage> GetTasksForAircraft(string aircraftId);

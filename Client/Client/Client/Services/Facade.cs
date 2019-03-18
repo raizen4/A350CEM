@@ -399,5 +399,45 @@ namespace Client.Services
             responseData.Error = "Internal Error" + result.StatusCode.ToString();
             return responseData;
         }
+
+        public async Task<ResponseBase> MarkTaskAsCompleted(ServiceTask taskToBeCompleted)
+        {
+            var responseData = new ResponseBase
+            {
+                HasBeenSuccessful = false
+            };
+
+            var serviceTaskReq = new TaskRequest();
+            serviceTaskReq.Task = taskToBeCompleted;
+
+            var result = await this.apiWrapper.MarkTaskAsCompleted(serviceTaskReq);
+            string content = await result.Content.ReadAsStringAsync();
+            if (result.StatusCode == HttpStatusCode.OK)
+            {
+                try
+                {
+                    var deserializedContent = JsonConvert.DeserializeObject<ResponseBase>(content);
+                    if (!deserializedContent.HasBeenSuccessful || deserializedContent.Error != null)
+                    {
+                        responseData.HasBeenSuccessful = false;
+                        responseData.Error = "Internal Server Error";
+                        return responseData;
+                    }
+                    responseData.HasBeenSuccessful = true;
+                    responseData.Error = null;
+                    return responseData;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.StackTrace);
+                    responseData.HasBeenSuccessful = false;
+                    responseData.Error = "Deserialization Error";
+                    return responseData;
+                }
+            }
+            responseData.HasBeenSuccessful = false;
+            responseData.Error = "Internal Error" + result.StatusCode.ToString();
+            return responseData;
+        }
     }
 }

@@ -27,7 +27,6 @@ namespace Client.Interfaces
        
         //Login methods
         Task<ResponseData<User>> Login(string password);
-
-
+        Task<ResponseBase> MarkTaskAsCompleted(ServiceTask taskToBeCompleted);
     }
 }
