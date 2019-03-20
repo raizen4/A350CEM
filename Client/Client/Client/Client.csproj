@@ -13,13 +13,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\AircraftTasksPage.xaml.cs">
+      <DependentUpon>AircraftTasksPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Update="Views\AircraftInfoPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\LoginPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Task.xaml">
+    <EmbeddedResource Update="Views\AircraftTasksPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

@@ -1,4 +1,5 @@
-﻿using Client.Interfaces;
+﻿using Client.Enums;
+using Client.Interfaces;
 using Client.Models;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -6,27 +7,28 @@ using Prism.Navigation;
 using Prism.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Client.ViewModels
 {
-	public class TaskViewModel : ViewModelBase
+	public class AircraftTasksPageViewModel : ViewModelBase
 	{
         private readonly IFacade _facade;
         private readonly INavigationService _navService;
         private readonly IPageDialogService _dialogService;
-        private  List<ServiceTask> listOfTasksForCurrentAircraft;
+        private ObservableCollection<ServiceTask> listOfTasksForCurrentAircraft;
 
 
         public DelegateCommand<ServiceTask> MarkTaskAsCompletedCommand { get; set; }
-        public List<ServiceTask> ListOfTasksForCurrentAircraft {
+        public ObservableCollection<ServiceTask> ListOfTasksForCurrentAircraft {
             get => this.listOfTasksForCurrentAircraft;
             set => this.listOfTasksForCurrentAircraft = value;
         }
         
 
-        public TaskViewModel(INavigationService navigationService, IFacade facade, IPageDialogService dialogService) : base(navigationService)
+        public AircraftTasksPageViewModel(INavigationService navigationService, IFacade facade, IPageDialogService dialogService) : base(navigationService)
         {
             this._facade = facade;
             this._navService = navigationService;
@@ -45,7 +47,8 @@ namespace Client.ViewModels
                 parameters.TryGetValue("Tasks", out tasksReceived);
                 if (tasksReceived != null)
                 {
-                    ListOfTasksForCurrentAircraft = tasksReceived;
+                    var listToObservableCollection = new ObservableCollection<ServiceTask>(tasksReceived);
+                    ListOfTasksForCurrentAircraft = listToObservableCollection;
                 }
             }
             catch(Exception e)
@@ -62,6 +65,11 @@ namespace Client.ViewModels
                 if (result.HasBeenSuccessful)
                 {
                     await this._dialogService.DisplayAlertAsync("Succedded", "Task marked as completed", "OK");
+                    var currentTaskPressedIndex = ListOfTasksForCurrentAircraft.IndexOf(taskToBeCompleted);
+                    var currentTask = taskToBeCompleted;
+                    currentTask.Status = ServiceTaskStatusesEnum.StatusCompleted;
+                    ListOfTasksForCurrentAircraft.RemoveAt(currentTaskPressedIndex);
+                    ListOfTasksForCurrentAircraft.Insert(currentTaskPressedIndex, currentTask);
                 }
                 else
                 {
@@ -74,5 +82,15 @@ namespace Client.ViewModels
 
             }
         }
+        internal void ShowOrHideExtension(ServiceTask taskPressed)
+        {
+            var currentTaskPressedIndex = ListOfTasksForCurrentAircraft.IndexOf(taskPressed);
+            var currentTask = taskPressed;
+            currentTask.IsExtendedView = !currentTask.IsExtendedView;
+            ListOfTasksForCurrentAircraft.RemoveAt(currentTaskPressedIndex);
+            ListOfTasksForCurrentAircraft.Insert(currentTaskPressedIndex, currentTask);
+
+        }
+
     }
 }
