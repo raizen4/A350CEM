@@ -4,22 +4,23 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Client.Views.AircraftInfoPage"
-             x:Name="AircraftInfoPageLayout">
+             x:Name="AircraftInfoPageLayout"
+             Title="{Binding Title}">
 
     <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
 
         <ListView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
-                  ItemTapped="ListView_ItemTapped" ItemsSource="{Binding ListOfAircrafts}">
+                 HasUnevenRows="True" ItemTapped="ListView_ItemTapped" ItemsSource="{Binding ListOfAircrafts}">
 
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                             <StackLayout Orientation="Horizontal">
-                                <Label FontSize="24"  HorizontalOptions="StartAndExpand" Text="{Binding Name}"></Label>
-                                <Label  FontSize="24" HorizontalOptions="End"  Text="{Binding ID}"></Label>
+                                <Label FontSize="24"  HorizontalOptions="StartAndExpand" Text="{Binding Name}" Margin="10,0,0,0"></Label>
+                                <Label  FontSize="24" HorizontalOptions="End"  Text="{Binding ID}" Margin="0,0,10,0"></Label>
                             </StackLayout>
-                            <StackLayout IsVisible="{Binding IsExtendedView}" Orientation="Vertical">
+                            <StackLayout Margin="10,0,0,0" IsVisible="{Binding IsExtendedView}" Orientation="Vertical">
                                 <StackLayout Orientation="Horizontal">
                                     <Label  FontSize="21" Text="Assigned Team: "></Label>
                                     <Label FontSize="21" Text="{Binding EngTeam.Name}"></Label>
@@ -30,7 +31,7 @@
                                 </StackLayout>
 
                                 <Button 
-                                        Command="{Binding Path=BindingContext.NavigateToAircraftTasksCommand}, 
+                                        Command="{Binding Path=BindingContext.NavigateToAircraftTasksCommand, 
                                         Source={x:Reference AircraftInfoPageLayout}}"
                                                         CommandParameter="{Binding}" 
                                                         HorizontalOptions="FillAndExpand" 

@@ -24,12 +24,16 @@ namespace Client.ViewModels
         public DelegateCommand<ServiceTask> MarkTaskAsCompletedCommand { get; set; }
         public ObservableCollection<ServiceTask> ListOfTasksForCurrentAircraft {
             get => this.listOfTasksForCurrentAircraft;
-            set => this.listOfTasksForCurrentAircraft = value;
+            set { this.listOfTasksForCurrentAircraft = value;
+                RaisePropertyChanged();
+            }
+
         }
         
 
         public AircraftTasksPageViewModel(INavigationService navigationService, IFacade facade, IPageDialogService dialogService) : base(navigationService)
         {
+            this.Title = "Task history";
             this._facade = facade;
             this._navService = navigationService;
             this._dialogService = dialogService;
@@ -86,6 +90,10 @@ namespace Client.ViewModels
         {
             var currentTaskPressedIndex = ListOfTasksForCurrentAircraft.IndexOf(taskPressed);
             var currentTask = taskPressed;
+            if (currentTaskPressedIndex == -1)
+            {
+                currentTaskPressedIndex++;
+            }
             currentTask.IsExtendedView = !currentTask.IsExtendedView;
             ListOfTasksForCurrentAircraft.RemoveAt(currentTaskPressedIndex);
             ListOfTasksForCurrentAircraft.Insert(currentTaskPressedIndex, currentTask);

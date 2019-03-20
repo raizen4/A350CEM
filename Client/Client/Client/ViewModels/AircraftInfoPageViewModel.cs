@@ -27,12 +27,15 @@ namespace Client.ViewModels
         public ObservableCollection<Aircraft> ListOfAircrafts
         {
             get => this.listOfAircrafts;
-            set => this.listOfAircrafts = value;
+            set
+            { this.listOfAircrafts = value;
+                RaisePropertyChanged();
+            }
         }
 
         public AircraftInfoPageViewModel(IFacade facade, IPageDialogService dialogService, INavigationService navigationService) : base(navigationService)
         {
-            this.Title = "Aircrafts Data";
+            this.Title = "Aircrafts Database";
             this.NavigateToAircraftTasksCommand = new DelegateCommand<Aircraft>(async (aircraftPressed) =>
               {
                   NavigationParameters navParams = new NavigationParameters();
@@ -143,6 +146,10 @@ namespace Client.ViewModels
         {
             var currentAircraftPressedIndex = ListOfAircrafts.IndexOf(aircraftPressed);
             var currentAircraft = aircraftPressed;
+            if (currentAircraftPressedIndex == -1)
+            {
+                currentAircraftPressedIndex++;
+            }
             currentAircraft.IsExtendedView = !currentAircraft.IsExtendedView;
             ListOfAircrafts.RemoveAt(currentAircraftPressedIndex);
             ListOfAircrafts.Insert(currentAircraftPressedIndex, currentAircraft);

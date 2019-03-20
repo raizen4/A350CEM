@@ -15,7 +15,7 @@ namespace Client.Views
 
         private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            var aicraftPressed = sender as Aircraft;
+            var aicraftPressed = e.Item as Aircraft;
             this.vm.ShowOrHideExtension(aicraftPressed);
         }
     }
