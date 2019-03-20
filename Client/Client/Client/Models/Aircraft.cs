@@ -11,7 +11,7 @@ namespace Client.Models
         private  Team _engTeam;
         private string _flyHours;
         private  List<ServiceTask> _taskHistory;
-        private bool isExtendedView;
+        private bool isExtendedView = false;
 
 
         public bool IsExtendedView

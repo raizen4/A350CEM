@@ -26,7 +26,7 @@ namespace Client
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavigationPage/MainPage");
+            await NavigationService.NavigateAsync("NavigationPage/AircraftInfoPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)

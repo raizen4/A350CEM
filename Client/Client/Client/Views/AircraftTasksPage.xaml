@@ -5,7 +5,8 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Client.Views.AircraftTasksPage"
              xmlns:local="clr-namespace:Client.Convertors"
-             x:Name="AircraftTasksPage">
+             x:Name="AircraftTasksPageLayout"
+             Title="{Binding Title}">
 
     <ContentPage.Resources>
 
@@ -20,18 +21,18 @@
     <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
 
         <ListView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
-                 ItemTapped="ListView_ItemTapped" ItemsSource="{Binding ListOfTasksForCurrentAircraft}">
+                  HasUnevenRows="True" ItemTapped="ListView_ItemTapped" ItemsSource="{Binding ListOfTasksForCurrentAircraft}">
 
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                            <StackLayout Orientation="Horizontal">
-                                <Label FontSize="24"  HorizontalOptions="StartAndExpand" Text="{Binding Name}"></Label>
+                            <StackLayout  Orientation="Horizontal">
+                                <Label Margin="10,0,0,0" FontSize="22"  HorizontalOptions="StartAndExpand" Text="{Binding Name}"></Label>
                                 <StackLayout HorizontalOptions="End" WidthRequest="40" 
                                              BackgroundColor="{Binding Status, Converter={StaticResource StringToColourConverter}}"></StackLayout>
                             </StackLayout>
-                            <StackLayout IsVisible="{Binding IsExtendedView}" Orientation="Vertical">
+                            <StackLayout Margin="10,0,0,0" IsVisible="{Binding IsExtendedView}" Orientation="Vertical">
                                 <StackLayout Orientation="Horizontal">
                                     <Label  FontSize="21" Text="ID: "></Label>
                                     <Label FontSize="19" Text="{Binding ID}"></Label>
@@ -46,8 +47,8 @@
                                 </StackLayout>
 
                                 <Button IsVisible="{Binding Status, Converter={StaticResource StringToBoolConverter}}"
-                                        Command="{Binding Path=BindingContext.NavigateToAircraftTasksCommand}, 
-                                        Source={x:Reference AircraftInfoPageLayout}}"
+                                        Command="{Binding Path=BindingContext.NavigateToAircraftTasksCommand, 
+                                        Source={x:Reference AircraftTasksPageLayout}}"
                                                         CommandParameter="{Binding}" 
                                                         HorizontalOptions="FillAndExpand" 
                                                         FontSize="16" Text="Mark task as completed"></Button>
