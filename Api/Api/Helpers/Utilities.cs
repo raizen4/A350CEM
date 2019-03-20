@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Microsoft.IdentityModel.Tokens;
+using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Api.Helpers
@@ -8,9 +11,9 @@ namespace Api.Helpers
     public static class Utilities
     {
 
-        protected string GetName(string token)
+        public static string GetName(string token)
         {
-            string secret = "this is a string used for encrypt and decrypt token";
+            string secret = AppSettings.Secret; 
             var key = Encoding.ASCII.GetBytes(secret);
             var handler = new JwtSecurityTokenHandler();
             var tokenSecure = handler.ReadToken(token) as SecurityToken;

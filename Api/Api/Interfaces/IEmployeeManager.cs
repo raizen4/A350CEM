@@ -1,4 +1,6 @@
-﻿using Client.Models;
+﻿using Api.Models;
+using Api.ServiceModels;
+using Client.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +12,10 @@ namespace Api.Interfaces
     {
         bool AssignEmployeeToTeam(string teamId);
 
-
+        bool CreateEmployee(EmployeeFormRequest request);
         IEnumerable<Employee> GetEmployees();
+
+
+        User Authenticate(LoginRequest loginReq);
     }
 }

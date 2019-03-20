@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Api.Interfaces
+namespace Api.ServiceModels
 {
-    public interface IDatabaseService
+    public class LoginRequest
     {
-
+        public string Code { get; set; }
     }
 }
