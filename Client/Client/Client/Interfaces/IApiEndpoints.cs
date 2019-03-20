@@ -30,21 +30,20 @@ namespace Client.Interfaces
         Task<HttpResponseMessage> GetTeams();
         [Post("/Api/Team/GetTeam")]
         // Task<HttpResponseMessage> GetTeam(string teamId);
-        Task<HttpResponseMessage> GetTeam([Header("Accept")] string applicationJson, [Body(BodySerializationMethod.Json)] string body);
+        Task<HttpResponseMessage> GetTeam([Header("Accept")] string applicationJson, [Body(BodySerializationMethod.Serialized)] string body);
         [Post("/Api/Team/GetMembers")]
         // Task<HttpResponseMessage> GetMembers(string teamId);
-        Task<HttpResponseMessage> GetMembers([Header("Accept")] string applicationJson, [Body(BodySerializationMethod.Json)] string body);
+        Task<HttpResponseMessage> GetMembers([Header("Accept")] string applicationJson, [Body(BodySerializationMethod.Serialized)] string body);
         [Post("/Api/Team/AddMemberToTeam")]
         // Task<HttpResponseMessage> AddMemberToTeam(string teamId);
-        Task<HttpResponseMessage> AddMemberToTeam([Header("Accept")] string applicationJson, [Body(BodySerializationMethod.Json)] string body);
+        Task<HttpResponseMessage> AddMemberToTeam([Header("Accept")] string applicationJson, [Body(BodySerializationMethod.Serialized)] string body);
 
         // Tasks endpoint
         [Post("/Api/Task/CreateTask")]
         // Task<HttpResponseMessage> CreateTask(string aircraftId, string teamId, string description);
-        Task<HttpResponseMessage> CreateTask([Header("Accept")] string applicationJson, [Body(BodySerializationMethod.Json)] string body);
+        Task<HttpResponseMessage> CreateTask([Header("Accept")] string applicationJson, [Body(BodySerializationMethod.Serialized)] string body);
         [Post("/Api/Task/GetTasksForAircraft")]
         // Task<HttpResponseMessage> GetTasksForAircraft(string aircraftId);
-        Task<HttpResponseMessage> GetTasksForAircraft([Header("Accept")] string applicationJson, [Body(BodySerializationMethod.Json)] string body);
-
+        Task<HttpResponseMessage> GetTasksForAircraft([Header("Accept")] string applicationJson, [Body(BodySerializationMethod.Serialized)] string body);
     }
 }

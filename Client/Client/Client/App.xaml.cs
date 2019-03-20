@@ -26,7 +26,7 @@ namespace Client
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavigationPage/TasksPage");
+            await NavigationService.NavigateAsync("NavigationPage/MainPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -37,6 +37,7 @@ namespace Client
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
             containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
             containerRegistry.RegisterForNavigation<Task, TaskViewModel>();
+            containerRegistry.RegisterForNavigation<EmployeesPage, EmployeesPageViewModel>();
         }
     }
 }
