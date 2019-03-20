@@ -7,9 +7,16 @@ namespace Client
 {
     public static class Constants
     {
-        public static Employee LoggedUser=null;
-        public static string WebApiEndpoint = "10.0.0.2:4000";
-   
+        public static User LoggedUser=null;
+        public static string WebApiEndpoint = "https://10.0.0.2:4000";
+        public static string Token = "";
+        public class Headers
+        {
+            /// <summary>
+            /// The type of the content.
+            /// </summary>
+            public const string ContentType = "application/json";
+        }
 
     }
 }

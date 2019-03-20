@@ -358,13 +358,59 @@ namespace Client.Services
             return responseData;
         }
 
-        public async Task<ResponseBase> Login(string password)
+        public async Task<ResponseData<User>> Login(string password)
         {
-            var responseData = new ResponseData<IEnumerable<Team>>()
+            var responseData = new ResponseData<User>()
             {
                 HasBeenSuccessful = false
             };
-            var result = await this.apiWrapper.Login(password);
+
+            var loginReq = new LoginRequest();
+            loginReq.Password = password;
+            var result = await this.apiWrapper.Login(loginReq);
+            string content = await result.Content.ReadAsStringAsync();
+            if (result.StatusCode == HttpStatusCode.OK)
+            {
+                try
+                {
+                    var deserializedContent = JsonConvert.DeserializeObject<ResponseData<User>>(content);
+                    if (!deserializedContent.HasBeenSuccessful || deserializedContent.Error != null)
+                    {
+                        responseData.HasBeenSuccessful = false;
+                        responseData.Content = null;
+                        responseData.Error = "Internal Server Error";
+                        return responseData;
+                    }
+                    responseData.HasBeenSuccessful = true;
+                    responseData.Content = deserializedContent.Content;
+                    responseData.Error = null;
+                    return responseData;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.StackTrace);
+                    responseData.HasBeenSuccessful = false;
+                    responseData.Content = null;
+                    responseData.Error = "Deserialization Error";
+                    return responseData;
+                }
+            }
+            responseData.HasBeenSuccessful = false;
+            responseData.Error = "Internal Error" + result.StatusCode.ToString();
+            return responseData;
+        }
+
+        public async Task<ResponseBase> MarkTaskAsCompleted(ServiceTask taskToBeCompleted)
+        {
+            var responseData = new ResponseBase
+            {
+                HasBeenSuccessful = false
+            };
+
+            var serviceTaskReq = new TaskRequest();
+            serviceTaskReq.Task = taskToBeCompleted;
+
+            var result = await this.apiWrapper.MarkTaskAsCompleted(serviceTaskReq);
             string content = await result.Content.ReadAsStringAsync();
             if (result.StatusCode == HttpStatusCode.OK)
             {

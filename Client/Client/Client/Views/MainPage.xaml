@@ -4,8 +4,51 @@
              x:Class="Client.Views.MainPage"
              Title="{Binding Title}">
 
-    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-        <Label Text="Welcome to Xamarin Forms and Prism!" />
-    </StackLayout>
+    <Grid HorizontalOptions="FillAndExpand"   VerticalOptions="FillAndExpand">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*"></RowDefinition>
+                <RowDefinition Height="50*"></RowDefinition>
+                <RowDefinition Height="20*"></RowDefinition>
+                <RowDefinition Height="10*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <StackLayout   Grid.Row="0" Grid.Column="0" Orientation="Horizontal"  HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                <Label FontSize="25" TextColor="Black" Text="Welcome, "></Label>
+                <Label FontSize="25" TextColor="Black" Text="Bogdan"></Label>
+            </StackLayout>
+            
+            <StackLayout BackgroundColor="Green" Grid.Row="1" Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+                <Grid   HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50*"></RowDefinition>
+                        <RowDefinition Height="50*"></RowDefinition>
+                        
+                    </Grid.RowDefinitions>
+                    
+                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50*"></ColumnDefinition>
+                        <ColumnDefinition Width="50*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+
+                    <Button Grid.Column="0"  Grid.Row="0" Text="See Employees"></Button>
+                    <Button  Grid.Column="0" Grid.Row="1" Text="Get Aircrafts"></Button>
+                    <Button  Grid.Column="1" Grid.Row="0" Text="See Employees"></Button>
+                    <Button  Grid.Column="1" Grid.Row="1" Text="See Employees"></Button>
+
+                </Grid>
+            </StackLayout>
+
+            <StackLayout  Grid.Row="3" Grid.Column="0"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <Button VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Text="Logout"></Button>
+            </StackLayout>
+        </Grid>
+      
+    </Grid>
 
 </ContentPage>
