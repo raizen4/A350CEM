@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Client.ViewModels
 {
@@ -26,10 +27,27 @@ namespace Client.ViewModels
 
 
 
-        public MainPageViewModel(INavigationService navigationService)
+        public MainPageViewModel(INavigationService navigationService, IFacade facade, IPageDialogService dialogService)
             : base(navigationService)
         {
+
             Title = "Menu Page";
+            this.LogoutCommand = new DelegateCommand(() => this.LogOut());
+            this._facade = facade;
+            this._dialogService = dialogService;
+            this.GoToAircraftInfoPage = new DelegateCommand(async () => await this._navService.NavigateAsync(nameof(Views.AircraftInfoPage)));
+            
+        }
+
+        private async void LogOut()
+        {
+            var dialogResult = await this._dialogService.DisplayAlertAsync("Log Out", "Are you sure you want to log out?", "Yes", "No");
+            if (dialogResult)
+            {
+                Constants.Token = "";
+                Constants.LoggedUser = null;
+                await this._navService.NavigateAsync(nameof(Views.LoginPage));
+            }
         }
     }
 }
