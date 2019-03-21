@@ -1,4 +1,5 @@
-﻿using Client.Models;
+﻿using Api.ServiceModels;
+using Client.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,6 @@ namespace Api.Interfaces
     {
         IEnumerable<Aircraft> GetAircrafts();
 
+        bool CreateAircraft(NewAircraftForm newAircraft);
     }
 }

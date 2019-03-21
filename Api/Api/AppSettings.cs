@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace Api
 {
-    public static class AppSettings
+    public  class AppSettings
     {
-        public static string Secret { get; set; }
+        public string Secret { get; set; }
     }
 }

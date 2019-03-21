@@ -16,15 +16,15 @@ namespace Api.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        IEmployeeManager manager;
-        public UserController(IEmployeeManager manager)
+        IUserManager manager;
+        public UserController(IUserManager manager)
         {
             this.manager = manager;
 
         }
 
         [HttpPost,Route("authenticate")]
-        public IActionResult Authenticate([FromBody]LoginRequest userParam)
+        public  IActionResult Authenticate([FromBody]LoginRequest userParam)
         {
             var res = new ResponseData<User>();
             try
@@ -55,36 +55,7 @@ namespace Api.Controllers
            
         }
        
-        [HttpGet, AllowAnonymous,Route("CreateEmployee")]
-        public IActionResult CreateUser([FromBody] EmployeeFormRequest req)
-        {
-            var res = new BaseResponse();
-            try
-            {
-                var createdUser = manager.CreateEmployee(req);
-                if (createdUser)
-                {
-
-                    res.Code = 401;
-                    res.IsSuccessful = false;
-                    return Ok(res);
-                }
-
-
-                res.Code = 200;
-                res.IsSuccessful = true;
-                return Ok(res);
-            }
-            catch (Exception e)
-            {
-
-                res.Code = 501;
-                res.IsSuccessful = false;
-                return Ok(res);
-            }
-            
-        
-        }
+      
 
 
 

@@ -16,6 +16,6 @@ namespace Api.Interfaces
         IEnumerable<Employee> GetEmployees();
 
 
-        User Authenticate(LoginRequest loginReq);
+       
     }
 }
