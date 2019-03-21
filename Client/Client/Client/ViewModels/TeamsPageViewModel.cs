@@ -9,9 +9,9 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace Client.ViewModels
-{
-    public class TeamsPageViewModel : ViewModelBase
-    {
+{ 
+	public class TeamsPageViewModel : ViewModelBase
+	{
         private readonly IFacade facade;
         private List<Team> teamsList;
         private readonly INavigationService navService;
@@ -25,8 +25,7 @@ namespace Client.ViewModels
 
         private Team onTeamSelected;
 
-        public Team OnTeamSelected
-        {
+        public Team OnTeamSelected {
             get => this.onTeamSelected;
 
             set
@@ -38,7 +37,7 @@ namespace Client.ViewModels
                     RaisePropertyChanged();
                 }
                 else
-                {
+                { 
                     if (this.onTeamSelected.Name != value.Name)
                     {
                         this.onTeamSelected = value;
@@ -57,7 +56,7 @@ namespace Client.ViewModels
             this.navService = navigationService;
             this.NavToTeamDetailsCommand = new DelegateCommand<Team>(async (teamPressed) => {
                 NavigationParameters navParams = new NavigationParameters();
-                navParams.Add(NavigationParamsEnum.TeamSelected, teamPressed);
+                navParams.Add("TeamDetail",teamPressed);
                 await this.navService.NavigateAsync(nameof(Views.TeamDetailsPage), navParams);
             });
             this.TeamsList = new List<Team>()
@@ -88,7 +87,7 @@ namespace Client.ViewModels
                             Spec = "Engineer",
                         }
                     },
-
+               
                     Type ="Maintenance"},
                 new Team()
                 {

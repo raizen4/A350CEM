@@ -19,8 +19,7 @@ namespace Client.ViewModels
         public ObservableCollection<Employee> TeamMembers
         {
             get
-            {
-                if (CurrentTeamSeen != null)
+            {   if (CurrentTeamSeen != null)
                 {
                     var observableCollection = new ObservableCollection<Employee>(CurrentTeamSeen.Members);
                     return observableCollection;
@@ -30,11 +29,10 @@ namespace Client.ViewModels
                     return new ObservableCollection<Employee>();
                 }
             }
-            set
-            {
+            set {
                 this.CurrentTeamSeen.Members = value.ToList();
                 RaisePropertyChanged();
-            }
+                 }
 
         }
         public Team CurrentTeamSeen
@@ -51,7 +49,7 @@ namespace Client.ViewModels
 
         public TeamDetailsPageViewModel(INavigationService navigationService) : base(navigationService)
         {
-
+          
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)
@@ -60,12 +58,12 @@ namespace Client.ViewModels
             try
             {
                 Team teamPassed;
-                parameters.TryGetValue(NavigationParamsEnum.TeamSelected, out teamPassed);
+                parameters.TryGetValue("TeamDetail", out teamPassed);
                 if (teamPassed.Name != null)
                 {
                     Title = teamPassed.Name;
                     CurrentTeamSeen = teamPassed;
-
+                  
                 }
 
 
