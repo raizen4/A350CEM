@@ -1,48 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace Client.Models
 {
     public class Employee
     {
-        private string _id;
-        private string _spec;
-        private string _team;
-        private string _name;
-        private string _manHours;
-        private string _token;
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
+      
 
+        [BsonElement("Name")]
+        public string Name { get; set; }
+       
 
-        public string Token
-        {
-            get => this._token;
-            set => this._token = value;
-        }
-        public string ID
-        {
-            get => this._id;
-            set => this._id = value;
-        }
-        public string Name
-        {
-            get => this._name;
-            set => this._name = value;
-        }
-        public string Team  
-        {
-            get => this._team;
-            set => this._team = value;
-        }
-        public string ManHours
-        {
-            get => this._manHours;
-            set => this._manHours = value;
-        }
-        public string Spec
-        {
-            get => this._spec;
-            set => this._spec = value;
-        }
+        [BsonElement("Team")]
+        public string TeamId { get; set; }
+
+        [BsonElement("ManHours")]
+        public string ManHours { get; set; }
+
+        [BsonElement("Spec")]
+        public string Spec {get;set;}
     }
 }

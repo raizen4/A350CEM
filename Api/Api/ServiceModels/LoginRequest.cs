@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Api
+namespace Api.ServiceModels
 {
-    public  class AppSettings
+    public class LoginRequest
     {
-        public string Secret { get; set; }
+        public string Code { get; set; }
     }
 }
