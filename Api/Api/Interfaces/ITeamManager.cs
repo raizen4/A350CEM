@@ -1,4 +1,5 @@
 ﻿using Api.ServiceModels;
+using Client.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Api.Interfaces
 {
-    interface ITeamManager
+    public interface ITeamManager
     {
-        bool CreateTeam(NewTeamForm form);
+        bool CreateTeam(Team newTeamToBeInserted);
 
         
     }

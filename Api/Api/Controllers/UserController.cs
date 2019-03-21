@@ -23,7 +23,7 @@ namespace Api.Controllers
 
         }
 
-        [HttpPost,Route("authenticate")]
+        [HttpPost,AllowAnonymous, Route("Authenticate")]
         public  IActionResult Authenticate([FromBody]LoginRequest userParam)
         {
             var res = new ResponseData<User>();

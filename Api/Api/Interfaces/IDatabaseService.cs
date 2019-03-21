@@ -11,9 +11,9 @@ namespace Api.Interfaces
     {
         User GetUser(string password);
 
-        bool CreateUser(Employee user);
-        bool CreateAircraft(Aircraft aircraft);
-        bool CreateTeam(Team team);
+        User CreateUser(User user);
+        Aircraft CreateAircraft(Aircraft aircraft);
+        Team CreateTeam(Team team);
 
         IEnumerable<Aircraft> GetAircrafts();
 

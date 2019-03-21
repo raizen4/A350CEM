@@ -13,14 +13,13 @@ namespace Api.Managers
         {
             this.dbService = dbService;
         }
-        public bool CreateAircraft(NewAircraftForm aircraftForm)
+        public bool CreateAircraft(Aircraft newAircraft)
         {
-            var aircraftToBeInserted = aircraftForm.NewAircraft;
-            
+        
             try
             {
-                var result = dbService.CreateAircraft(aircraftToBeInserted);
-                if (result)
+                var result = dbService.CreateAircraft(newAircraft);
+                if (result!=null)
                 {
                     return true;
                 }

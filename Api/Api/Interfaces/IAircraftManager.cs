@@ -11,6 +11,6 @@ namespace Api.Interfaces
     {
         IEnumerable<Aircraft> GetAircrafts();
 
-        bool CreateAircraft(NewAircraftForm newAircraft);
+        bool CreateAircraft(Aircraft newAircraft);
     }
 }

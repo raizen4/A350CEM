@@ -12,7 +12,7 @@ namespace Api.Interfaces
     {
         bool AssignEmployeeToTeam(string teamId);
 
-        bool CreateEmployee(EmployeeFormRequest request);
+        bool CreateEmployee(Employee newEmployee);
         IEnumerable<Employee> GetEmployees();
 
 

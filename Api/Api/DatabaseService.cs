@@ -1,30 +1,92 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Api.Interfaces;
 using Api.Models;
 using Client.Models;
+using Microsoft.Extensions.Configuration;
+using MongoDB.Driver;
 
 namespace Api
 {
-    internal class DatabaseService : IDatabaseService
+     class DatabaseService : IDatabaseService
     {
-        public bool CreateAircraft(Aircraft aircraft)
+        private readonly IMongoCollection<Aircraft> aircrafts;
+        private readonly IMongoCollection<Team> teams;
+
+        private readonly IMongoCollection<Employee> employees;
+        private readonly IMongoCollection<User> users;
+
+
+
+        public DatabaseService(IConfiguration config)
         {
-            throw new System.NotImplementedException();
+            var client = new MongoClient(config.GetConnectionString("AirportManagementDb"));
+            var database = client.GetDatabase("AirportManagementDb");
+            this.aircrafts = database.GetCollection<Aircraft>("Aircrafts");
+            this.teams = database.GetCollection<Team>("Teams");
+            this.employees = database.GetCollection<Employee>("Employees");
+            this.users = database.GetCollection<User>("Users");
         }
 
-        public bool CreateTeam(Team team)
+   
+        public Aircraft CreateAircraft(Aircraft aircraft)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+               
+                aircrafts.InsertOne(aircraft);
+                return aircraft;
+            }catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
         }
 
-        public bool CreateUser(Employee user)
+        public Team CreateTeam(Team team)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+
+                teams.InsertOne(team);
+                return team;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
         }
+
+        public User CreateUser(User user)
+        {
+            try
+            {
+
+                users.InsertOne(user);
+                return user;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+
+        
 
         public IEnumerable<Aircraft> GetAircrafts()
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                var dbResult = this.aircrafts.Find(aircraft => true).ToEnumerable();
+                return dbResult;
+
+            }catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
         }
 
         public IEnumerable<Employee> GetEmployees()

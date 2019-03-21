@@ -26,7 +26,7 @@ namespace Api.Controllers
         }
 
 
-        [HttpGet]
+        [HttpGet, Route("GetEmployees")]
         // GET: Gets all the employees
         public IActionResult GetEmployees()
         {
@@ -56,13 +56,13 @@ namespace Api.Controllers
         }
 
 
-        [HttpGet, AllowAnonymous, Route("CreateEmployee")]
+        [HttpPost, AllowAnonymous, Route("CreateEmployee")]
         public IActionResult CreateUser([FromBody] EmployeeFormRequest req)
         {
             var res = new BaseResponse();
             try
             {
-                var createdUser = manager.CreateEmployee(req);
+                var createdUser = manager.CreateEmployee(req.NewEmployee);
                 if (createdUser)
                 {
 

@@ -31,7 +31,7 @@ namespace Api.Managers
 
      
 
-        public bool CreateEmployee(EmployeeFormRequest request)
+        public bool CreateEmployee(Employee newEmployee)
         {
             throw new NotImplementedException();
         }
