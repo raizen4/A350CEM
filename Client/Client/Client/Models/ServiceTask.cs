@@ -11,6 +11,14 @@ namespace Client.Models
         private string _description;
         private string _status;
         private string _date;
+        private bool isExtendedView=false;
+
+
+        public bool IsExtendedView
+        {
+            get => this.isExtendedView;
+            set => this.isExtendedView = value;
+        }
 
 
         public string ID

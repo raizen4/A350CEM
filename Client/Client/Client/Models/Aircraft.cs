@@ -8,10 +8,17 @@ namespace Client.Models
     {
         private string _id;
         private string _name;
-        private string _engTeam;
+        private  Team _engTeam;
         private string _flyHours;
         private  List<ServiceTask> _taskHistory;
+        private bool isExtendedView = false;
 
+
+        public bool IsExtendedView
+        {
+            get => this.isExtendedView;
+            set => this.isExtendedView = value;
+        }
         public string ID
         {
             get => this._id;
@@ -22,7 +29,7 @@ namespace Client.Models
             get => this._name;
             set => this._name = value;
         }
-        public string EngTeam
+        public Team EngTeam
         {
             get => this._engTeam;
             set => this._engTeam = value;

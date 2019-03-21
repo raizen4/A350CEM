@@ -26,7 +26,6 @@ namespace Client.Interfaces
         Task<HttpResponseMessage> GetTeam(GetTeamRequest req);
         Task<HttpResponseMessage> GetMembers(GetMembersRequest req);
         Task<HttpResponseMessage> AddMemberToTeam(AddMemberRequest req);
-
         Task<HttpResponseMessage> MarkTaskAsCompleted(TaskRequest req);
 
 
