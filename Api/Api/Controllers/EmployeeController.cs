@@ -57,7 +57,7 @@ namespace Api.Controllers
 
 
         [HttpPost, AllowAnonymous, Route("CreateEmployee")]
-        public IActionResult CreateUser([FromBody] EmployeeFormRequest req)
+        public IActionResult CreateUser([FromBody] NewEmployeeForm req)
         {
             var res = new BaseResponse();
             try

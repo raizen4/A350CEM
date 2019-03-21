@@ -57,7 +57,7 @@ namespace Api
                     ValidateAudience = false
                 };
             });
-
+            
             // configure DI for application services
             services.AddScoped<IUserManager, UserManager>();
             services.AddScoped<IEmployeeManager, EmployeeManager>();

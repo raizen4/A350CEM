@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Api.ServiceModels
 {
-    public class EmployeeFormRequest
+    public class NewEmployeeForm
     {
         public Employee NewEmployee { get; set; }
     }
