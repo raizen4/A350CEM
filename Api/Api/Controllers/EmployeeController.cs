@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Api.Interfaces;
 using Api.ServiceModels;
 using Client.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
@@ -17,10 +18,7 @@ namespace Api.Controllers
         /// </summary>
         private readonly IEmployeeManager manager;
 
-        /// <summary>
-        /// Initialises a new instance of the <see cref="SummaryChangingRoomController"/> class.
-        /// </summary>
-        /// <param name="manager">The manager.</param>
+
 
         public EmployeeController(IEmployeeManager manager)
         {
@@ -28,7 +26,7 @@ namespace Api.Controllers
         }
 
 
-        [HttpGet]
+        [HttpGet, Authorize, Route("GetEmployees")]
         // GET: Gets all the employees
         public IActionResult GetEmployees()
         {
@@ -56,6 +54,39 @@ namespace Api.Controllers
             }
 
         }
+
+
+        [HttpPost, AllowAnonymous, Route("CreateEmployee")]
+        public IActionResult CreateUser([FromBody] NewEmployeeForm req)
+        {
+            var res = new BaseResponse();
+            try
+            {
+                var createdUser = manager.CreateEmployee(req.NewEmployee);
+                if (createdUser)
+                {
+
+                    res.Code = 401;
+                    res.IsSuccessful = false;
+                    return Ok(res);
+                }
+
+
+                res.Code = 200;
+                res.IsSuccessful = true;
+                return Ok(res);
+            }
+            catch (Exception e)
+            {
+
+                res.Code = 501;
+                res.IsSuccessful = false;
+                return Ok(res);
+            }
+
+
+        }
+
     }
 }
-}
+
