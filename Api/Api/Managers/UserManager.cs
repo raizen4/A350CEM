@@ -54,5 +54,24 @@ namespace Api.Managers
             return user;
         }
 
+        public bool CreateUser(NewUserForm userForm)
+        {
+
+            try
+            {
+                var result = dbService.CreateUser(userForm.NewUser);
+                if (result != null)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.Message);
+                return false;
+            }
+        }
     }
 }
