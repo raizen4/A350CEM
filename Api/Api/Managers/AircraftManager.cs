@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Api.Interfaces;
 using Api.ServiceModels;
 using Client.Models;
@@ -7,14 +8,50 @@ namespace Api.Managers
 {
     internal class AircraftManager : IAircraftManager
     {
-        public bool CreateAircraft(NewAircraftForm newAircraft)
+        private readonly IDatabaseService dbService;
+        public AircraftManager(IDatabaseService dbService)
         {
-            throw new System.NotImplementedException();
+            this.dbService = dbService;
         }
+        public bool CreateAircraft(NewAircraftForm aircraftForm)
+        {
+            var aircraftToBeInserted = aircraftForm.NewAircraft;
+            
+            try
+            {
+                var result = dbService.CreateAircraft(aircraftToBeInserted);
+                if (result)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch(Exception e)
+            {
+                
+                Console.WriteLine(e.Message);
+                return false;
+            }
+        }
+            
 
         public IEnumerable<Aircraft> GetAircrafts()
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                var result = dbService.GetAircrafts();
+                if (result!=null)
+                {
+                    return result;
+                }
+                return new List<Aircraft>();
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.Message);
+                return null;
+            }
         }
     }
 }
