@@ -1,4 +1,6 @@
-﻿namespace Api.ServiceModels
+﻿using Client.Models;
+
+namespace Api.ServiceModels
 {
     public class NewTeamForm
     {

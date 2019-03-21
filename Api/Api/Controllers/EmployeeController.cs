@@ -26,7 +26,7 @@ namespace Api.Controllers
         }
 
 
-        [HttpGet, Route("GetEmployees")]
+        [HttpGet, Authorize, Route("GetEmployees")]
         // GET: Gets all the employees
         public IActionResult GetEmployees()
         {
