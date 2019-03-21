@@ -11,7 +11,7 @@ namespace Api.Interfaces
     {
         User Authenticate(LoginRequest loginReq);
 
-        bool CreateUser(NewUserForm UserForm);
+        bool CreateUser(User UserForm);
 
     }
 }

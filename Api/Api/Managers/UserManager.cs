@@ -54,12 +54,12 @@ namespace Api.Managers
             return user;
         }
 
-        public bool CreateUser(NewUserForm userForm)
+        public bool CreateUser(User userForm)
         {
 
             try
             {
-                var result = dbService.CreateUser(userForm.NewUser);
+                var result = dbService.CreateUser(userForm);
                 if (result != null)
                 {
                     return true;
