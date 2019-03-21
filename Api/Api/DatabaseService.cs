@@ -21,7 +21,7 @@ namespace Api
         public DatabaseService(IConfiguration config)
         {
             var client = new MongoClient(config.GetConnectionString("AirportManagementDb"));
-            var database = client.GetDatabase("AirportManagementDb");
+            var database = client.GetDatabase("airport-management-db");
             this.aircrafts = database.GetCollection<Aircraft>("Aircrafts");
             this.teams = database.GetCollection<Team>("Teams");
             this.employees = database.GetCollection<Employee>("Employees");
