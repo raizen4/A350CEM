@@ -51,7 +51,7 @@ namespace Api.Controllers
             }
 
         }
-        [HttpGet, Authorize, Route("GetTeams")]
+        [HttpGet, AllowAnonymous, Route("GetTeams")]
         // GET: Gets all teams
         public IActionResult GetTeams()
         {
@@ -78,7 +78,7 @@ namespace Api.Controllers
                 return httpResult;
             }
         }
-        [HttpGet, Authorize, Route("GetTeamMembers")]
+        [HttpGet, AllowAnonymous, Route("GetTeamMembers")]
         //GET: Gets all team members
         public IActionResult GetTeamMembers([FromQuery]string teamId)
         {
