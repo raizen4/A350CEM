@@ -12,7 +12,9 @@ namespace Api.Interfaces
         User GetUser(string password);
 
         User CreateUser(User user);
+
         Aircraft CreateAircraft(Aircraft aircraft);
+
         Team CreateTeam(Team team);
 
         IEnumerable<Aircraft> GetAircrafts();
