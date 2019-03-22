@@ -28,7 +28,7 @@ namespace Api
             this.aircrafts = database.GetCollection<Aircraft>("Aircrafts");
             this.teams = database.GetCollection<Team>("Teams");
             this.employees = database.GetCollection<Employee>("Employees");
-            this.tasks = database.GetCollection<Employee>("Tasks");
+            this.tasks = database.GetCollection<Task>("Tasks");
             this.users = database.GetCollection<User>("Users");
         }
 
