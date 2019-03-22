@@ -12,5 +12,10 @@ namespace Api.Interfaces
         IEnumerable<Aircraft> GetAircrafts();
 
         bool CreateAircraft(Aircraft newAircraft);
+
+        bool MarkTaskAsCompleted(string taskId);
+
+        IEnumerable<Client.Models.Task> GetTasksForAircraft(string AircraftId);
+
     }
 }

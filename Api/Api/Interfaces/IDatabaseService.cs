@@ -20,5 +20,6 @@ namespace Api.Interfaces
         IEnumerable<Employee> GetEmployees();
 
         IEnumerable<Client.Models.Task> GetTasksForAircraft(string aircraftId);
+        bool MarkTaskAsCompleted(string taskId);
     }
 }

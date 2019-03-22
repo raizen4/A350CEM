@@ -20,5 +20,8 @@ namespace Client.Models
 
         [BsonElement("Status")]
         public string Status { get; set; }
+
+        [BsonElement("Status")]
+        public string AircraftId { get; set; }
     }
 }
