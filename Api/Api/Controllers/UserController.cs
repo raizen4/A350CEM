@@ -15,7 +15,7 @@ namespace Api.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
-    {
+    {//comment pentru domnisoru vlad
         IUserManager manager;
         public UserController(IUserManager manager)
         {
