@@ -10,7 +10,7 @@ namespace Api.Interfaces
     public interface ITeamManager
     {
         bool CreateTeam(Team newTeamToBeInserted);
-
+        
         
     }
 }

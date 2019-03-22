@@ -57,7 +57,7 @@ namespace Api.Controllers
 
 
         [HttpPost, AllowAnonymous, Route("CreateEmployee")]
-        public IActionResult CreateUser([FromBody] NewEmployeeForm req)
+        public IActionResult CreateEmployee([FromBody] NewEmployeeForm req)
         {
             var res = new BaseResponse();
             try
@@ -66,14 +66,14 @@ namespace Api.Controllers
                 if (createdUser)
                 {
 
-                    res.Code = 401;
-                    res.IsSuccessful = false;
+                    res.Code = 200;
+                    res.IsSuccessful = true;
                     return Ok(res);
                 }
 
 
-                res.Code = 200;
-                res.IsSuccessful = true;
+                res.Code = 401;
+                res.IsSuccessful = false;
                 return Ok(res);
             }
             catch (Exception e)

@@ -20,15 +20,15 @@ namespace Api.Controllers
             this.manager = manager;
         }
 
-        [HttpPost, Authorize, Route("CreateTeam")]
-        public IActionResult CreateAircraft([FromBody] NewTeamForm teamForm)
+        [HttpPost, AllowAnonymous, Route("CreateTeam")]
+        public IActionResult CreateTeam([FromBody] NewTeamForm teamForm)
         {
             var team = teamForm.NewTeam;
             var res = new BaseResponse();
             try
             {
-                var createdAircraft = manager.CreateTeam(team);
-                if (createdAircraft)
+                var createdTeam = manager.CreateTeam(team);
+                if (createdTeam)
                 {
 
                     res.Code = 200;
