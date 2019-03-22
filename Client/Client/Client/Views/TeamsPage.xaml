@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="Client.Views.TeamsPage"
+             Title="{Binding Title}">
+
+    <StackLayout BackgroundColor="WhiteSmoke">
+        <StackLayout VerticalOptions="FillAndExpand">
+            <ListView
+                x:Name="TeamsList"
+                ItemsSource="{Binding TeamsList}"
+                HasUnevenRows="True"
+                SelectedItem="{Binding OnTeamSelected, Mode=TwoWay}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="100*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="54*"></ColumnDefinition>
+                                        <ColumnDefinition Width="46*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <StackLayout Grid.Column="0" Grid.Row="0" Orientation="Vertical" Margin="10,0,0,0" VerticalOptions="CenterAndExpand">
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="Team name:" Font="Bold, 11"/>
+                                            <Label Text="{Binding Name}" Font="11"/>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Horizontal"  >
+                                            <Label Text="No. of members:" Font="Bold, 11"/>
+                                            <Label Text="{Binding Members.Count}" Font="11"/>
+                                        </StackLayout>
+                                    </StackLayout>
+
+                                    <StackLayout Grid.Column="1" Grid.Row="0" VerticalOptions="CenterAndExpand">
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="Type:" Font="Bold, 11"/>
+                                            <Label Text="{Binding Type}" Font="11"/>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Grid>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>
