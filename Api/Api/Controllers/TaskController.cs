@@ -14,28 +14,27 @@ namespace Api.Controllers
     [ApiController]
     public class TaskController : ControllerBase
     {
-        private readonly ITeamManager manager;
-        public TaskController(ITeamManager manager)
+        private readonly ITaskManager manager;
+        public TaskController(ITaskManager manager)
         {
             this.manager = manager;
         }
 
-        [HttpPost, Authorize, Route("CreateTeam")]
+        [HttpPost, Authorize, Route("CreateTask")]
         public IActionResult CreateTask([FromBody] NewTaskForm taskForm)
         {
+            
             var task = taskForm.NewTask;
             var res = new BaseResponse();
             try
             {
-                var createdTask = manager.CreateTask(task);
+                var createdTask = manager.CreateTask(taskForm.NewTask);
                 if (createdTask)
                 {
-
                     res.Code = 200;
                     res.IsSuccessful = true;
                     return Ok(res);
                 }
-
 
                 res.Code = 501;
                 res.IsSuccessful = false;
@@ -48,7 +47,6 @@ namespace Api.Controllers
                 res.IsSuccessful = false;
                 return Ok(res);
             }
-
         }
     }
 }

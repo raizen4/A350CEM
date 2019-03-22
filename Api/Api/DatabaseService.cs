@@ -77,7 +77,34 @@ namespace Api
             }
         }
 
-        
+        public Task CreateTask(Task task)
+        {
+            try
+            {
+                tasks.InsertOne(task);
+                return task;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+
+        public Employee CreateEmployee(Employee employee)
+        {
+            try
+            {
+                employees.InsertOne(employee);
+                return employee;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+
 
         public IEnumerable<Aircraft> GetAircrafts()
         {
@@ -137,6 +164,25 @@ namespace Api
             {
                 var updateDef = Builders<Task>.Update.Set(task=>task.Status,ServiceTaskStatusesEnum.StatusCompleted);
                 var dbResult = this.tasks.FindOneAndUpdate(task=>task.Id==taskId, updateDef);
+                if (dbResult != null)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+        }
+
+        public bool AssignEmployeeToTeam(string teamId)
+        {
+            try
+            {
+                var updateDef = Builders<Employee>.Update.Set(employee => employee.TeamId, teamId);
+                var dbResult = this.employees.FindOneAndUpdate(employee => employee.TeamId == teamId, updateDef);
                 if (dbResult != null)
                 {
                     return true;

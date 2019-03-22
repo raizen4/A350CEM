@@ -87,6 +87,37 @@ namespace Api.Controllers
 
         }
 
+        [HttpPut, Authorize, Route("AssignEmployeeToTeam")]
+        public IActionResult AssignEmployeeToTeam([FromBody]AssignEmployeeToTeamForm req)
+        {
+            var response = new BaseResponse()
+            {
+                IsSuccessful = false
+            };
+
+            try
+            {
+                var result = manager.AssignEmployeeToTeam(req.TeamId);
+                if (result)
+                {
+                    response.IsSuccessful = true;
+                    response.Code = 200;
+                    return this.Ok(response);
+                }
+
+                response.IsSuccessful = false;
+                response.Code = 501;
+                return this.Ok(response);
+            }
+            catch (Exception e)
+            {
+                response.IsSuccessful = false;
+                response.Code = 501;
+                return this.Ok(response);
+            }
+
+        }
+
     }
 }
 
