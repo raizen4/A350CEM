@@ -54,9 +54,38 @@ namespace Api.Controllers
             }
            
         }
-       
-      
 
+
+        [HttpPost, AllowAnonymous, Route("CreateUser")]
+        public IActionResult CreateUser([FromBody] NewUserForm req)
+        {
+            var res = new BaseResponse();
+            try
+            {
+                var createdUser = manager.CreateUser(req.NewUser);
+                if (createdUser)
+                {
+
+                    res.Code = 401;
+                    res.IsSuccessful = false;
+                    return Ok(res);
+                }
+
+
+                res.Code = 200;
+                res.IsSuccessful = true;
+                return Ok(res);
+            }
+            catch (Exception e)
+            {
+
+                res.Code = 501;
+                res.IsSuccessful = false;
+                return Ok(res);
+            }
+
+
+        }
 
 
     }
