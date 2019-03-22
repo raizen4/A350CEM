@@ -78,5 +78,31 @@ namespace Api.Controllers
                 return httpResult;
             }
         }
+        [HttpGet, Authorize, Route("GetTeamMembers")]
+        //GET: Gets all team members
+        public IActionResult GetTeamMembers([FromQuery]string teamId)
+        {
+            List<Team> result = new List<Team>();
+            try
+            {
+                result = manager.GetTeamMembers(teamId).ToList();
+                ResponseData<List<Team>> response = new ResponseData<List<Team>>();
+                response.Content = result;
+                response.Code = 200;
+                response.IsSuccessful = true;
+                var httpResult = this.Ok(response);
+                return httpResult;
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+                ResponseData<List<Team>> response = new ResponseData<List<Team>>();
+                response.Content = null;
+                response.Code = 400;
+                response.IsSuccessful = false;
+                var httpResult = this.Ok(response);
+                return httpResult;
+            }
+        }
     }
 }
