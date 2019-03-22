@@ -28,7 +28,7 @@ namespace Api.Controllers
             var res = new BaseResponse();
             try
             {
-                var createdTeam = manager.CreateTeam(team);
+                var createdTeam = manager.CreateTeam(teamForm.NewTeam);
                 if (createdTeam)
                 {
 
