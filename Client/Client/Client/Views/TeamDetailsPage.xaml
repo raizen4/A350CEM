@@ -46,6 +46,13 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <Button 
+                Font="Bold,11"
+                BackgroundColor="Aqua"
+                VerticalOptions="CenterAndExpand"
+                Text="Add Member"
+                HeightRequest="45"
+                ></Button>
         </StackLayout>
     </StackLayout>
 </ContentPage>
