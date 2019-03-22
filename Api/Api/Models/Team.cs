@@ -16,9 +16,6 @@ namespace Client.Models
         public string Name { get; set; }
 
 
-        [BsonElement("Members")]
-        public List<Employee> Members { get; set; }
-
         [BsonElement("Type")]
 
         public string Type { get; set; }
