@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Api.Interfaces;
 using Api.ServiceModels;
+using Client.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -49,6 +50,33 @@ namespace Api.Controllers
                 return Ok(res);
             }
 
+        }
+        [HttpGet, Authorize, Route("GetTeams")]
+        // GET: Gets all teams
+        public IActionResult GetTeams()
+        {
+            List<Team> result = new List<Team>();
+            try
+            {
+                result = manager.GetTeams().ToList();
+                ResponseData<List<Team>> response = new ResponseData<List<Team>>();
+                response.Content = result;
+                response.Code = 200;
+                response.IsSuccessful = true;
+                var httpResult = this.Ok(response);
+                return httpResult;
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                ResponseData<List<Team>> response = new ResponseData<List<Team>>();
+                response.Content = null;
+                response.Code = 400;
+                response.IsSuccessful = false;
+                var httpResult = this.Ok(response);
+                return httpResult;
+            }
         }
     }
 }
