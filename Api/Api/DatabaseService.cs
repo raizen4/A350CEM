@@ -121,6 +121,22 @@ namespace Api
             }
         }
 
+        //implementing GetTeams method - Vlad Andreescu
+        public IEnumerable<Team> GetTeams()
+        {
+            try
+            {
+                var dbResult = this.teams.Find(teams => true).ToEnumerable();
+                return dbResult;
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+
         public IEnumerable<Employee> GetEmployees()
         {
             try
@@ -143,6 +159,21 @@ namespace Api
                 var dbResult = this.tasks.Find(task => task.AircraftId==aircraftId).ToEnumerable();
                 return dbResult;
 
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+
+        //implementing GetTeamMembers method - Vlad Andreescu
+        public IEnumerable<Team> GetTeamMembers(string teamId)
+        {
+            try
+            {
+                var dbResult = this.teams.Find<Team>(team => team.Id == teamId).ToEnumerable();
+                return dbResult;
             }
             catch (Exception e)
             {
