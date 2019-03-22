@@ -22,7 +22,7 @@ namespace Api.Controllers
             this.manager = manager;
         }
 
-        [HttpPost, Authorize, Route("CreateAircraft")]
+        [HttpPost, Route("CreateAircraft")]
         public IActionResult CreateAircraft([FromBody] NewAircraftForm aircraftForm)
         {
             var aircraft = aircraftForm.NewAircraft;
@@ -54,7 +54,6 @@ namespace Api.Controllers
         }
 
         [HttpGet, Authorize, Route("GetAircrafts")]
-        // GET: Gets all the employees
         public IActionResult GetAircrafts()
         {
             List<Aircraft> result = new List<Aircraft>();
@@ -82,6 +81,70 @@ namespace Api.Controllers
 
         }
 
+        [HttpGet, Authorize, Route("GetTasksForAircraft")]
+        public IActionResult GetTasksForAircraft([FromQuery]string aircraftId)
+        {
+            List<Client.Models.Task> result = new List<Client.Models.Task>();
+            try
+            {
+                result = manager.GetTasksForAircraft(aircraftId).ToList();
+                ResponseData<List<Client.Models.Task>> response = new ResponseData<List<Client.Models.Task>>();
+                response.Content = result;
+                response.Code = 200;
+                response.IsSuccessful = true;
+                var httpResult = this.Ok(response);
+                return httpResult;
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                ResponseData<List<Client.Models.Task>> response = new ResponseData<List<Client.Models.Task>>();
+                response.Content = null;
+                response.Code = 400;
+                response.IsSuccessful = false;
+                var httpResult = this.Ok(response);
+                return httpResult;
+            }
+
+        }
+
+
+        [HttpPut, Authorize, Route("MarkTaskAsCompleted")]
+
+        public IActionResult MarkTaskAsCompleted([FromBody]MarkTaskRequest req)
+        {
+            var response = new BaseResponse()
+            {
+                IsSuccessful = false
+            };
+
+            try
+            {
+                var result = manager.MarkTaskAsCompleted(req.TaskId);
+                if (result)
+                {
+                    response.IsSuccessful = true;
+                    response.Code = 200;
+                    return this.Ok(response);
+                }
+
+                response.IsSuccessful = false;
+                response.Code = 501;
+                return this.Ok(response);
+
+
+
+
+            }
+            catch (Exception e)
+            {
+                response.IsSuccessful = false;
+                response.Code = 501;
+                return this.Ok(response);
+            }
+
+        }
 
     }
 }

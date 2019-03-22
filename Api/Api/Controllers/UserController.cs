@@ -15,7 +15,7 @@ namespace Api.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
-    {
+    {//comment pentru domnisoru vlad
         IUserManager manager;
         public UserController(IUserManager manager)
         {
@@ -54,9 +54,38 @@ namespace Api.Controllers
             }
            
         }
-       
-      
 
+
+        [HttpPost, AllowAnonymous, Route("Crea")]
+        public IActionResult CreateUser([FromBody] NewUserForm req)
+        {
+            var res = new BaseResponse();
+            try
+            {
+                var createdUser = manager.CreateUser(req.NewUser);
+                if (createdUser)
+                {
+                    res.Code = 200;
+                    res.IsSuccessful = true;
+                    return Ok(res);
+                    
+                }
+
+                res.Code =403;
+                res.IsSuccessful = false;
+                return Ok(res);
+
+            }
+            catch (Exception e)
+            {
+
+                res.Code = 501;
+                res.IsSuccessful = false;
+                return Ok(res);
+            }
+
+
+        }
 
 
     }

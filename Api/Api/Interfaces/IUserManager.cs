@@ -10,5 +10,8 @@ namespace Api.Interfaces
     public interface IUserManager
     {
         User Authenticate(LoginRequest loginReq);
+
+        bool CreateUser(User UserForm);
+
     }
 }

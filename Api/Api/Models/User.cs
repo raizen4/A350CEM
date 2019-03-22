@@ -13,7 +13,7 @@ namespace Api.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
 
-       
+        [BsonIgnore]
         public string Token { get; set; }
 
         [BsonElement("Name")]

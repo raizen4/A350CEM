@@ -26,7 +26,7 @@ namespace Client
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavigationPage/AircraftInfoPage");
+            await NavigationService.NavigateAsync("NavigationPage/TeamsPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -39,6 +39,8 @@ namespace Client
             containerRegistry.RegisterForNavigation<AircraftInfoPage, AircraftInfoPageViewModel>();
             containerRegistry.RegisterForNavigation<AircraftTasksPage, AircraftTasksPageViewModel>();
 
+            containerRegistry.RegisterForNavigation<TeamsPage, TeamsPageViewModel>();
+            containerRegistry.RegisterForNavigation<TeamDetailsPage, TeamDetailsPageViewModel>();
         }
     }
 }
