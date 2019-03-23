@@ -28,18 +28,22 @@ namespace Client.Interfaces
         // Teams endpoint
         [Get("/Api/Team/GetTeams")]
         Task<HttpResponseMessage> GetTeams();
-        [Get("/Api/Team/GetTeam")]
-        Task<HttpResponseMessage> GetTeam(string teamId);
-        [Get("/Api/Team/GetMembers")]
-        Task<HttpResponseMessage> GetMembers(string teamId);
-        [Get("/Api/Team/AddMemberToTeam")]
-        Task<HttpResponseMessage> AddMemberToTeam(string teamId);
+        [Post("/Api/Team/GetTeam")]
+        // Task<HttpResponseMessage> GetTeam(string teamId);
+        Task<HttpResponseMessage> GetTeam([Header("Accept")] string applicationJson, [Body(BodySerializationMethod.Serialized)] string body);
+        [Post("/Api/Team/GetMembers")]
+        // Task<HttpResponseMessage> GetMembers(string teamId);
+        Task<HttpResponseMessage> GetMembers([Header("Accept")] string applicationJson, [Body(BodySerializationMethod.Serialized)] string body);
+        [Post("/Api/Team/AddMemberToTeam")]
+        // Task<HttpResponseMessage> AddMemberToTeam(string teamId);
+        Task<HttpResponseMessage> AddMemberToTeam([Header("Accept")] string applicationJson, [Body(BodySerializationMethod.Serialized)] string body);
 
         // Tasks endpoint
-        [Get("/Api/Task/CreateTask")]
-        Task<HttpResponseMessage> CreateTask(string aircraftId, string teamId, string description);
-        [Get("/Api/Task/GetTasksForAircraft")]
-        Task<HttpResponseMessage> GetTasksForAircraft(string aircraftId);
-
+        [Post("/Api/Task/CreateTask")]
+        // Task<HttpResponseMessage> CreateTask(string aircraftId, string teamId, string description);
+        Task<HttpResponseMessage> CreateTask([Header("Accept")] string applicationJson, [Body(BodySerializationMethod.Serialized)] string body);
+        [Post("/Api/Task/GetTasksForAircraft")]
+        // Task<HttpResponseMessage> GetTasksForAircraft(string aircraftId);
+        Task<HttpResponseMessage> GetTasksForAircraft([Header("Accept")] string applicationJson, [Body(BodySerializationMethod.Serialized)] string body);
     }
 }

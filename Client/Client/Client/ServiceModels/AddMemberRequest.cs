@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Client.ServiceModels
 {
-    class AddMemberRequest
+    public class AddMemberRequest
     {
         public string EmployeeId { get; set; }
 

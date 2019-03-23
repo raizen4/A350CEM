@@ -43,7 +43,8 @@ namespace Client.ViewModels
             Title = "Login Page";
             this._navService = navigationService;
             this._dialogService = dialogService;
-            this.LogInCommand = new DelegateCommand(async () => await this.Login());    
+            this.LogInCommand = new DelegateCommand(async () => await this.Login());
+            // this.LogInCommand = new DelegateCommand(async () => await this._navService.NavigateAsync(nameof(Views.AircraftInfoPage));
             this._facade = facadeImplementation;
         }
 

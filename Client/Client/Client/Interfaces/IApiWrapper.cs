@@ -23,16 +23,15 @@ namespace Client.Interfaces
 
         // Team
         Task<HttpResponseMessage> GetTeams();
-        Task<HttpResponseMessage> GetTeam(string teamId);
-        Task<HttpResponseMessage> GetMembers(string teamId);
-        Task<HttpResponseMessage> AddMemberToTeam(string teamId);
-
+        Task<HttpResponseMessage> GetTeam(GetTeamRequest req);
+        Task<HttpResponseMessage> GetMembers(GetMembersRequest req);
+        Task<HttpResponseMessage> AddMemberToTeam(AddMemberRequest req);
         Task<HttpResponseMessage> MarkTaskAsCompleted(TaskRequest req);
 
 
         // Task
-        Task<HttpResponseMessage> CreateTask(string aircraftId, string teamId, string description);
-        Task<HttpResponseMessage> GetTasksForAircraft(string aircraftId);
+        Task<HttpResponseMessage> CreateTask(CreateTaskRequest req);
+        Task<HttpResponseMessage> GetTasksForAircraft(GetTasksForAircraftRequest req);
 
     }
 }

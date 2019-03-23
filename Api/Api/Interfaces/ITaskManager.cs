@@ -11,6 +11,7 @@ namespace Api.Interfaces
 
         bool MarkTaskAsCompleted(string taskId, string status);
 
+        Task CreateTask(Task task);
 
     }
 }
