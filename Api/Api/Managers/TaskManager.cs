@@ -1,53 +1,40 @@
 ﻿using Api.Interfaces;
+using Client.Models;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using Xamarin.Forms;
 
 namespace Api.Managers
 {
-    public class TaskManager : ITaskManager
+    public class CreateTaskManager : ICreateTaskManager
     {
+        private AppSettings settings;
         private readonly IDatabaseService dbService;
-        private AppSettings apiConstants;
-
-        public TaskManager(IDatabaseService dbService, IOptions<AppSettings> constants)
+        public CreateTaskManager(IOptions<AppSettings> appSettings, IDatabaseService dbService)
         {
+            this.settings = appSettings.Value;
             this.dbService = dbService;
-            this.apiConstants = constants.Value;
         }
 
-        public User Authenticate(LoginRequest req)
+        public bool CreateTask(Task newTask)
         {
-            var user = dbService.GetUser(req.Code);
-
-            // return null if user not found
-            if (user == null)
-                return null;
-
-            // authentication successful so generate jwt token
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(apiConstants.Secret);
-            var tokenDescriptor = new SecurityTokenDescriptor
+            try
             {
-                Subject = new ClaimsIdentity(new Claim[]
+                var result = dbService.CreateTask(newTask);
+                if (result != null)
                 {
-                    new Claim(ClaimTypes.UserData, user.Name),
-                    new Claim(ClaimTypes.UserData,user.Token)
-                }),
-                Expires = DateTime.UtcNow.AddDays(7),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            user.Token = tokenHandler.WriteToken(token);
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception e)
+            {
 
-            // remove password before returning
-            user.Password = null;
-
-            return user;
+                Console.WriteLine(e.Message);
+                return false;
+            }
         }
     }
 }

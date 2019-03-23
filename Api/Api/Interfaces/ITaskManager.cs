@@ -5,13 +5,9 @@ using System.Threading.Tasks;
 
 namespace Api.Interfaces
 {
-    interface ITaskManager
+    public interface ITaskManager
     {
        
-
         bool MarkTaskAsCompleted(string taskId, string status);
-
-        Task CreateTask(Task task);
-
     }
 }

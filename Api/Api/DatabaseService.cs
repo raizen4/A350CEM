@@ -77,7 +77,35 @@ namespace Api
             }
         }
 
-        
+        public Task CreateTask(Task task)
+        {
+            Console.WriteLine("TAAAAASK", task);
+            try
+            {
+                tasks.InsertOne(task);
+                return task;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+
+        public Employee CreateEmployee(Employee employee)
+        {
+            try
+            {
+                employees.InsertOne(employee);
+                return employee;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+
 
         public IEnumerable<Aircraft> GetAircrafts()
         {
@@ -95,7 +123,17 @@ namespace Api
 
         public IEnumerable<Employee> GetEmployees()
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                var dbResult = this.employees.Find(employee => true).ToEnumerable();
+                return dbResult;
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
         }
 
         public IEnumerable<Task> GetTasksForAircraft(string aircraftId)
@@ -137,6 +175,28 @@ namespace Api
             {
                 var updateDef = Builders<Task>.Update.Set(task=>task.Status,ServiceTaskStatusesEnum.StatusCompleted);
                 var dbResult = this.tasks.FindOneAndUpdate(task=>task.Id==taskId, updateDef);
+                if (dbResult != null)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+        }
+
+        public bool AssignEmployeeToTeam(string employeeId, string teamId)
+        {
+            try
+            {
+                var updateDef = Builders<Employee>.Update.Set(employee => employee.TeamId, teamId);
+                Console.WriteLine("updateDef is ", updateDef);
+                var dbResult = this.employees.FindOneAndUpdate(employee => employee.Id == employeeId, updateDef);
+                Console.WriteLine("dbResult is ", dbResult);
+
                 if (dbResult != null)
                 {
                     return true;

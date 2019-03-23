@@ -23,24 +23,65 @@ namespace Api.Managers
             this.settings = appSettings.Value;
             this.dbService = dbService;
         }
-        public bool AssignEmployeeToTeam(string teamId)
-        {
-            throw new NotImplementedException();
-        }
-
-
-     
 
         public bool CreateEmployee(Employee newEmployee)
         {
-            throw new NotImplementedException();
+
+            try
+            {
+                var result = dbService.CreateEmployee(newEmployee);
+                if (result != null)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.Message);
+                return false;
+            }
+        }
+
+        public bool AssignEmployeeToTeam(string employeeId ,string teamId)
+        {
+            try
+            {
+                var result = dbService.AssignEmployeeToTeam(employeeId, teamId);
+                if (result)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.Message);
+                return false;
+            }
         }
 
         public IEnumerable<Employee> GetEmployees()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = dbService.GetEmployees();
+                if (result != null)
+                {
+                    return result;
+                }
+                return new List<Employee>();
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.Message);
+                return null;
+            }
         }
 
-       
+
     }
 }
