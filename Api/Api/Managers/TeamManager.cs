@@ -51,7 +51,7 @@ namespace Api.Managers
             }
         }
 
-        public IEnumerable<Team> GetTeamMembers(string teamId)
+        public IEnumerable<Employee> GetTeamMembers(string teamId)
         {
             try
             {

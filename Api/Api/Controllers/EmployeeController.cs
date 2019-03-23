@@ -80,9 +80,10 @@ namespace Api.Controllers
             }
             catch (Exception e)
             {
-
+                Console.WriteLine(e.Message);
                 res.Code = 501;
                 res.IsSuccessful = false;
+                
                 return Ok(res);
             }
         }

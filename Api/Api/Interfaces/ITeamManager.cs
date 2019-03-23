@@ -11,7 +11,7 @@ namespace Api.Interfaces
     {
         IEnumerable<Team> GetTeams();
         bool CreateTeam(Team newTeam);
-        IEnumerable<Team> GetTeamMembers(string teamId);
+        IEnumerable<Employee> GetTeamMembers(string teamId);
 
         
     }

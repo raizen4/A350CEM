@@ -82,11 +82,11 @@ namespace Api.Controllers
         //GET: Gets all team members
         public IActionResult GetTeamMembers([FromQuery]string teamId)
         {
-            List<Team> result = new List<Team>();
+            List<Employee> result = new List<Employee>();
             try
             {
                 result = manager.GetTeamMembers(teamId).ToList();
-                ResponseData<List<Team>> response = new ResponseData<List<Team>>();
+                ResponseData<List<Employee>> response = new ResponseData<List<Employee>>();
                 response.Content = result;
                 response.Code = 200;
                 response.IsSuccessful = true;
@@ -96,7 +96,7 @@ namespace Api.Controllers
             catch(Exception e)
             {
                 Console.WriteLine(e.Message);
-                ResponseData<List<Team>> response = new ResponseData<List<Team>>();
+                ResponseData<List<Employee>> response = new ResponseData<List<Employee>>();
                 response.Content = null;
                 response.Code = 400;
                 response.IsSuccessful = false;
