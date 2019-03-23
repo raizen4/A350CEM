@@ -16,13 +16,13 @@ namespace Api.Interfaces
         Team CreateTeam(Team team);
 
         Employee CreateEmployee(Employee employee);
-        bool AssignEmployeeToTeam(string teamId);
+        bool AssignEmployeeToTeam(string employeeId, string teamId);
         IEnumerable<Employee> GetEmployees();
 
         Aircraft CreateAircraft(Aircraft aircraft);
         bool MarkTaskAsCompleted(string taskId);
         IEnumerable<Aircraft> GetAircrafts();
-        IEnumerable<Client.Models.Task> GetTasksForAircraft(string aircraftId);
+        IEnumerable<Task> GetTasksForAircraft(string aircraftId);
 
         Task CreateTask(Task task);
     }

@@ -12,18 +12,23 @@ namespace Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TaskController : ControllerBase
+    public class CreateTaskController : ControllerBase
     {
-        private readonly ITaskManager manager;
-        public TaskController(ITaskManager manager)
+        /// <summary>
+        /// The manager
+        /// </summary>
+        private readonly ICreateTaskManager manager;
+
+
+
+        public CreateTaskController(ICreateTaskManager manager)
         {
             this.manager = manager;
         }
 
-        [HttpPost, Authorize, Route("CreateTask")]
+        [HttpPost, AllowAnonymous, Route("CreateTask")]
         public IActionResult CreateTask([FromBody] NewTaskForm taskForm)
         {
-            
             var task = taskForm.NewTask;
             var res = new BaseResponse();
             try

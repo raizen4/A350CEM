@@ -1,24 +1,25 @@
 ﻿using Api.Interfaces;
+using Client.Models;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using Task = Client.Models.Task;
 
 namespace Api.Managers
 {
-    public class TaskManager : ITaskManager
+    public class CreateTaskManager : ICreateTaskManager
     {
+        private AppSettings settings;
         private readonly IDatabaseService dbService;
-        public TaskManager(IDatabaseService dbService)
+        public CreateTaskManager(IOptions<AppSettings> appSettings, IDatabaseService dbService)
         {
+            this.settings = appSettings.Value;
             this.dbService = dbService;
         }
+
         public bool CreateTask(Task newTask)
         {
-
             try
             {
                 var result = dbService.CreateTask(newTask);
@@ -34,11 +35,6 @@ namespace Api.Managers
                 Console.WriteLine(e.Message);
                 return false;
             }
-        }
-
-        public bool MarkTaskAsCompleted(string taskId, string status)
-        {
-            throw new NotImplementedException();
         }
     }
 }

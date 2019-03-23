@@ -17,7 +17,6 @@ namespace Client.Models
 
 
         [BsonElement("Type")]
-
         public string Type { get; set; }
 
     }

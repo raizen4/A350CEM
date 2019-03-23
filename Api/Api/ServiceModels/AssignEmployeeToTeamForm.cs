@@ -8,5 +8,7 @@ namespace Api.ServiceModels
     public class AssignEmployeeToTeamForm
     {
         public string TeamId { get; set; }
+
+        public string EmployeeId { get; set; }
     }
 }

@@ -10,7 +10,7 @@ namespace Api.Interfaces
 {
    public interface IEmployeeManager
     {
-        bool AssignEmployeeToTeam(string teamId);
+        bool AssignEmployeeToTeam(string employeeId, string teamId);
 
         bool CreateEmployee(Employee newEmployee);
 

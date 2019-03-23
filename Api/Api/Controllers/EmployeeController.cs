@@ -11,7 +11,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace Api.Controllers
 {
     [Route("api/[controller]")]
-    public class EmployeeController : Controller
+    [ApiController]
+    public class EmployeeController : ControllerBase
     {
         /// <summary>
         /// The manager
@@ -26,7 +27,7 @@ namespace Api.Controllers
         }
 
 
-        [HttpGet, Authorize, Route("GetEmployees")]
+        [HttpGet, AllowAnonymous, Route("GetEmployees")]
         // GET: Gets all the employees
         public IActionResult GetEmployees()
         {
@@ -57,12 +58,13 @@ namespace Api.Controllers
 
 
         [HttpPost, AllowAnonymous, Route("CreateEmployee")]
-        public IActionResult CreateEmployee([FromBody] NewEmployeeForm req)
+        public IActionResult CreateEmployee([FromBody] NewEmployeeForm employeeForm)
         {
+            var employee = employeeForm.NewEmployee;
             var res = new BaseResponse();
             try
             {
-                var createdUser = manager.CreateEmployee(req.NewEmployee);
+                var createdUser = manager.CreateEmployee(employeeForm.NewEmployee);
                 if (createdUser)
                 {
 
@@ -83,12 +85,10 @@ namespace Api.Controllers
                 res.IsSuccessful = false;
                 return Ok(res);
             }
-
-
         }
 
-        [HttpPut, Authorize, Route("AssignEmployeeToTeam")]
-        public IActionResult AssignEmployeeToTeam([FromBody]AssignEmployeeToTeamForm req)
+        [HttpPut, AllowAnonymous, Route("AssignEmployeeToTeam")]
+        public IActionResult AssignEmployeeToTeam([FromBody]AssignEmployeeToTeamForm assignEmployeeForm)
         {
             var response = new BaseResponse()
             {
@@ -97,7 +97,7 @@ namespace Api.Controllers
 
             try
             {
-                var result = manager.AssignEmployeeToTeam(req.TeamId);
+                var result = manager.AssignEmployeeToTeam(assignEmployeeForm.EmployeeId, assignEmployeeForm.TeamId);
                 if (result)
                 {
                     response.IsSuccessful = true;

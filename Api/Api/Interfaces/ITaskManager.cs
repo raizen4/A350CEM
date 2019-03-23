@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Client.Models;
-using Task = Client.Models.Task;
 
 namespace Api.Interfaces
 {
@@ -11,7 +9,5 @@ namespace Api.Interfaces
     {
        
         bool MarkTaskAsCompleted(string taskId, string status);
-
-        bool CreateTask(Task newTask);
     }
 }
