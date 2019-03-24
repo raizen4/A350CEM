@@ -2,9 +2,9 @@
 
 namespace Client.Views
 {
-    public partial class TasksPage : ContentPage
+    public partial class CreateTeamsPage : ContentPage
     {
-        public TasksPage()
+        public CreateTeamsPage()
         {
             InitializeComponent();
         }

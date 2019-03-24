@@ -10,6 +10,8 @@ namespace Client.ServiceModels
 
         public string TaskId { get; set; }
 
+        public string TeamId { get; set; }
+
         public string Description { get; set; }
     }
 }

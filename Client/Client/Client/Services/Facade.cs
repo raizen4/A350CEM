@@ -25,7 +25,9 @@ namespace Client.Services
             {
                 HasBeenSuccessful = false
             };
-            var result = await this.apiWrapper.AddMemberToTeam(teamId);
+            var addMemberReq = new AddMemberRequest();
+            addMemberReq.TeamId = teamId;
+            var result = await this.apiWrapper.AddMemberToTeam(addMemberReq);
             string content = await result.Content.ReadAsStringAsync();
             if(result.StatusCode == HttpStatusCode.OK)
             {
@@ -68,8 +70,11 @@ namespace Client.Services
             {
                 HasBeenSuccessful = false
             };
-
-            var result = await this.apiWrapper.CreateTask(aircraftId, teamId, description);
+            var createTaskReq = new CreateTaskRequest();
+            createTaskReq.AircraftId = aircraftId;
+            createTaskReq.TeamId = teamId;
+            createTaskReq.Description = description;
+            var result = await this.apiWrapper.CreateTask(createTaskReq);
             string content = await result.Content.ReadAsStringAsync();
             if (result.StatusCode == HttpStatusCode.OK)
             {
@@ -191,7 +196,9 @@ namespace Client.Services
             {
                 HasBeenSuccessful = false
             };
-            var result = await this.apiWrapper.GetMembers(teamId);
+            var getMembersReq = new GetMembersRequest();
+            getMembersReq.EmployeeId.Add(teamId);
+            var result = await this.apiWrapper.GetMembers(getMembersReq);
             string content = await result.Content.ReadAsStringAsync();
             if (result.StatusCode == HttpStatusCode.OK)
             {
@@ -235,7 +242,11 @@ namespace Client.Services
             {
                 HasBeenSuccessful = false
             };
-            var result = await this.apiWrapper.GetTasksForAircraft(aircraftId);
+            var getTasksForAircraftReq = new GetTasksForAircraftRequest();
+            var newAircraft = new Aircraft();
+            newAircraft.ID = aircraftId;
+            getTasksForAircraftReq.GetTasksForAircraft.Add(newAircraft);
+            var result = await this.apiWrapper.GetTasksForAircraft(getTasksForAircraftReq);
             string content = await result.Content.ReadAsStringAsync();
             if (result.StatusCode == HttpStatusCode.OK)
             {
@@ -278,7 +289,11 @@ namespace Client.Services
             {
                 HasBeenSuccessful = false
             };
-            var result = await this.apiWrapper.GetTeam(teamId);
+            var newTeamObj = new Team();
+            newTeamObj.ID = teamId;
+            var getTeamReq = new GetTeamRequest();
+            getTeamReq.GetTeam = newTeamObj;
+            var result = await this.apiWrapper.GetTeam(getTeamReq);
             string content = await result.Content.ReadAsStringAsync();
             if (result.StatusCode == HttpStatusCode.OK)
             {

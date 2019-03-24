@@ -9,11 +9,9 @@ using System.Linq;
 
 namespace Client.ViewModels
 {
-    public class TasksPageViewModel : ViewModelBase
+    public class CreateTasksPageViewModel : ViewModelBase
     {
         private IFacade facade;
-        private List<Aircraft> aircraft;
-        private List<Team> team;
 
         public List<Aircraft> Aircrafts
         {
@@ -46,10 +44,10 @@ namespace Client.ViewModels
 
         private readonly INavigationService navService;
 
-        public TasksPageViewModel(INavigationService navigationService) : base(navigationService)
+        public CreateTasksPageViewModel(INavigationService navigationService) : base(navigationService)
         {
             this.navService = NavigationService;
-            this.Title = "Employees";
+            this.Title = "Create Tasks";
         }
     }
 }

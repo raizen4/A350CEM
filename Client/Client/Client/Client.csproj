@@ -16,10 +16,16 @@
     <Compile Update="Views\AircraftTasksPage.xaml.cs">
       <DependentUpon>AircraftTasksPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\CresteTasksPage.xaml.cs">
+      <DependentUpon>CresteTasksPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Update="Views\AircraftInfoPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\CreateTeamsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\LoginPage.xaml">
