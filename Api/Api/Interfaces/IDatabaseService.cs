@@ -29,7 +29,7 @@ namespace Api.Interfaces
         IEnumerable<Aircraft> GetAircrafts();
 
         //Task
-        TaskClass CreateOneTask(TaskClass task);
+        TaskClass CreateTask(TaskClass task);
         bool MarkTaskAsCompleted(string taskId);
        
     }

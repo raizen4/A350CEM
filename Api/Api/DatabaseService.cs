@@ -76,9 +76,8 @@ namespace Api
             }
         }
 
-        public TaskClass CreateOneTask(TaskClass task)
+        public TaskClass CreateTask(TaskClass task)
         {
-            Console.WriteLine("TAAAAASK", task);
             try
             {
                 tasks.InsertOne(task);

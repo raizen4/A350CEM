@@ -8,21 +8,21 @@ using System.Text;
 
 namespace Api.Managers
 {
-    public class CreateTaskManager : ICreateTaskManager
+    public class TaskManager : ITaskManager
     {
         private AppSettings settings;
         private readonly IDatabaseService dbService;
-        public CreateTaskManager(IOptions<AppSettings> appSettings, IDatabaseService dbService)
+        public TaskManager(IOptions<AppSettings> appSettings, IDatabaseService dbService)
         {
             this.settings = appSettings.Value;
             this.dbService = dbService;
         }
 
-        public bool CreateOneTask(TaskClass newTask)
+        public bool CreateTask(TaskClass newTask)
         {
             try
             {
-                var result = dbService.CreateOneTask(newTask);
+                var result = dbService.CreateTask(newTask);
                 if (result != null)
                 {
                     return true;
@@ -35,6 +35,11 @@ namespace Api.Managers
                 Console.WriteLine(e.Message);
                 return false;
             }
+        }
+
+        public bool MarkTaskAsCompleted(string taskId, string status)
+        {
+            throw new NotImplementedException();
         }
     }
 }
