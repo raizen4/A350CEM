@@ -12,7 +12,7 @@ namespace Client.Interfaces
     {
         void InitialiseApi();
 
-        // Login
+        // Authenticate
         Task<HttpResponseMessage> Login(LoginRequest req);
 
         // Employees

@@ -19,7 +19,7 @@
 
             <StackLayout   Grid.Row="0" Grid.Column="0" Orientation="Horizontal"  HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
                 <Label FontSize="25" TextColor="Black" Text="Welcome, "></Label>
-                <Label FontSize="25" TextColor="Black" Text="Bogdan"></Label>
+                <Label FontSize="25" TextColor="Black" Text="{Binding UserName}"></Label>
             </StackLayout>
             
             <StackLayout  Grid.Row="1" Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">

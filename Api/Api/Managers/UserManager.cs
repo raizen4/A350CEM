@@ -26,7 +26,7 @@ namespace Api.Managers
 
         public  User Authenticate(LoginRequest req)
         {
-            var user = dbService.GetUser(req.Code);
+            var user = dbService.GetUser(req.Password);
 
             // return null if user not found
             if (user == null)
@@ -39,8 +39,7 @@ namespace Api.Managers
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.UserData, user.Name),
-                    new Claim(ClaimTypes.UserData,user.Token)
+                    new Claim(ClaimTypes.UserData, user.Name)
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

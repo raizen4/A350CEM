@@ -5,7 +5,8 @@ using System.Text;
 namespace Client.ServiceModels
 {
    public class LoginRequest
-    {        public string Password { get; set; }
+    {
+        public string Password { get; set; }
 
     }
 }
