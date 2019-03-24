@@ -9,8 +9,10 @@ namespace Api.Interfaces
 {
     public interface ITeamManager
     {
-        bool CreateTeam(Team newTeamToBeInserted);
-        
+        IEnumerable<Team> GetTeams();
+        bool CreateTeam(Team newTeam);
+        IEnumerable<Employee> GetTeamMembers(string teamId);
+
         
     }
 }
