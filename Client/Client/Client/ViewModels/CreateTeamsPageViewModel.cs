@@ -11,7 +11,10 @@ namespace Client.ViewModels
 {
     public class CreateTeamsPageViewModel : ViewModelBase
     {
-        private IFacade facade;
+        private IFacade _facade;
+        private readonly INavigationService _navService;
+
+        public DelegateCommand GoToMainPage { get; set; }
 
         public List<Aircraft> Aircrafts
         {
@@ -41,13 +44,11 @@ namespace Client.ViewModels
             }
         }
 
-
-        private readonly INavigationService navService;
-
-        public CreateTeamsPageViewModel(INavigationService navigationService) : base(navigationService)
+        public CreateTeamsPageViewModel(INavigationService navigationService, IFacade facade) : base(navigationService)
         {
-            this.navService = NavigationService;
-            this.Title = "Create Team";
+            Title = "Create Teams";
+            this._facade = facade;
+            this.GoToMainPage = new DelegateCommand(() => this._navService.NavigateAsync(nameof(Views.MainPage)));
         }
     }
 }

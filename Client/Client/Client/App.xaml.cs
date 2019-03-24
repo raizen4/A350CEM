@@ -26,7 +26,7 @@ namespace Client
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavigationPage/TeamsPage");
+            await NavigationService.NavigateAsync("NavigationPage/MainPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
