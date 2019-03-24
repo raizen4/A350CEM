@@ -14,9 +14,8 @@ namespace Api
     {
         private readonly IMongoCollection<Aircraft> aircrafts;
         private readonly IMongoCollection<Team> teams;
-
         private readonly IMongoCollection<Employee> employees;
-        private readonly IMongoCollection<Task> tasks;
+        private readonly IMongoCollection<TaskClass> tasks;
         private readonly IMongoCollection<User> users;
 
 
@@ -28,7 +27,7 @@ namespace Api
             this.aircrafts = database.GetCollection<Aircraft>("Aircrafts");
             this.teams = database.GetCollection<Team>("Teams");
             this.employees = database.GetCollection<Employee>("Employees");
-            this.tasks = database.GetCollection<Task>("Tasks");
+            this.tasks = database.GetCollection<TaskClass>("Tasks");
             this.users = database.GetCollection<User>("Users");
         }
 
@@ -77,7 +76,7 @@ namespace Api
             }
         }
 
-        public Task CreateTask(Task task)
+        public TaskClass CreateOneTask(TaskClass task)
         {
             Console.WriteLine("TAAAAASK", task);
             try
@@ -152,7 +151,7 @@ namespace Api
             }
         }
 
-        public IEnumerable<Task> GetTasksForAircraft(string aircraftId)
+        public IEnumerable<TaskClass> GetTasksForAircraft(string aircraftId)
         {
             try
             {
@@ -205,7 +204,7 @@ namespace Api
         {
             try
             {
-                var updateDef = Builders<Task>.Update.Set(task=>task.Status,ServiceTaskStatusesEnum.StatusCompleted);
+                var updateDef = Builders<TaskClass>.Update.Set(task=>task.Status,ServiceTaskStatusesEnum.StatusCompleted);
                 var dbResult = this.tasks.FindOneAndUpdate(task=>task.Id==taskId, updateDef);
                 if (dbResult != null)
                 {

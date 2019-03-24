@@ -70,7 +70,7 @@ namespace Api.Managers
             }
         }
 
-        public IEnumerable<Task> GetTasksForAircraft(string AircraftId)
+        public IEnumerable<TaskClass> GetTasksForAircraft(string AircraftId)
         {
             try
             {
@@ -79,7 +79,7 @@ namespace Api.Managers
                 {
                     return result;
                 }
-                return new List<Task>();
+                return new List<TaskClass>();
             }
             catch (Exception e)
             {

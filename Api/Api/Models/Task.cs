@@ -3,7 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace Client.Models
 {
-    public class Task
+    public class TaskClass
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]

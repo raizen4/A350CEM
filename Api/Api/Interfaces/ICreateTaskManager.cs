@@ -7,6 +7,6 @@ namespace Api.Interfaces
 {
     public interface ICreateTaskManager
     {
-        bool CreateTask(Task newTask);
+        bool CreateOneTask(TaskClass newTask);
     }
 }

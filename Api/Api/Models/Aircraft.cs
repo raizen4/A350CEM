@@ -23,7 +23,7 @@ namespace Client.Models
         public Team Team { get; set; }
 
         [BsonElement("Tasks")]
-        public List<Task> Tasks { get; set; }
+        public List<TaskClass> Tasks { get; set; }
 
     }
 }

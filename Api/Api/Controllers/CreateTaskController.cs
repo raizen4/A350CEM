@@ -19,21 +19,20 @@ namespace Api.Controllers
         /// </summary>
         private readonly ICreateTaskManager manager;
 
-
-
         public CreateTaskController(ICreateTaskManager manager)
         {
             this.manager = manager;
         }
 
-        [HttpPost, AllowAnonymous, Route("CreateTask")]
-        public IActionResult CreateTask([FromBody] NewTaskForm taskForm)
+        [HttpPost, AllowAnonymous, Route("CreateOneTask")]
+        public IActionResult CreateOneTask([FromBody] NewTaskForm taskForm)
         {
+            Console.WriteLine("Hello there !!!!!!!!!!!!!");
             var task = taskForm.NewTask;
             var res = new BaseResponse();
             try
             {
-                var createdTask = manager.CreateTask(taskForm.NewTask);
+                var createdTask = manager.CreateOneTask(taskForm.NewTask);
                 if (createdTask)
                 {
                     res.Code = 200;
