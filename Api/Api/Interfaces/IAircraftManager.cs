@@ -15,7 +15,7 @@ namespace Api.Interfaces
 
         bool MarkTaskAsCompleted(string taskId);
 
-        IEnumerable<Client.Models.Task> GetTasksForAircraft(string AircraftId);
+        IEnumerable<TaskClass> GetTasksForAircraft(string AircraftId);
 
     }
 }

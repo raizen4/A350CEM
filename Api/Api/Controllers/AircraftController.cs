@@ -84,11 +84,11 @@ namespace Api.Controllers
         [HttpGet, AllowAnonymous, Route("GetTasksForAircraft")]
         public IActionResult GetTasksForAircraft([FromQuery]string aircraftId)
         {
-            List<Client.Models.Task> result = new List<Client.Models.Task>();
+            List<TaskClass> result = new List<TaskClass>();
             try
             {
                 result = manager.GetTasksForAircraft(aircraftId).ToList();
-                ResponseData<List<Client.Models.Task>> response = new ResponseData<List<Client.Models.Task>>();
+                ResponseData<List<TaskClass>> response = new ResponseData<List<TaskClass>>();
                 response.Content = result;
                 response.Code = 200;
                 response.IsSuccessful = true;
@@ -99,7 +99,7 @@ namespace Api.Controllers
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                ResponseData<List<Client.Models.Task>> response = new ResponseData<List<Client.Models.Task>>();
+                ResponseData<List<TaskClass>> response = new ResponseData<List<TaskClass>>();
                 response.Content = null;
                 response.Code = 400;
                 response.IsSuccessful = false;

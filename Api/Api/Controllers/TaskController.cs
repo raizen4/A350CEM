@@ -12,16 +12,14 @@ namespace Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CreateTaskController : ControllerBase
+    public class TaskController : ControllerBase
     {
         /// <summary>
         /// The manager
         /// </summary>
-        private readonly ICreateTaskManager manager;
+        private readonly ITaskManager manager;
 
-
-
-        public CreateTaskController(ICreateTaskManager manager)
+        public TaskController(ITaskManager manager)
         {
             this.manager = manager;
         }
@@ -47,6 +45,7 @@ namespace Api.Controllers
             }
             catch (Exception e)
             {
+                Console.WriteLine(e.Message);
 
                 res.Code = 501;
                 res.IsSuccessful = false;

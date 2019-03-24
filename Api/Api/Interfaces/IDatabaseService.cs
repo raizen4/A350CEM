@@ -1,4 +1,4 @@
-﻿using Api.Models;
+﻿﻿using Api.Models;
 using Client.Models;
 using System;
 using System.Collections.Generic;
@@ -26,8 +26,9 @@ namespace Api.Interfaces
         Aircraft CreateAircraft(Aircraft aircraft);
         IEnumerable<Client.Models.Task> GetTasksForAircraft(string aircraftId);
         IEnumerable<Aircraft> GetAircrafts();
+
         //Task
-        Task CreateTask(Task task);
+        TaskClass CreateTask(TaskClass task);
         bool MarkTaskAsCompleted(string taskId);
        
     }

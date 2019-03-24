@@ -9,11 +9,12 @@ using System.Linq;
 
 namespace Client.ViewModels
 {
-    public class TasksPageViewModel : ViewModelBase
+    public class CreateTasksPageViewModel : ViewModelBase
     {
-        private IFacade facade;
-        private List<Aircraft> aircraft;
-        private List<Team> team;
+        private IFacade _facade;
+        private readonly INavigationService _navService;
+
+        public DelegateCommand GoToMainPage { get; set; }
 
         public List<Aircraft> Aircrafts
         {
@@ -43,13 +44,11 @@ namespace Client.ViewModels
             }
         }
 
-
-        private readonly INavigationService navService;
-
-        public TasksPageViewModel(INavigationService navigationService) : base(navigationService)
+        public CreateTasksPageViewModel(INavigationService navigationService, IFacade facade) : base(navigationService)
         {
-            this.navService = NavigationService;
-            this.Title = "Employees";
+            Title = "Create Tasks";
+            this._facade = facade;
+            this.GoToMainPage = new DelegateCommand(() => this._navService.NavigateAsync(nameof(Views.MainPage)));
         }
     }
 }
