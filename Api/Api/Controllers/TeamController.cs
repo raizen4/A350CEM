@@ -33,20 +33,20 @@ namespace Api.Controllers
                 {
 
                     res.Code = 200;
-                    res.IsSuccessful = true;
+                    res.HasBeenSuccessful = true;
                     return Ok(res);
                 }
 
 
                 res.Code = 501;
-                res.IsSuccessful = false;
+                res.HasBeenSuccessful = false;
                 return Ok(res);
             }
             catch (Exception e)
             {
 
                 res.Code = 501;
-                res.IsSuccessful = false;
+                res.HasBeenSuccessful = false;
                 return Ok(res);
             }
 
@@ -62,7 +62,7 @@ namespace Api.Controllers
                 ResponseData<List<Team>> response = new ResponseData<List<Team>>();
                 response.Content = result;
                 response.Code = 200;
-                response.IsSuccessful = true;
+                response.HasBeenSuccessful = true;
                 var httpResult = this.Ok(response);
                 return httpResult;
 
@@ -73,7 +73,7 @@ namespace Api.Controllers
                 ResponseData<List<Team>> response = new ResponseData<List<Team>>();
                 response.Content = null;
                 response.Code = 400;
-                response.IsSuccessful = false;
+                response.HasBeenSuccessful = false;
                 var httpResult = this.Ok(response);
                 return httpResult;
             }
@@ -89,7 +89,7 @@ namespace Api.Controllers
                 ResponseData<List<Employee>> response = new ResponseData<List<Employee>>();
                 response.Content = result;
                 response.Code = 200;
-                response.IsSuccessful = true;
+                response.HasBeenSuccessful = true;
                 var httpResult = this.Ok(response);
                 return httpResult;
             }
@@ -99,7 +99,7 @@ namespace Api.Controllers
                 ResponseData<List<Employee>> response = new ResponseData<List<Employee>>();
                 response.Content = null;
                 response.Code = 400;
-                response.IsSuccessful = false;
+                response.HasBeenSuccessful = false;
                 var httpResult = this.Ok(response);
                 return httpResult;
             }

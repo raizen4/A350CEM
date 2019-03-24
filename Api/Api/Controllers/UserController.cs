@@ -35,13 +35,13 @@ namespace Api.Controllers
 
                     res.Code = 401;
                     res.Content = null;
-                    res.IsSuccessful = false;
+                    res.HasBeenSuccessful = false;
                     return Ok(res);
                 }
 
                 res.Code = 200;
                 res.Content = user;
-                res.IsSuccessful = true;
+                res.HasBeenSuccessful = true;
                 return Ok(res);
             }
             catch(Exception e)
@@ -49,7 +49,7 @@ namespace Api.Controllers
 
                 res.Code = 501;
                 res.Content = null;
-                res.IsSuccessful = false;
+                res.HasBeenSuccessful = false;
                 return Ok(res);
             }
            
@@ -66,13 +66,13 @@ namespace Api.Controllers
                 if (createdUser)
                 {
                     res.Code = 200;
-                    res.IsSuccessful = true;
+                    res.HasBeenSuccessful = true;
                     return Ok(res);
                     
                 }
 
                 res.Code =403;
-                res.IsSuccessful = false;
+                res.HasBeenSuccessful = false;
                 return Ok(res);
 
             }
@@ -80,7 +80,7 @@ namespace Api.Controllers
             {
 
                 res.Code = 501;
-                res.IsSuccessful = false;
+                res.HasBeenSuccessful = false;
                 return Ok(res);
             }
 

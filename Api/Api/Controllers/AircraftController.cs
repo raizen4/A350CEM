@@ -34,20 +34,20 @@ namespace Api.Controllers
                 {
 
                     res.Code = 200;
-                    res.IsSuccessful = true;
+                    res.HasBeenSuccessful = true;
                     return Ok(res);
                 }
 
 
                 res.Code = 501;
-                res.IsSuccessful = false;
+                res.HasBeenSuccessful = false;
                 return Ok(res);
             }
             catch (Exception e)
             {
 
                 res.Code = 501;
-                res.IsSuccessful = false;
+                res.HasBeenSuccessful = false;
                 return Ok(res);
             }
 
@@ -63,7 +63,7 @@ namespace Api.Controllers
                 ResponseData<List<Aircraft>> response = new ResponseData<List<Aircraft>>();
                 response.Content = result;
                 response.Code = 200;
-                response.IsSuccessful = true;
+                response.HasBeenSuccessful = true;
                 var httpResult = this.Ok(response);
                 return httpResult;
 
@@ -74,7 +74,7 @@ namespace Api.Controllers
                 ResponseData<List<Aircraft>> response = new ResponseData<List<Aircraft>>();
                 response.Content = null;
                 response.Code = 400;
-                response.IsSuccessful = false;
+                response.HasBeenSuccessful = false;
                 var httpResult = this.Ok(response);
                 return httpResult;
             }
@@ -91,7 +91,7 @@ namespace Api.Controllers
                 ResponseData<List<TaskClass>> response = new ResponseData<List<TaskClass>>();
                 response.Content = result;
                 response.Code = 200;
-                response.IsSuccessful = true;
+                response.HasBeenSuccessful = true;
                 var httpResult = this.Ok(response);
                 return httpResult;
 
@@ -102,7 +102,7 @@ namespace Api.Controllers
                 ResponseData<List<TaskClass>> response = new ResponseData<List<TaskClass>>();
                 response.Content = null;
                 response.Code = 400;
-                response.IsSuccessful = false;
+                response.HasBeenSuccessful = false;
                 var httpResult = this.Ok(response);
                 return httpResult;
             }
@@ -116,7 +116,7 @@ namespace Api.Controllers
         {
             var response = new BaseResponse()
             {
-                IsSuccessful = false
+                HasBeenSuccessful = false
             };
 
             try
@@ -124,12 +124,12 @@ namespace Api.Controllers
                 var result = manager.MarkTaskAsCompleted(req.TaskId);
                 if (result)
                 {
-                    response.IsSuccessful = true;
+                    response.HasBeenSuccessful = true;
                     response.Code = 200;
                     return this.Ok(response);
                 }
 
-                response.IsSuccessful = false;
+                response.HasBeenSuccessful = false;
                 response.Code = 501;
                 return this.Ok(response);
 
@@ -139,7 +139,7 @@ namespace Api.Controllers
             }
             catch (Exception e)
             {
-                response.IsSuccessful = false;
+                response.HasBeenSuccessful = false;
                 response.Code = 501;
                 return this.Ok(response);
             }

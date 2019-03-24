@@ -9,6 +9,6 @@ namespace Api.ServiceModels
     {
         public int Code { get; set; }
 
-        public bool IsSuccessful { get; set; }
+        public bool HasBeenSuccessful { get; set; }
     }
 }

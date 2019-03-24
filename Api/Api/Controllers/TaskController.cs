@@ -35,12 +35,12 @@ namespace Api.Controllers
                 if (createdTask)
                 {
                     res.Code = 200;
-                    res.IsSuccessful = true;
+                    res.HasBeenSuccessful = true;
                     return Ok(res);
                 }
 
                 res.Code = 501;
-                res.IsSuccessful = false;
+                res.HasBeenSuccessful = false;
                 return Ok(res);
             }
             catch (Exception e)
@@ -48,7 +48,7 @@ namespace Api.Controllers
                 Console.WriteLine(e.Message);
 
                 res.Code = 501;
-                res.IsSuccessful = false;
+                res.HasBeenSuccessful = false;
                 return Ok(res);
             }
         }
