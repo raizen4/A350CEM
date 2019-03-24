@@ -1,4 +1,6 @@
-﻿using Client.Models;
+﻿using Api.Models;
+using Api.ServiceModels;
+using Client.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +10,13 @@ namespace Api.Interfaces
 {
    public interface IEmployeeManager
     {
-        bool AssignEmployeeToTeam(string teamId);
+        bool AssignEmployeeToTeam(string employeeId, string teamId);
 
+        bool CreateEmployee(Employee newEmployee);
 
         IEnumerable<Employee> GetEmployees();
+
+
+       
     }
 }

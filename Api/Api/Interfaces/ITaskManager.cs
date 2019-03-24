@@ -5,13 +5,9 @@ using System.Threading.Tasks;
 
 namespace Api.Interfaces
 {
-    interface ITaskManager
+    public interface ITaskManager
     {
-        bool CreateTask(string description, string teamId, string aircraftId);
        
-
-        bool ChangeStatusForTask(string taskId);
-
-
+        bool MarkTaskAsCompleted(string taskId, string status);
     }
 }

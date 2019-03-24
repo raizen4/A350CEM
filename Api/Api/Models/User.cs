@@ -2,22 +2,24 @@
 using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Client.Models
+namespace Api.Models
 {
-    public class Team
+    public class User
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
 
+        [BsonIgnore]
+        public string Token { get; set; }
+
         [BsonElement("Name")]
         public string Name { get; set; }
 
-
-        [BsonElement("Type")]
-        public string Type { get; set; }
-
+        [BsonElement("Password")]
+        public string Password { get; set; }
     }
 }

@@ -5,22 +5,21 @@ using System.Threading.Tasks;
 using Api.Interfaces;
 using Api.ServiceModels;
 using Client.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
     [Route("api/[controller]")]
-    public class EmployeeController : Controller
+    [ApiController]
+    public class EmployeeController : ControllerBase
     {
         /// <summary>
         /// The manager
         /// </summary>
         private readonly IEmployeeManager manager;
 
-        /// <summary>
-        /// Initialises a new instance of the <see cref="SummaryChangingRoomController"/> class.
-        /// </summary>
-        /// <param name="manager">The manager.</param>
+
 
         public EmployeeController(IEmployeeManager manager)
         {
@@ -28,7 +27,7 @@ namespace Api.Controllers
         }
 
 
-        [HttpGet]
+        [HttpGet, AllowAnonymous, Route("GetEmployees")]
         // GET: Gets all the employees
         public IActionResult GetEmployees()
         {
@@ -56,6 +55,70 @@ namespace Api.Controllers
             }
 
         }
+
+
+        [HttpPost, AllowAnonymous, Route("CreateEmployee")]
+        public IActionResult CreateEmployee([FromBody] NewEmployeeForm employeeForm)
+        {
+            var employee = employeeForm.NewEmployee;
+            var res = new BaseResponse();
+            try
+            {
+                var createdUser = manager.CreateEmployee(employeeForm.NewEmployee);
+                if (createdUser)
+                {
+
+                    res.Code = 200;
+                    res.IsSuccessful = true;
+                    return Ok(res);
+                }
+
+
+                res.Code = 401;
+                res.IsSuccessful = false;
+                return Ok(res);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                res.Code = 501;
+                res.IsSuccessful = false;
+                
+                return Ok(res);
+            }
+        }
+
+        [HttpPut, AllowAnonymous, Route("AssignEmployeeToTeam")]
+        public IActionResult AssignEmployeeToTeam([FromBody]AssignEmployeeToTeamForm assignEmployeeForm)
+        {
+            var response = new BaseResponse()
+            {
+                IsSuccessful = false
+            };
+
+            try
+            {
+                var result = manager.AssignEmployeeToTeam(assignEmployeeForm.EmployeeId, assignEmployeeForm.TeamId);
+                if (result)
+                {
+                    response.IsSuccessful = true;
+                    response.Code = 200;
+                    return this.Ok(response);
+                }
+
+                response.IsSuccessful = false;
+                response.Code = 501;
+                return this.Ok(response);
+            }
+            catch (Exception e)
+            {
+                response.IsSuccessful = false;
+                response.Code = 501;
+                return this.Ok(response);
+            }
+
+        }
+
     }
 }
-}
+
