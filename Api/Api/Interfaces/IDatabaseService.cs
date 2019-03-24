@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Task = Client.Models.Task;
+using Task = Client.Models.TaskClass;
 
 namespace Api.Interfaces
 {
@@ -24,7 +24,7 @@ namespace Api.Interfaces
         IEnumerable<Employee> GetTeamMembers(string teamId);
         //Aircraft
         Aircraft CreateAircraft(Aircraft aircraft);
-        IEnumerable<Client.Models.Task> GetTasksForAircraft(string aircraftId);
+        IEnumerable<Client.Models.TaskClass> GetTasksForAircraft(string aircraftId);
         IEnumerable<Aircraft> GetAircrafts();
 
         //Task
