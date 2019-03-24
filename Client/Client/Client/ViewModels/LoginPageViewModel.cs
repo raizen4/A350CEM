@@ -40,11 +40,10 @@ namespace Client.ViewModels
         public LoginPageViewModel(INavigationService navigationService, IFacade facadeImplementation, IPageDialogService dialogService)
             : base(navigationService)
         {
-            Title = "Login Page";
+            Title = "Authenticate Page";
             this._navService = navigationService;
             this._dialogService = dialogService;
             this.LogInCommand = new DelegateCommand(async () => await this.Login());
-            // this.LogInCommand = new DelegateCommand(async () => await this._navService.NavigateAsync(nameof(Views.AircraftInfoPage));
             this._facade = facadeImplementation;
         }
 
@@ -58,19 +57,26 @@ namespace Client.ViewModels
             else
             {
                 IsLoading = true;
-                var currentUserLoggedIn = await this._facade.Login(Password);
-                IsLoading = false;
-                if (currentUserLoggedIn.HasBeenSuccessful)
+                try
                 {
-                    Constants.LoggedUser = currentUserLoggedIn.Content;
-                    await this.NavigationService.NavigateAsync(nameof(Views.MainPage));
-                }
-                else
-                {
+                    var currentUserLoggedIn = await this._facade.Login(Password);
+                    IsLoading = false;
+                    if (currentUserLoggedIn.HasBeenSuccessful)
+                    {
+                        Constants.LoggedUser = currentUserLoggedIn.Content;
+                        await this.NavigationService.NavigateAsync(nameof(Views.MainPage));
+                    }
+                    else
+                    {
 
-                    await this._dialogService.DisplayAlertAsync("Error",
-                        "Password wrong. Please try again", "OK");
+                        await this._dialogService.DisplayAlertAsync("Error",
+                            "Password wrong. Please try again", "OK");
+                    }
+                }catch(Exception e)
+                {
+                    Console.WriteLine(e.Message);
                 }
+               
 
             }
 

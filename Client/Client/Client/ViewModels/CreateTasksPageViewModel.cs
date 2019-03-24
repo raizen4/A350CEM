@@ -22,10 +22,10 @@ namespace Client.ViewModels
             {
                 return new List<Aircraft>()
                 {
-                    new Aircraft() {ID="A Id 1", Name="A Name 1"},
-                    new Aircraft() {ID="A Id 2", Name="A Name 2"},
-                    new Aircraft() {ID="A Id 3", Name="A Name 3"},
-                    new Aircraft() {ID="A Id 4", Name="A Name 4"},
+                    new Aircraft() {Id="A Id 1", Name="A Name 1"},
+                    new Aircraft() {Id="A Id 2", Name="A Name 2"},
+                    new Aircraft() {Id="A Id 3", Name="A Name 3"},
+                    new Aircraft() {Id="A Id 4", Name="A Name 4"},
                 };
             }
         }

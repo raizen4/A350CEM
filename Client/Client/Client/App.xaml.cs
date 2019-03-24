@@ -22,11 +22,11 @@ namespace Client
 
         public App(IPlatformInitializer initializer) : base(initializer) { }
 
+
         protected override async void OnInitialized()
         {
             InitializeComponent();
-
-            await NavigationService.NavigateAsync("NavigationPage/MainPage");
+            await NavigationService.NavigateAsync("NavigationPage/LoginPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)

@@ -41,18 +41,30 @@ namespace Client.ViewModels
         }
 
 
-        public override void OnNavigatedTo(INavigationParameters parameters)
+        public async override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
 
-            List<ServiceTask> tasksReceived;
+            string aircraftId;
             try
             {
-                parameters.TryGetValue("Tasks", out tasksReceived);
-                if (tasksReceived != null)
+                parameters.TryGetValue("AircraftId", out aircraftId);
+                if (aircraftId != null)
                 {
-                    var listToObservableCollection = new ObservableCollection<ServiceTask>(tasksReceived);
-                    ListOfTasksForCurrentAircraft = listToObservableCollection;
+                    
+                    var getTasksResult = await this._facade.GetTasksForAircraft(aircraftId);
+                    if (getTasksResult.HasBeenSuccessful)
+                    {
+                        var listToObservableCollection = new ObservableCollection<ServiceTask>(getTasksResult.Content);
+                        ListOfTasksForCurrentAircraft = listToObservableCollection;
+                    }
+                    else
+                    {
+                        await this._dialogService.DisplayAlertAsync("Failed", "Something went wrong, try again", "OK");
+                        await this._navService.GoBackAsync();
+
+                    }
+
                 }
             }
             catch(Exception e)

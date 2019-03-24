@@ -8,6 +8,7 @@ using Refit;
 namespace Client.ApiWrapperImplementation
 {
     using System.Net.Http.Headers;
+    using System.Text;
     using Client.Interfaces;
     using Client.ServiceModels;
     using Newtonsoft.Json;
@@ -41,10 +42,11 @@ namespace Client.ApiWrapperImplementation
 
                 DefaultRequestHeaders = { Authorization = new AuthenticationHeaderValue("Bearer", Constants.Token) },
                 BaseAddress = new Uri(Constants.WebApiEndpoint),
+               
 
             };
             try
-            {
+            { 
                 this.API = RestService.For<IApiEndpoints>(this.client);
             }
             catch (Exception ex)
@@ -58,7 +60,9 @@ namespace Client.ApiWrapperImplementation
         public async Task<HttpResponseMessage> Login(LoginRequest req)
         {
             var jsonToSend = JsonConvert.SerializeObject(req);
-            var result = await this.API.Login(Constants.Headers.ContentType,jsonToSend);          
+            var content = new StringContent(jsonToSend, Encoding.UTF8, Constants.Headers.ContentType);
+
+            var result = await this.API.Authenticate(Constants.Headers.ContentType, content);          
             return result;
         }
 
@@ -91,7 +95,8 @@ namespace Client.ApiWrapperImplementation
         {
             this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Constants.Token);
             var jsonToSend = JsonConvert.SerializeObject(req);
-            var result = await this.API.GetTeam(Constants.Headers.ContentType, jsonToSend);
+            var content = new StringContent(jsonToSend, Encoding.UTF8, Constants.Headers.ContentType);
+            var result = await this.API.GetTeam(Constants.Headers.ContentType, content);
             return result;
         }
 
@@ -100,7 +105,8 @@ namespace Client.ApiWrapperImplementation
         {
             this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Constants.Token);
             var jsonToSend = JsonConvert.SerializeObject(req);
-            var result = await this.API.GetMembers(Constants.Headers.ContentType, jsonToSend);
+            var content = new StringContent(jsonToSend, Encoding.UTF8, Constants.Headers.ContentType);
+            var result = await this.API.GetMembers(Constants.Headers.ContentType, content);
             return result;
         }
 
@@ -109,7 +115,8 @@ namespace Client.ApiWrapperImplementation
         {
             this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Constants.Token);
             var jsonToSend = JsonConvert.SerializeObject(req);
-            var result = await this.API.AddMemberToTeam(Constants.Headers.ContentType, jsonToSend);
+            var content = new StringContent(jsonToSend, Encoding.UTF8, Constants.Headers.ContentType);
+            var result = await this.API.AddMemberToTeam(Constants.Headers.ContentType, content);
             return result;
         }
 
@@ -118,24 +125,30 @@ namespace Client.ApiWrapperImplementation
         {
             this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Constants.Token);
             var jsonToSend = JsonConvert.SerializeObject(req);
-            var result = await this.API.CreateTask(Constants.Headers.ContentType, jsonToSend);
+            var content = new StringContent(jsonToSend, Encoding.UTF8, Constants.Headers.ContentType);
+            var result = await this.API.CreateTask(Constants.Headers.ContentType, content);
             return result;
         }
 
-        /// <inheritdoc />
-        public async Task<HttpResponseMessage> GetTasksForAircraft(GetTasksForAircraftRequest req)
-        {
-            this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Constants.Token);
-            var jsonToSend = JsonConvert.SerializeObject(req);
-            var result = await this.API.GetTasksForAircraft(Constants.Headers.ContentType, jsonToSend);
-            return result;
-        }
+    
 
         public async Task<HttpResponseMessage> MarkTaskAsCompleted(TaskRequest req)
         {
             this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Constants.Token);
             var jsonToSend = JsonConvert.SerializeObject(req);
-            var result = await this.API.Login(Constants.Headers.ContentType, jsonToSend);
+            var content = new StringContent(jsonToSend, Encoding.UTF8, Constants.Headers.ContentType);
+            var result = await this.API.MarkTaskAsCompleted(Constants.Headers.ContentType, content);
+            return result;
+        }
+
+        public async Task<HttpResponseMessage> GetTasksForAircraft(GetTasksForAircraftRequest req)
+        {
+            var getAircraftTasksForm = new GetTasksForAircraftRequest();
+            getAircraftTasksForm.AircraftId = req.AircraftId;
+            this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Constants.Token);
+            var jsonToSend = JsonConvert.SerializeObject(req);
+            var content = new StringContent(jsonToSend, Encoding.UTF8, Constants.Headers.ContentType);
+            var result = await this.API.GetTasksForAircraft(Constants.Headers.ContentType, content);
             return result;
         }
     }

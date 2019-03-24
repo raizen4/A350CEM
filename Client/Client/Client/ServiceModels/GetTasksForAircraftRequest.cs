@@ -7,6 +7,6 @@ namespace Client.ServiceModels
 {
     public class GetTasksForAircraftRequest
     {
-        public List<Aircraft> GetTasksForAircraft { get; set; }
+        public string AircraftId { get; set; }
     }
 }

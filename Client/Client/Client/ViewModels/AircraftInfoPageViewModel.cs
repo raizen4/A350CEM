@@ -39,79 +39,13 @@ namespace Client.ViewModels
             this.NavigateToAircraftTasksCommand = new DelegateCommand<Aircraft>(async (aircraftPressed) =>
               {
                   NavigationParameters navParams = new NavigationParameters();
-                  navParams.Add("Tasks", aircraftPressed.TaskHistory);
+                  navParams.Add("AircraftId", aircraftPressed.Id);
                   await this._navService.NavigateAsync(nameof(Views.AircraftTasksPage), navParams);
               });
             this._facade = facade;
             this._dialogService = dialogService;
             this._navService = navigationService;
-            this.ListOfAircrafts = new ObservableCollection < Aircraft >()
-            {
-                new Aircraft()
-                {
-                    FlyHours="50",
-                    EngTeam=new Team()
-                    {
-                        Name="Bosii"
-                    },
-                    ID="231445",
-                    Name="Boeing 737 800 V2",
-                    TaskHistory=new List<ServiceTask>()
-                    {
-                        new ServiceTask()
-                        {
-                            Date=DateTime.Now.ToShortTimeString(),
-                            Description=TaskDescriptionsEnum.Task1,
-                            Status=ServiceTaskStatusesEnum.StatusAssigned,
-                            ID="2132132",
-                            Name="Something really important",
-                        }
-                    }
-                },
-                new Aircraft()
-                {
-                    FlyHours="50",
-                    EngTeam=new Team()
-                    {
-                        Name="Mistocarii"
-                    },
-                    ID="231445",
-                    Name="Airbus A320",
-                    TaskHistory=new List<ServiceTask>()
-                    {
-                        new ServiceTask()
-                        {
-                            Date=DateTime.Now.ToShortTimeString(),
-                            Description=TaskDescriptionsEnum.Task1,
-                            Status=ServiceTaskStatusesEnum.StatusAssigned,
-                            ID="2132132",
-                            Name="Something really important",
-                        }
-                    }
-                },
-                new Aircraft()
-                {
-                    FlyHours="200",
-                    EngTeam=new Team()
-                    {
-                        Name="Bebelusii"
-                    },
-                    ID="23142",
-                    Name="Boeing 787",
-                    TaskHistory=new List<ServiceTask>()
-                    {
-                        new ServiceTask()
-                        {
-                            Date=DateTime.Now.ToShortTimeString(),
-                            Description=TaskDescriptionsEnum.Task1,
-                            Status=ServiceTaskStatusesEnum.StatusAssigned,
-                            ID="2132132",
-                            Name="Something really important",
-                        }
-                    }
-                }
-            };
-            //this.GetAircraftsInfo();
+            this.GetAircraftsInfo();
         }
 
         public async void GetAircraftsInfo()

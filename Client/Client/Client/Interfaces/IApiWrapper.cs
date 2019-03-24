@@ -12,7 +12,7 @@ namespace Client.Interfaces
     {
         void InitialiseApi();
 
-        // Login
+        // Authenticate
         Task<HttpResponseMessage> Login(LoginRequest req);
 
         // Employees
@@ -32,6 +32,5 @@ namespace Client.Interfaces
         // Task
         Task<HttpResponseMessage> CreateTask(CreateTaskRequest req);
         Task<HttpResponseMessage> GetTasksForAircraft(GetTasksForAircraftRequest req);
-
     }
 }

@@ -17,7 +17,9 @@ namespace Client.ViewModels
         private readonly IFacade _facade;
         private readonly INavigationService _navService;
         private readonly IPageDialogService _dialogService;
+        private string userName;
 
+        public string UserName { get; set; }
         public DelegateCommand GoToAircraftInfoPage { get; set; }
         public DelegateCommand GoToEmployeesPage { get; set; }
         public DelegateCommand GoToAircraftManagement { get; set; }
@@ -35,7 +37,7 @@ namespace Client.ViewModels
             this._facade = facade;
             this._dialogService = dialogService;
             this.GoToAircraftInfoPage = new DelegateCommand(async () => await this._navService.NavigateAsync(nameof(Views.AircraftInfoPage)));
-            
+            this.UserName = Constants.LoggedUser.Name;
         }
 
         private async void _navigatoToAircraftManagement()
@@ -43,13 +45,11 @@ namespace Client.ViewModels
             var dialogResult = await this._dialogService.DisplayActionSheetAsync("Aircraft Management", "Where do you want to navigate next?", "Cancel", "Add Team", "Add Task");
             if (dialogResult == "Add Team")
             {
-                Constants.Token = "";
-                Constants.LoggedUser = null;
+               
                 await this._navService.NavigateAsync(nameof(Views.CreateTeamsPage));
             } else if (dialogResult == "Add Task")
             {
-                Constants.Token = "";
-                Constants.LoggedUser = null;
+               
                 await this._navService.NavigateAsync(nameof(Views.CreateTasksPage));
             }
         }

@@ -21,6 +21,7 @@ namespace Client.ViewModels
         public ViewModelBase(INavigationService navigationService)
         {
             NavigationService = navigationService;
+
         }
 
         public virtual void OnNavigatedFrom(INavigationParameters parameters)
@@ -38,6 +39,16 @@ namespace Client.ViewModels
 
         }
 
+      
+        public void ShowProgressDialog()
+        {
+
+        }
+
+        public void DissmissProcessDialog()
+        {
+
+        }
         public virtual void Destroy()
         {
 

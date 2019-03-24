@@ -38,7 +38,7 @@ namespace Api.Controllers
                 ResponseData<List<Employee>> response = new ResponseData<List<Employee>>();
                 response.Content = result;
                 response.Code = 200;
-                response.IsSuccessful = true;
+                response.HasBeenSuccessful = true;
                 var httpResult = this.Ok(response);
                 return httpResult;
 
@@ -49,7 +49,7 @@ namespace Api.Controllers
                 ResponseData<List<Employee>> response = new ResponseData<List<Employee>>();
                 response.Content = null;
                 response.Code = 400;
-                response.IsSuccessful = false;
+                response.HasBeenSuccessful = false;
                 var httpResult = this.Ok(response);
                 return httpResult;
             }
@@ -69,20 +69,20 @@ namespace Api.Controllers
                 {
 
                     res.Code = 200;
-                    res.IsSuccessful = true;
+                    res.HasBeenSuccessful = true;
                     return Ok(res);
                 }
 
 
                 res.Code = 401;
-                res.IsSuccessful = false;
+                res.HasBeenSuccessful = false;
                 return Ok(res);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 res.Code = 501;
-                res.IsSuccessful = false;
+                res.HasBeenSuccessful = false;
                 
                 return Ok(res);
             }
@@ -93,7 +93,7 @@ namespace Api.Controllers
         {
             var response = new BaseResponse()
             {
-                IsSuccessful = false
+                HasBeenSuccessful = false
             };
 
             try
@@ -101,18 +101,18 @@ namespace Api.Controllers
                 var result = manager.AssignEmployeeToTeam(assignEmployeeForm.EmployeeId, assignEmployeeForm.TeamId);
                 if (result)
                 {
-                    response.IsSuccessful = true;
+                    response.HasBeenSuccessful = true;
                     response.Code = 200;
                     return this.Ok(response);
                 }
 
-                response.IsSuccessful = false;
+                response.HasBeenSuccessful = false;
                 response.Code = 501;
                 return this.Ok(response);
             }
             catch (Exception e)
             {
-                response.IsSuccessful = false;
+                response.HasBeenSuccessful = false;
                 response.Code = 501;
                 return this.Ok(response);
             }
