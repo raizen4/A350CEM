@@ -8,7 +8,7 @@ namespace Api.Interfaces
 {
     public interface ITaskManager
     {
-        bool CreateOneTask(TaskClass newTask);
+        bool CreateTask(TaskClass newTask);
 
         bool MarkTaskAsCompleted(string taskId, string status);
     }

@@ -24,14 +24,14 @@ namespace Api.Controllers
             this.manager = manager;
         }
 
-        [HttpPost, AllowAnonymous, Route("CreateOneTask")]
-        public IActionResult CreateOneTask([FromBody] NewTaskForm taskForm)
+        [HttpPost, AllowAnonymous, Route("CreateTask")]
+        public IActionResult CreateTask([FromBody] NewTaskForm taskForm)
         {
             var task = taskForm.NewTask;
             var res = new BaseResponse();
             try
             {
-                var createdTask = manager.CreateOneTask(taskForm.NewTask);
+                var createdTask = manager.CreateTask(taskForm.NewTask);
                 if (createdTask)
                 {
                     res.Code = 200;
