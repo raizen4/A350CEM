@@ -147,6 +147,51 @@ namespace Client.Services
 
         }
 
+        public async Task<ResponseData<IEnumerable<ServiceTask>>> GetAircraftTasks(string aircraftId)
+        {
+            var responseData = new ResponseData<IEnumerable<ServiceTask>>()
+            {
+                HasBeenSuccessful = false
+            };
+            var req = new GetTasksForAircraftRequest();
+            req.AircraftId = aircraftId;
+            var result = await this.apiWrapper.GetTasksForAircraft(req);
+            string content = await result.Content.ReadAsStringAsync();
+            if (result.StatusCode == HttpStatusCode.OK)
+            {
+                try
+                {
+                    var deserializedContent = JsonConvert.DeserializeObject<ResponseData<IEnumerable<ServiceTask>>>(content);
+
+                    if (!deserializedContent.HasBeenSuccessful || !deserializedContent.Content.Any())
+                    {
+                        responseData.HasBeenSuccessful = false;
+                        responseData.Content = null;
+                        responseData.Error = "Internal Server Error";
+                        return responseData;
+                    }
+
+                    responseData.HasBeenSuccessful = true;
+                    responseData.Content = deserializedContent.Content;
+                    responseData.Error = null;
+                    return responseData;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.StackTrace);
+                    responseData.HasBeenSuccessful = false;
+                    responseData.Content = null;
+                    responseData.Error = "Deserialization Error";
+                    return responseData;
+                }
+            }
+            responseData.HasBeenSuccessful = false;
+            responseData.Content = null;
+            responseData.Error = "Internal server Error";
+            return responseData;
+
+        }
+
         public async Task<ResponseData<IEnumerable<Employee>>> GetEmployees()
         {
             var responseData = new ResponseData<IEnumerable<Employee>>()
@@ -244,8 +289,7 @@ namespace Client.Services
             };
             var getTasksForAircraftReq = new GetTasksForAircraftRequest();
             var newAircraft = new Aircraft();
-            newAircraft.ID = aircraftId;
-            getTasksForAircraftReq.GetTasksForAircraft.Add(newAircraft);
+            newAircraft.Id = aircraftId;
             var result = await this.apiWrapper.GetTasksForAircraft(getTasksForAircraftReq);
             string content = await result.Content.ReadAsStringAsync();
             if (result.StatusCode == HttpStatusCode.OK)

@@ -43,13 +43,11 @@ namespace Client.ViewModels
             var dialogResult = await this._dialogService.DisplayActionSheetAsync("Aircraft Management", "Where do you want to navigate next?", "Cancel", "Add Team", "Add Task");
             if (dialogResult == "Add Team")
             {
-                Constants.Token = "";
-                Constants.LoggedUser = null;
+               
                 await this._navService.NavigateAsync(nameof(Views.CreateTeamsPage));
             } else if (dialogResult == "Add Task")
             {
-                Constants.Token = "";
-                Constants.LoggedUser = null;
+               
                 await this._navService.NavigateAsync(nameof(Views.CreateTasksPage));
             }
         }

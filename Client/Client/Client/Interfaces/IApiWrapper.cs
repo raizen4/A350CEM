@@ -32,6 +32,5 @@ namespace Client.Interfaces
         // Task
         Task<HttpResponseMessage> CreateTask(CreateTaskRequest req);
         Task<HttpResponseMessage> GetTasksForAircraft(GetTasksForAircraftRequest req);
-
     }
 }

@@ -122,20 +122,23 @@ namespace Client.ApiWrapperImplementation
             return result;
         }
 
-        /// <inheritdoc />
-        public async Task<HttpResponseMessage> GetTasksForAircraft(GetTasksForAircraftRequest req)
-        {
-            this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Constants.Token);
-            var jsonToSend = JsonConvert.SerializeObject(req);
-            var result = await this.API.GetTasksForAircraft(Constants.Headers.ContentType, jsonToSend);
-            return result;
-        }
+    
 
         public async Task<HttpResponseMessage> MarkTaskAsCompleted(TaskRequest req)
         {
             this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Constants.Token);
             var jsonToSend = JsonConvert.SerializeObject(req);
             var result = await this.API.Login(Constants.Headers.ContentType, jsonToSend);
+            return result;
+        }
+
+        public async Task<HttpResponseMessage> GetTasksForAircraft(GetTasksForAircraftRequest req)
+        {
+            var getAircraftTasksForm = new GetTasksForAircraftRequest();
+            getAircraftTasksForm.AircraftId = req.AircraftId;
+            this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Constants.Token);
+            var jsonToSend = JsonConvert.SerializeObject(req);
+            var result = await this.API.GetTasksForAircraft(Constants.Headers.ContentType, jsonToSend);
             return result;
         }
     }

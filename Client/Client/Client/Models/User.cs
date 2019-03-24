@@ -9,6 +9,8 @@ namespace Client.Models
         public string Token { get; set; }
         public string UserCode { get; set; }
 
+        public string Name { get; set; }
+
 
     }
 }
