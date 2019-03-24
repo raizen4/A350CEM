@@ -168,11 +168,12 @@ namespace Api
         }
 
         //implementing GetTeamMembers method - Vlad Andreescu
-        public IEnumerable<Team> GetTeamMembers(string teamId)
+        public IEnumerable<Employee> GetTeamMembers(string teamId)
         {
             try
             {
-                var dbResult = this.teams.Find<Team>(team => team.Id == teamId).ToEnumerable();
+                var dbResult = this.employees.Find(employee => employee.TeamId == teamId).ToEnumerable();
+                Console.WriteLine(dbResult);
                 return dbResult;
             }
             catch (Exception e)

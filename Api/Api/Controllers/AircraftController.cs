@@ -53,7 +53,7 @@ namespace Api.Controllers
 
         }
 
-        [HttpGet, Authorize, Route("GetAircrafts")]
+        [HttpGet, AllowAnonymous, Route("GetAircrafts")]
         public IActionResult GetAircrafts()
         {
             List<Aircraft> result = new List<Aircraft>();
@@ -81,7 +81,7 @@ namespace Api.Controllers
 
         }
 
-        [HttpGet, Authorize, Route("GetTasksForAircraft")]
+        [HttpGet, AllowAnonymous, Route("GetTasksForAircraft")]
         public IActionResult GetTasksForAircraft([FromQuery]string aircraftId)
         {
             List<Client.Models.Task> result = new List<Client.Models.Task>();

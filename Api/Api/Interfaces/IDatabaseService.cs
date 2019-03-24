@@ -10,27 +10,25 @@ namespace Api.Interfaces
 {
     public interface IDatabaseService
     {
+        //User
         User GetUser(string password);
         User CreateUser(User user);
-
-        Team CreateTeam(Team team);
-        IEnumerable<Aircraft> GetAircrafts();
-        IEnumerable<Team> GetTeams();
-
+        //Employee
         Employee CreateEmployee(Employee employee);
-        bool AssignEmployeeToTeam(string employeeId, string teamId);
         IEnumerable<Employee> GetEmployees();
+        bool AssignEmployeeToTeam(string employeeId, string teamId);
 
+        //Team
+        Team CreateTeam(Team team);
+        IEnumerable<Team> GetTeams();
+        IEnumerable<Employee> GetTeamMembers(string teamId);
+        //Aircraft
         Aircraft CreateAircraft(Aircraft aircraft);
         IEnumerable<Client.Models.Task> GetTasksForAircraft(string aircraftId);
-
-        IEnumerable<Team> GetTeamMembers(string teamId);
-
-        IEnumerable<Employee> GetTeamMembers(string teamId);
-        bool MarkTaskAsCompleted(string taskId);
         IEnumerable<Aircraft> GetAircrafts();
-        IEnumerable<Task> GetTasksForAircraft(string aircraftId);
-
+        //Task
         Task CreateTask(Task task);
+        bool MarkTaskAsCompleted(string taskId);
+       
     }
 }

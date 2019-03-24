@@ -80,7 +80,7 @@ namespace Api.Controllers
         }
         [HttpGet, AllowAnonymous, Route("GetTeamMembers/{teamId}")]
         //GET: Gets all team members
-        public IActionResult GetTeamMembers([FromQuery]string teamId)
+        public IActionResult GetTeamMembers(string teamId)
         {
             List<Employee> result = new List<Employee>();
             try
