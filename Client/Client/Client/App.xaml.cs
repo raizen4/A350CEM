@@ -43,6 +43,7 @@ namespace Client
             containerRegistry.RegisterForNavigation<AircraftTasksPage, AircraftTasksPageViewModel>();
             containerRegistry.RegisterForNavigation<TeamsPage, TeamsPageViewModel>();
             containerRegistry.RegisterForNavigation<TeamDetailsPage, TeamDetailsPageViewModel>();
+            containerRegistry.RegisterForNavigation<AddMemberToTeamPage, AddMemberToTeamPageViewModel>();
         }
     }
 }

@@ -18,6 +18,7 @@ namespace Client.ViewModels
         private readonly INavigationService navService;
         private readonly IPageDialogService dialogService;
         private ObservableCollection<Employee> teamMembersList;
+        public DelegateCommand GoToAddMemberToTeamPage { get; set; }
 
         public ObservableCollection<Employee> TeamMembersList
         {
@@ -37,7 +38,8 @@ namespace Client.ViewModels
             this.facade = facadeImpl;
             this.navService = navigationService;
             this.dialogService = dialogServiceImpl;
-          
+            this.GoToAddMemberToTeamPage = new DelegateCommand(async () => await this.navService.NavigateAsync(nameof(Views.AddMemberToTeamPage)));
+
         }
 
         public async override void OnNavigatedTo(INavigationParameters parameters)
