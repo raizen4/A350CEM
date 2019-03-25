@@ -103,6 +103,8 @@ namespace Client.ApiWrapperImplementation
         /// <inheritdoc />
         public async Task<HttpResponseMessage> GetTeamMembers(GetTeamMembersRequest req)
         {
+            var getTeamMembersForm = new GetTeamMembersRequest();
+            getTeamMembersForm.teamId = req.teamId;
             this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Constants.Token);
             var jsonToSend = JsonConvert.SerializeObject(req);
             var content = new StringContent(jsonToSend, Encoding.UTF8, Constants.Headers.ContentType);

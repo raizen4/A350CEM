@@ -60,7 +60,7 @@ namespace Api.Managers
                 {
                     return result;
                 }
-                return null;
+                return new List<Employee>();
             }
             catch (Exception e)
             {

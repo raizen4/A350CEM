@@ -31,7 +31,7 @@ namespace Client.Interfaces
         [Post("/api/Team/GetTeam")]
         // Task<HttpResponseMessage> GetTeam(string teamId);
         Task<HttpResponseMessage> GetTeam([Header("Accept")] string applicationJson, [Body(BodySerializationMethod.Serialized)] StringContent body);
-        [Get("/api/Team/GetTeamMembers")]
+        [Post("/api/Team/GetTeamMembers")]
         // Task<HttpResponseMessage> GetTeamMembers(string teamId);
         Task<HttpResponseMessage> GetTeamMembers([Header("Accept")] string applicationJson, [Body(BodySerializationMethod.Serialized)] StringContent body);
         [Put("/api/Team/AddMemberToTeam")]

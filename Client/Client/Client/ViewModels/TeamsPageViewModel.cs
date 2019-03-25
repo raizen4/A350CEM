@@ -37,21 +37,13 @@ namespace Client.ViewModels
 
             set
             {
-                if (this.onTeamSelected == null)
+                if (this.onTeamSelected == null && value != null)
                 {
                     this.onTeamSelected = value;
                     this.NavToTeamDetailsCommand.Execute(OnTeamSelected);
                     RaisePropertyChanged();
                 }
-                else
-                { 
-                    if (this.onTeamSelected.Name != value.Name)
-                    {
-                        this.onTeamSelected = value;
-                        RaisePropertyChanged();
-                        this.NavToTeamDetailsCommand.Execute(OnTeamSelected);
-                    }
-                }
+                
             }
         }
 

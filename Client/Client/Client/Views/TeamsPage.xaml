@@ -11,7 +11,7 @@
             <ListView
                 ItemsSource="{Binding TeamsList}"
                 HasUnevenRows="True"
-                >
+                SelectedItem="{Binding OnTeamSelected}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

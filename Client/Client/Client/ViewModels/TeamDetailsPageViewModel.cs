@@ -33,7 +33,7 @@ namespace Client.ViewModels
        
         public TeamDetailsPageViewModel(INavigationService navigationService, IFacade facadeImpl, IPageDialogService dialogServiceImpl) : base(navigationService)
         {
-            this.Title = "Team Members";
+            
             this.facade = facadeImpl;
             this.navService = navigationService;
             this.dialogService = dialogServiceImpl;
@@ -54,6 +54,7 @@ namespace Client.ViewModels
                     {
                         var listToObservableCollection = new ObservableCollection<Employee>(getMembersResult.Content);
                         TeamMembersList = listToObservableCollection;
+                        this.Title = "Team Members:" + TeamMembersList.Count.ToString();
                     }
                     else
                     {
