@@ -235,21 +235,21 @@ namespace Client.Services
 
         }
 
-        public async Task<ResponseData<IEnumerable<Team>>> GetMembers(string teamId)
+        public async Task<ResponseData<IEnumerable<Employee>>> GetTeamMembers(string teamId)
         {
-            var responseData = new ResponseData<IEnumerable<Team>>()
+            var responseData = new ResponseData<IEnumerable<Employee>>()
             {
                 HasBeenSuccessful = false
             };
-            var getMembersReq = new GetMembersRequest();
-            getMembersReq.EmployeeId.Add(teamId);
-            var result = await this.apiWrapper.GetMembers(getMembersReq);
+            var req = new GetTeamMembersRequest();
+            req.teamId = teamId;
+            var result = await this.apiWrapper.GetTeamMembers(req);
             string content = await result.Content.ReadAsStringAsync();
             if (result.StatusCode == HttpStatusCode.OK)
             {
                 try
                 {
-                    var deserializedContent = JsonConvert.DeserializeObject<ResponseData<IEnumerable<Team>>>(content);
+                    var deserializedContent = JsonConvert.DeserializeObject<ResponseData<IEnumerable<Employee>>>(content);
 
                     if (!deserializedContent.HasBeenSuccessful || !deserializedContent.Content.Any())
                     {

@@ -8,7 +8,7 @@ namespace Client.Models
     {
         private string _id;
         private string _spec;
-        private string _team;
+        private string _teamId;
         private string _name;
         private string _manHours;
         private string _token;
@@ -31,8 +31,8 @@ namespace Client.Models
         }
         public string Team  
         {
-            get => this._team;
-            set => this._team = value;
+            get => this._teamId;
+            set => this._teamId = value;
         }
         public string ManHours
         {

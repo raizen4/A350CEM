@@ -18,7 +18,7 @@ namespace Client.Interfaces
         //Teams methods
         Task<ResponseData<IEnumerable<Team>>> GetTeams();
         Task<ResponseData<IEnumerable<Team>>> GetTeam(string teamId);
-        Task<ResponseData<IEnumerable<Team>>> GetMembers(string teamId);
+        Task<ResponseData<IEnumerable<Employee>>> GetTeamMembers(string teamId);
         Task<ResponseData<IEnumerable<Team>>> AddMemberToTeam(string teamId);
 
         //Tasks methods

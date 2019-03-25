@@ -1,9 +1,10 @@
-﻿using Api.Models;
+﻿﻿using Api.Models;
 using Client.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Task = Client.Models.TaskClass;
 
 namespace Api.Interfaces
 {
@@ -12,7 +13,6 @@ namespace Api.Interfaces
         //User
         User GetUser(string password);
         User CreateUser(User user);
-
         //Employee
         Employee CreateEmployee(Employee employee);
         IEnumerable<Employee> GetEmployees();
@@ -22,10 +22,9 @@ namespace Api.Interfaces
         Team CreateTeam(Team team);
         IEnumerable<Team> GetTeams();
         IEnumerable<Employee> GetTeamMembers(string teamId);
-
         //Aircraft
         Aircraft CreateAircraft(Aircraft aircraft);
-        IEnumerable<TaskClass> GetTasksForAircraft(string aircraftId);
+        IEnumerable<Client.Models.TaskClass> GetTasksForAircraft(string aircraftId);
         IEnumerable<Aircraft> GetAircrafts();
 
         //Task

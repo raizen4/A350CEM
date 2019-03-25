@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Api.Interfaces;
 using Api.ServiceModels;
 using Client.Models;
+using Client.ServiceModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -78,13 +79,14 @@ namespace Api.Controllers
                 return httpResult;
             }
         }
-        [HttpGet, AllowAnonymous, Route("GetTeamMembers/{teamId}")]
+        [HttpPost, AllowAnonymous, Route("GetTeamMembers")]
         //GET: Gets all team members
-        public IActionResult GetTeamMembers(string teamId)
+        public IActionResult GetTeamMembers([FromBody] GetTeamMembersRequest req)
         {
             List<Employee> result = new List<Employee>();
             try
             {
+                var teamId = req.teamId;
                 result = manager.GetTeamMembers(teamId).ToList();
                 ResponseData<List<Employee>> response = new ResponseData<List<Employee>>();
                 response.Content = result;
