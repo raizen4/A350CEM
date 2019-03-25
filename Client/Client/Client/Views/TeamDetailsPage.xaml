@@ -25,19 +25,18 @@
                                     </Grid.ColumnDefinitions>
                                     <StackLayout Grid.Column="0" Grid.Row="0" Orientation="Vertical" Margin="10,0,0,0" VerticalOptions="CenterAndExpand">
                                         <StackLayout Orientation="Horizontal">
-                                            
-                                            <Label Text="ID:" Font="Bold, 15"/>
-                                            <Label Text="{Binding ID}" Font="15"/>
+                                            <Label Text="Name:" Font="Bold, 18"/>
                                         </StackLayout>
                                         <StackLayout Orientation="Horizontal"  >
-                                            <Label Text="Member name:" Font="Bold, 18"/>
                                             <Label Text="{Binding Name}" Font="18"/>
                                         </StackLayout>
 
                                     </StackLayout>
                                     <StackLayout Grid.Column="1" Grid.Row="0" VerticalOptions="CenterAndExpand">
                                         <StackLayout Orientation="Horizontal">
-                                            <Label Text="Spec" Font="Bold, 18"/>
+                                            <Label Text="Spec:" Font="Bold, 18"/>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Horizontal">
                                             <Label Text="{Binding Spec}" Font="18"/>
                                         </StackLayout>
                                     </StackLayout>
