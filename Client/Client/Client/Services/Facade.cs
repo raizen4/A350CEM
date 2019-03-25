@@ -498,5 +498,87 @@ namespace Client.Services
             responseData.Error = "Internal Error" + result.StatusCode.ToString();
             return responseData;
         }
+
+        public async Task<ResponseBase> AssignTaskToAircraft(string aircraftId, string taskId, string description)
+        {
+            var responseData = new ResponseBase
+            {
+                HasBeenSuccessful = false
+            };
+
+            var serviceTaskReq = new AssignTaskRequest();
+            serviceTaskReq.AircraftId = aircraftId;
+            serviceTaskReq.TaskId = taskId;
+            serviceTaskReq.Description = description;
+            var result = await this.apiWrapper.AssignTaskToAircraft(serviceTaskReq);
+            string content = await result.Content.ReadAsStringAsync();
+            if (result.StatusCode == HttpStatusCode.OK)
+            {
+                try
+                {
+                    var deserializedContent = JsonConvert.DeserializeObject<ResponseBase>(content);
+                    if (!deserializedContent.HasBeenSuccessful || deserializedContent.Error != null)
+                    {
+                        responseData.HasBeenSuccessful = false;
+                        responseData.Error = "Internal Server Error";
+                        return responseData;
+                    }
+                    responseData.HasBeenSuccessful = true;
+                    responseData.Error = null;
+                    return responseData;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.StackTrace);
+                    responseData.HasBeenSuccessful = false;
+                    responseData.Error = "Deserialization Error";
+                    return responseData;
+                }
+            }
+            responseData.HasBeenSuccessful = false;
+            responseData.Error = "Internal Error" + result.StatusCode.ToString();
+            return responseData;
+        }
+
+        public async Task<ResponseBase> AssignTeamToAircraft(string aircraftId, string teamId, string description)
+        {
+            var responseData = new ResponseBase
+            {
+                HasBeenSuccessful = false
+            };
+
+            var serviceTeamReq = new AssignTeamRequest();
+            serviceTeamReq.AircraftId = aircraftId;
+            serviceTeamReq.TeamId = teamId;
+            serviceTeamReq.Description = description;
+            var result = await this.apiWrapper.AssignTeamToAircraft(serviceTeamReq);
+            string content = await result.Content.ReadAsStringAsync();
+            if (result.StatusCode == HttpStatusCode.OK)
+            {
+                try
+                {
+                    var deserializedContent = JsonConvert.DeserializeObject<ResponseBase>(content);
+                    if (!deserializedContent.HasBeenSuccessful || deserializedContent.Error != null)
+                    {
+                        responseData.HasBeenSuccessful = false;
+                        responseData.Error = "Internal Server Error";
+                        return responseData;
+                    }
+                    responseData.HasBeenSuccessful = true;
+                    responseData.Error = null;
+                    return responseData;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.StackTrace);
+                    responseData.HasBeenSuccessful = false;
+                    responseData.Error = "Deserialization Error";
+                    return responseData;
+                }
+            }
+            responseData.HasBeenSuccessful = false;
+            responseData.Error = "Internal Error" + result.StatusCode.ToString();
+            return responseData;
+        }
     }
 }

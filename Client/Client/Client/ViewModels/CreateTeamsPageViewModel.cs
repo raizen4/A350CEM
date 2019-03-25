@@ -6,6 +6,7 @@ using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Client.ViewModels
 {
@@ -14,7 +15,26 @@ namespace Client.ViewModels
         private IFacade _facade;
         private readonly INavigationService _navService;
 
+        public string AircraftId;
+        public string TeamId;
+        public string Description;
+
+        public List<Aircraft> RealAircrafts;
+        public List<Team> RealTeams;
+
         public DelegateCommand GoToMainPage { get; set; }
+        public DelegateCommand AddTeamCommand { get; set; }
+
+
+        public CreateTeamsPageViewModel(INavigationService navigationService, IFacade facadeImplementation)
+            : base(navigationService)
+        {
+            Title = "Create Teams";
+            this._navService = navigationService;
+            this.GoToMainPage = new DelegateCommand(async () => await this._navService.NavigateAsync(nameof(Views.MainPage)));
+            AddTeamCommand = new DelegateCommand(async () => await AddTeam(AircraftId, TeamId, Description));
+            this._facade = facadeImplementation;
+        }
 
         public List<Aircraft> Aircrafts
         {
@@ -22,33 +42,43 @@ namespace Client.ViewModels
             {
                 return new List<Aircraft>()
                 {
-                    new Aircraft() {Id="A Id 1", Name="A Name 1"},
-                    new Aircraft() {Id="A Id 2", Name="A Name 2"},
-                    new Aircraft() {Id="A Id 3", Name="A Name 3"},
-                    new Aircraft() {Id="A Id 4", Name="A Name 4"},
+                    new Aircraft() {Id="A Id 1"},
+                    new Aircraft() {Id="A Id 2"},
+                    new Aircraft() {Id="A Id 3"},
+                    new Aircraft() {Id="A Id 4"},
                 };
             }
         }
 
-        public List<ServiceTask> Teams
+        public List<Team> Teams
         {
             get
             {
-                return new List<ServiceTask>()
+                return new List<Team>()
                 {
-                    new ServiceTask() {ID="T Id 1", Name="T Name 1"},
-                    new ServiceTask() {ID="T Id 2", Name="T Name 2"},
-                    new ServiceTask() {ID="T Id 3", Name="T Name 3"},
-                    new ServiceTask() {ID="T Id 4", Name="T Name 4"},
+                    new Team() {ID="T Id 1"},
+                    new Team() {ID="T Id 2"},
+                    new Team() {ID="T Id 3"},
+                    new Team() {ID="T Id 4"},
                 };
             }
         }
 
-        public CreateTeamsPageViewModel(INavigationService navigationService, IFacade facade) : base(navigationService)
+        private async Task AddTeam(string AircraftId, string TeamId, string Description)
         {
-            Title = "Create Teams";
-            this._facade = facade;
-            this.GoToMainPage = new DelegateCommand(() => this._navService.NavigateAsync(nameof(Views.MainPage)));
+            try
+            {
+                var result = await this._facade.AssignTeamToAircraft(AircraftId, TeamId, Description);
+                if (result.HasBeenSuccessful)
+                {
+                    await this._navService.NavigateAsync(nameof(Views.CreateTeamsPage));
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+
+            }
         }
     }
 }

@@ -21,6 +21,11 @@ namespace Client.Interfaces
         [Put("/api/Task/MarkTaskAsCompleted")]
         Task<HttpResponseMessage> MarkTaskAsCompleted([Header("Accept")] string applicationJson, [Body(BodySerializationMethod.Serialized)] StringContent body);
 
+        [Put("/api/Task/AssignTaskToAircraft")]
+        Task<HttpResponseMessage> AssignTaskToAircraft([Header("Accept")] string applicationJson, [Body(BodySerializationMethod.Serialized)] StringContent body);
+        [Put("/api/Team/AssignTeamToAircraft")]
+        Task<HttpResponseMessage> AssignTeamToAircraft([Header("Accept")] string applicationJson, [Body(BodySerializationMethod.Serialized)] StringContent body);
+
         // Aircraft endpoint
         [Get("/api/Aircraft/GetAricrafts")]
         Task<HttpResponseMessage> GetAircrafts();

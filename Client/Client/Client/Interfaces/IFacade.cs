@@ -28,5 +28,9 @@ namespace Client.Interfaces
         //Authenticate methods
         Task<ResponseData<User>> Login(string password);
         Task<ResponseBase> MarkTaskAsCompleted(ServiceTask taskToBeCompleted);
+
+        Task<ResponseBase> AssignTeamToAircraft(string aircraftId, string teamId, string description);
+        Task<ResponseBase> AssignTaskToAircraft(string aircraftId, string taskId, string description);
+
     }
 }

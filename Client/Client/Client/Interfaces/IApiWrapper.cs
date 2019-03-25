@@ -28,6 +28,10 @@ namespace Client.Interfaces
         Task<HttpResponseMessage> AddMemberToTeam(AddMemberRequest req);
         Task<HttpResponseMessage> MarkTaskAsCompleted(TaskRequest req);
 
+        Task<HttpResponseMessage> AssignTeamToAircraft(AssignTeamRequest req);
+        Task<HttpResponseMessage> AssignTaskToAircraft(AssignTaskRequest req);
+
+
 
         // Task
         Task<HttpResponseMessage> CreateTask(CreateTaskRequest req);

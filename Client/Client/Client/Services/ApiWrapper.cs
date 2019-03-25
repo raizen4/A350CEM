@@ -141,6 +141,24 @@ namespace Client.ApiWrapperImplementation
             return result;
         }
 
+        public async Task<HttpResponseMessage> AssignTaskToAircraft(AssignTaskRequest req)
+        {
+            this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Constants.Token);
+            var jsonToSend = JsonConvert.SerializeObject(req);
+            var content = new StringContent(jsonToSend, Encoding.UTF8, Constants.Headers.ContentType);
+            var result = await this.API.AssignTaskToAircraft(Constants.Headers.ContentType, content);
+            return result;
+        }
+
+        public async Task<HttpResponseMessage> AssignTeamToAircraft(AssignTeamRequest req)
+        {
+            this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Constants.Token);
+            var jsonToSend = JsonConvert.SerializeObject(req);
+            var content = new StringContent(jsonToSend, Encoding.UTF8, Constants.Headers.ContentType);
+            var result = await this.API.AssignTeamToAircraft(Constants.Headers.ContentType, content);
+            return result;
+        }
+
         public async Task<HttpResponseMessage> GetTasksForAircraft(GetTasksForAircraftRequest req)
         {
             var getAircraftTasksForm = new GetTasksForAircraftRequest();
