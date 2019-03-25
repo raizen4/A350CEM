@@ -63,7 +63,7 @@ namespace Api
             services.AddScoped<IEmployeeManager, EmployeeManager>();
             services.AddScoped<ITeamManager, TeamManager>();
             services.AddScoped<IDatabaseService, DatabaseService>();
-            services.AddScoped<IUserManager, UserManager>();
+            services.AddScoped<IAircraftManager, AircraftManager>();
             services.AddScoped<ITaskManager, TaskManager>();
 
         }

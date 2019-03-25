@@ -35,6 +35,7 @@ namespace Client.ViewModels
             this.LogoutCommand = new DelegateCommand(() => this.LogOut());
             this.GoToAircraftManagement = new DelegateCommand(() => this._navigatoToAircraftManagement());
             this._facade = facade;
+            this._navService = navigationService;
             this._dialogService = dialogService;
             this.GoToAircraftInfoPage = new DelegateCommand(async () => await this._navService.NavigateAsync(nameof(Views.AircraftInfoPage)));
             this.UserName = Constants.LoggedUser.Name;
