@@ -25,6 +25,7 @@ namespace Client.ViewModels
         public DelegateCommand GoToAircraftManagement { get; set; }
         public DelegateCommand GoToTeamsListPage { get; set; }
         public DelegateCommand LogoutCommand { get; set; }
+        public DelegateCommand DisplayAircraftManagementPopup { get; set; }
 
 
 
@@ -39,9 +40,27 @@ namespace Client.ViewModels
             this._facade = facade;
             this._navService = navigationService;
             this._dialogService = dialogService;
+            this.GoToEmployeesPage = new DelegateCommand(async () => await this._navService.NavigateAsync(nameof(Views.EmployeesPage)));
             this.GoToAircraftInfoPage = new DelegateCommand(async () => await this._navService.NavigateAsync(nameof(Views.AircraftInfoPage)));
             this.GoToTeamsListPage = new DelegateCommand(async () => await this._navService.NavigateAsync(nameof(Views.TeamsPage)));
+            this.DisplayAircraftManagementPopup = new DelegateCommand(() => this.NavigatoToAircraftManagement());
+
             this.UserName = Constants.LoggedUser.Name;
+        }
+
+        private async void NavigatoToAircraftManagement()
+        {
+            var dialogResult = await this._dialogService.DisplayActionSheetAsync("Aircraft Management", "Cancel", null, "Add Team", "Add Task");
+            switch (dialogResult)
+            {
+                case "Add Team":
+                    await this._navService.NavigateAsync(nameof(Views.CreateTeamsPage));
+                    break;
+
+                case "Add Task":
+                    await this._navService.NavigateAsync(nameof(Views.CreateTasksPage));
+                    break;
+            }
         }
 
         private async void _navigatoToAircraftManagement()
