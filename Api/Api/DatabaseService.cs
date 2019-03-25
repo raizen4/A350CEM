@@ -83,7 +83,7 @@ namespace Api
                 var task = new TaskClass();
                 task.AircraftId = aircraftId;
                 task.Title = title;
-                task.Status = status;
+                task.Status = ServiceTaskStatusesEnum.StatusAssigned;
                 task.Description = description;
                 tasks.InsertOne(task);
                 return task;

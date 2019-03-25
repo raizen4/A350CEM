@@ -76,10 +76,10 @@ namespace Client.ViewModels
             {
                 return new List<ServiceTask>()
                 {
-                    new ServiceTask() {Id="T Id 1", Description="Test Description", Status="Assigned", Title="Title"},
-                    new ServiceTask() {Id="T Id 2", Description="Test Description", Status="Assigned", Title="Title"},
-                    new ServiceTask() {Id="T Id 3", Description="Test Description", Status="Assigned", Title="Title"},
-                    new ServiceTask() {Id="T Id 4", Description="Test Description", Status="Assigned", Title="Title"},
+                    new ServiceTask() {Id="1", Description="Oil Change", Status="Assigned", Title="Oil Change"},
+                    new ServiceTask() {Id="2", Description="Repair Wing", Status="Assigned", Title="Repair Wing"},
+                    new ServiceTask() {Id="3", Description="Clean Aircraft", Status="Assigned", Title="Clean Aircraft"},
+                    new ServiceTask() {Id="4", Description="Put Gas", Status="Assigned", Title="Put Gas"},
                 };
             }
         }
