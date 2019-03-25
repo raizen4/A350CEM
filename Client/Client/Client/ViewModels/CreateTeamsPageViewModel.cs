@@ -56,6 +56,7 @@ namespace Client.ViewModels
             AddTeamCommand = new DelegateCommand(async () => await AddTeam(AircraftId, TeamId, Description));
             this._facade = facadeImplementation;
             this.GetAircraftsInfo();
+            this._dialogService = dialogService;
         }
 
         public List<Aircraft> Aircrafts

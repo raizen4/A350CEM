@@ -54,6 +54,7 @@ namespace Client.ViewModels
             this.GetAircraftsInfo();
 
             this._facade = facadeImplementation;
+            this._dialogService = dialogService;
         }
 
         public List<Aircraft> Aircrafts

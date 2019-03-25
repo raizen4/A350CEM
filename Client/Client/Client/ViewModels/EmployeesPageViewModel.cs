@@ -39,11 +39,13 @@ namespace Client.ViewModels
 
         private readonly INavigationService navService;
 
-        public EmployeesPageViewModel(INavigationService navigationService, IPageDialogService dialogService) : base(navigationService)
+        public EmployeesPageViewModel(INavigationService navigationService, IPageDialogService dialogService, IFacade facade) : base(navigationService)
         {
             this.navService = NavigationService;
             this.Title = "Employees";
             this.GetEmployeesInfo();
+            this._facade = facade;
+            this._dialogService = dialogService;
         }
 
         public async void GetEmployeesInfo()
