@@ -33,6 +33,25 @@ namespace Api.Managers
 
         }
 
+        public bool AssignTeamToAircraft(string aircraftId, string teamId)
+        {
+            try
+            {
+                var result = dbService.AssignTeamToAircraft(aircraftId, teamId);
+                if (result)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.Message);
+                return false;
+            }
+        }
+
         public IEnumerable<Team> GetTeams()
         {
             try

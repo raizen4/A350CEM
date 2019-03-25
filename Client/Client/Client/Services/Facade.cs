@@ -499,7 +499,7 @@ namespace Client.Services
             return responseData;
         }
 
-        public async Task<ResponseBase> AssignTaskToAircraft(string aircraftId, string taskId, string description)
+        public async Task<ResponseBase> AssignTaskToAircraft(string aircraftId, string title, string description, string status)
         {
             var responseData = new ResponseBase
             {
@@ -508,8 +508,9 @@ namespace Client.Services
 
             var serviceTaskReq = new AssignTaskRequest();
             serviceTaskReq.AircraftId = aircraftId;
-            serviceTaskReq.TaskId = taskId;
+            serviceTaskReq.Title = title;
             serviceTaskReq.Description = description;
+            serviceTaskReq.Status = status;
             var result = await this.apiWrapper.AssignTaskToAircraft(serviceTaskReq);
             string content = await result.Content.ReadAsStringAsync();
             if (result.StatusCode == HttpStatusCode.OK)
@@ -540,7 +541,7 @@ namespace Client.Services
             return responseData;
         }
 
-        public async Task<ResponseBase> AssignTeamToAircraft(string aircraftId, string teamId, string description)
+        public async Task<ResponseBase> AssignTeamToAircraft(string aircraftId, string teamId)
         {
             var responseData = new ResponseBase
             {
@@ -550,7 +551,6 @@ namespace Client.Services
             var serviceTeamReq = new AssignTeamRequest();
             serviceTeamReq.AircraftId = aircraftId;
             serviceTeamReq.TeamId = teamId;
-            serviceTeamReq.Description = description;
             var result = await this.apiWrapper.AssignTeamToAircraft(serviceTeamReq);
             string content = await result.Content.ReadAsStringAsync();
             if (result.StatusCode == HttpStatusCode.OK)

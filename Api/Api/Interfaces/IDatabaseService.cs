@@ -22,6 +22,8 @@ namespace Api.Interfaces
         Team CreateTeam(Team team);
         IEnumerable<Team> GetTeams();
         IEnumerable<Employee> GetTeamMembers(string teamId);
+        bool AssignTeamToAircraft(string aicraftId, string teamId);
+
 
         //Aircraft
         Aircraft CreateAircraft(Aircraft aircraft);
@@ -29,7 +31,7 @@ namespace Api.Interfaces
         IEnumerable<Aircraft> GetAircrafts();
 
         //Task
-        TaskClass CreateTask(TaskClass task);
+        TaskClass CreateTask(string aicraftId, string title, string status, string description);
         bool MarkTaskAsCompleted(string taskId);
        
     }

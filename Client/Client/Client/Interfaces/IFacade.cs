@@ -29,8 +29,8 @@ namespace Client.Interfaces
         Task<ResponseData<User>> Login(string password);
         Task<ResponseBase> MarkTaskAsCompleted(ServiceTask taskToBeCompleted);
 
-        Task<ResponseBase> AssignTeamToAircraft(string aircraftId, string teamId, string description);
-        Task<ResponseBase> AssignTaskToAircraft(string aircraftId, string taskId, string description);
+        Task<ResponseBase> AssignTeamToAircraft(string aircraftId, string teamId);
+        Task<ResponseBase> AssignTaskToAircraft(string aircraftId, string title, string description, string status);
 
     }
 }

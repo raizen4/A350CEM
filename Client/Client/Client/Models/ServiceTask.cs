@@ -11,6 +11,7 @@ namespace Client.Models
         private string _description;
         private string _status;
         private string _date;
+        private string _title;
         private bool isExtendedView=false;
 
 
@@ -21,10 +22,15 @@ namespace Client.Models
         }
 
 
-        public string ID
+        public string Id
         {
             get => this._id;
             set => this._id = value;
+        }
+        public string Title
+        {
+            get => this._title;
+            set => this._title = value;
         }
         public string Name
         {

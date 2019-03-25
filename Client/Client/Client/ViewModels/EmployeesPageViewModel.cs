@@ -3,16 +3,24 @@ using Client.Models;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
+using Prism.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace Client.ViewModels
 {
 	public class EmployeesPageViewModel : ViewModelBase
 	{
-        private IFacade facade;
+        private IFacade _facade;
+        private readonly IPageDialogService _dialogService;
+        private readonly INavigationService _navService;
+
         private List<Employee> employees;
+        private ObservableCollection<Employee> listOfEmployees;
+
+        private ObservableCollection<Employee> ListOfEmployees;
 
         public List<Employee> Employees
         {
@@ -31,10 +39,40 @@ namespace Client.ViewModels
 
         private readonly INavigationService navService;
 
-        public EmployeesPageViewModel(INavigationService navigationService) : base(navigationService)
+        public EmployeesPageViewModel(INavigationService navigationService, IPageDialogService dialogService) : base(navigationService)
         {
             this.navService = NavigationService;
             this.Title = "Employees";
+            this.GetEmployeesInfo();
+        }
+
+        public async void GetEmployeesInfo()
+        {
+            try
+            {
+
+                var result = await this._facade.GetEmployees();
+                if (result.HasBeenSuccessful)
+                {
+                    var listToObservable = new ObservableCollection<Employee>(result.Content.ToList());
+                    ListOfEmployees = listToObservable;
+
+                }
+                else
+                {
+                    var dialogResult = await this._dialogService.DisplayAlertAsync("Error", "Something went wrong, couldn't retrieve the Employees' data", "Try again", "OK");
+                    if (dialogResult)
+                    {
+                        this.GetEmployeesInfo();
+                    }
+                    await this._navService.NavigateAsync(nameof(Views.MainPage));
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
     }
 }

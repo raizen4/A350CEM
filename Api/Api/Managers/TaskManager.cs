@@ -18,11 +18,11 @@ namespace Api.Managers
             this.dbService = dbService;
         }
 
-        public bool CreateTask(TaskClass newTask)
+        public bool CreateTask(string aircraftId, string title, string status, string description)
         {
             try
             {
-                var result = dbService.CreateTask(newTask);
+                var result = dbService.CreateTask(aircraftId, title, status, description);
                 if (result != null)
                 {
                     return true;

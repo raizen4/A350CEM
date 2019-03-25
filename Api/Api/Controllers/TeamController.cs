@@ -51,6 +51,38 @@ namespace Api.Controllers
             }
 
         }
+
+        [HttpPost, AllowAnonymous, Route("AssignTeamToAircraft")]
+        public IActionResult AssignTeamToAircraft([FromBody] AssignTeamToAircraft form)
+        {
+            var aircraftId = form.AircraftId;
+            var teamId = form.TeamId;
+
+            var res = new BaseResponse();
+            try
+            {
+                var createdTask = manager.AssignTeamToAircraft(aircraftId, teamId);
+                if (createdTask)
+                {
+                    res.Code = 200;
+                    res.HasBeenSuccessful = true;
+                    return Ok(res);
+                }
+
+                res.Code = 501;
+                res.HasBeenSuccessful = false;
+                return Ok(res);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+
+                res.Code = 501;
+                res.HasBeenSuccessful = false;
+                return Ok(res);
+            }
+        }
+
         [HttpGet, AllowAnonymous, Route("GetTeams")]
         // GET: Gets all teams
         public IActionResult GetTeams()
