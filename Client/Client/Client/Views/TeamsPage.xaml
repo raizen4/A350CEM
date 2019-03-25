@@ -9,10 +9,9 @@
     <StackLayout BackgroundColor="WhiteSmoke">
         <StackLayout VerticalOptions="FillAndExpand">
             <ListView
-                x:Name="TeamsList"
                 ItemsSource="{Binding TeamsList}"
                 HasUnevenRows="True"
-                SelectedItem="{Binding OnTeamSelected, Mode=TwoWay}">
+                >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
