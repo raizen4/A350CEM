@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Client.Views.Popup"   
+             xmlns:pages ="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup">
+
+
+    <StackLayout Margin="12"
+                 Padding="24"
+                 Spacing="24"
+                 WidthRequest="250"
+                 BackgroundColor="White"
+                 HorizontalOptions="Center"
+                 VerticalOptions="Center">
+        
+    <StackLayout>
+        <Label Text="Username" 
+               FontSize="20"/>
+            <Entry FontSize="15"/>
+        </StackLayout>
+
+        <Button BackgroundColor="Gray"
+                FontSize="20"
+                Text="Add"
+                TextColor="White"
+         />
+    </StackLayout>
+
+</pages:PopupPage>

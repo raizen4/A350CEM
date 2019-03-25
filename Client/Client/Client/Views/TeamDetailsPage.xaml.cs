@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using Rg.Plugins.Popup.Services;
+using Xamarin.Forms;
 
 namespace Client.Views
 {
@@ -7,6 +8,11 @@ namespace Client.Views
         public TeamDetailsPage()
         {
             InitializeComponent();
+        }
+
+        private void Button_Clicked(object sender, System.EventArgs e)
+        {
+            PopupNavigation.Instance.PushAsync(new Popup());
         }
     }
 }

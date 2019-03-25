@@ -47,6 +47,7 @@
                 </ListView.ItemTemplate>
             </ListView>
             <Button 
+                Clicked="Button_Clicked"
                 Font="Bold,11"
                 BackgroundColor="Aqua"
                 VerticalOptions="CenterAndExpand"
