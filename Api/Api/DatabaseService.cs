@@ -110,6 +110,11 @@ namespace Api
             try
             {
                 var dbResult = this.aircrafts.Find(aircraft => true).ToEnumerable();
+                foreach(Aircraft aircraft in dbResult)
+                {
+                    var aircraftTasks = this.tasks.Find(task => task.AircraftId == aircraft.Id).ToList();
+                    aircraft.Tasks = aircraftTasks;
+                }
                 return dbResult;
 
             }catch(Exception e)
