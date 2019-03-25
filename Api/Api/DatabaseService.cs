@@ -132,12 +132,17 @@ namespace Api
             try
             {
                 var dbResult = this.aircrafts.Find(aircraft => true).ToEnumerable();
+                var normalizedList = new List<Aircraft>();
                 foreach(Aircraft aircraft in dbResult)
+                
                 {
+                    var aircraftTeam = this.teams.Find(team => team.Id == aircraft.TeamId).FirstOrDefault() as Team;
                     var aircraftTasks = this.tasks.Find(task => task.AircraftId == aircraft.Id).ToList();
                     aircraft.Tasks = aircraftTasks;
+                    aircraft.TeamName = aircraftTeam.Name;
+                    normalizedList.Add(aircraft);
                 }
-                return dbResult;
+                return normalizedList;
 
             }catch(Exception e)
             {

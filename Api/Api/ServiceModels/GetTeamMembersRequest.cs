@@ -4,8 +4,8 @@ using System.Text;
 
 namespace Client.ServiceModels
 {
-    public class GetMembersRequest
+    public class GetTeamMembersRequest
     {
-        public List<string> EmployeeId { get; set; }
+        public string teamId { get; set; }
     }
 }

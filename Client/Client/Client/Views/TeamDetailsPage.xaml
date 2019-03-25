@@ -9,7 +9,7 @@
         <StackLayout VerticalOptions="FillAndExpand">
             <ListView
                 x:Name="TeamDetailList"
-                ItemsSource="{Binding TeamMembers}"
+                ItemsSource="{Binding TeamMembersList}"
                 HasUnevenRows="True">
                 <ListView.ItemTemplate>
                     <DataTemplate>
