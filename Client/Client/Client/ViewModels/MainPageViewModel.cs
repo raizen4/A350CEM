@@ -37,6 +37,7 @@ namespace Client.ViewModels
             this.GoToAircraftManagement = new DelegateCommand(() => this._navigatoToAircraftManagement());
             this._navService = navigationService;
             this._facade = facade;
+            this._navService = navigationService;
             this._dialogService = dialogService;
             this.GoToAircraftInfoPage = new DelegateCommand(async () => await this._navService.NavigateAsync(nameof(Views.AircraftInfoPage)));
             this.GoToTeamsListPage = new DelegateCommand(async () => await this._navService.NavigateAsync(nameof(Views.TeamsPage)));

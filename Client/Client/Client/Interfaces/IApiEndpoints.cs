@@ -22,7 +22,7 @@ namespace Client.Interfaces
         Task<HttpResponseMessage> MarkTaskAsCompleted([Header("Accept")] string applicationJson, [Body(BodySerializationMethod.Serialized)] StringContent body);
 
         // Aircraft endpoint
-        [Get("/api/Aircraft/GetAricrafts")]
+        [Get("/api/Aircraft/GetAircrafts")]
         Task<HttpResponseMessage> GetAircrafts();
 
         // Teams endpoint

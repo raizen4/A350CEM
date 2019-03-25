@@ -15,7 +15,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        <StackLayout Orientation="Vertical" Padding="0,15,0,15" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                             <StackLayout Orientation="Horizontal">
                                 <Label FontSize="24"  HorizontalOptions="StartAndExpand" Text="{Binding Name}" Margin="10,0,0,0"></Label>
                                 <Label  FontSize="24" HorizontalOptions="End"  Text="{Binding ID}" Margin="0,0,10,0"></Label>
@@ -23,11 +23,11 @@
                             <StackLayout Margin="10,0,0,0" IsVisible="{Binding IsExtendedView}" Orientation="Vertical">
                                 <StackLayout Orientation="Horizontal">
                                     <Label  FontSize="21" Text="Assigned Team: "></Label>
-                                    <Label FontSize="21" Text="{Binding EngTeam.Name}"></Label>
+                                    <Label FontSize="21" Text="{Binding TeamName}"></Label>
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal">
                                     <Label  FontSize="21" Text="Flying Hours: "></Label>
-                                    <Label  FontSize="21" Text="{Binding FlyHours}"></Label>
+                                    <Label  FontSize="21" Text="{Binding FlyingHours}"></Label>
                                 </StackLayout>
 
                                 <Button 
