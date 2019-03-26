@@ -19,18 +19,17 @@
                     <RowDefinition Height="40*"></RowDefinition>
                 </Grid.RowDefinitions>
             </Grid>
-            <Label Grid.Column="0" Grid.Row="0" Text="Please select the Aircraft" FontSize="Micro"/>
+            <Label Grid.Column="0" Grid.Row="0" Text="Please select the Aircraft" FontSize="Medium"/>
             <Picker Grid.Column="1" Grid.Row="0" Title="--Select--" 
                     ItemsSource="{Binding ListOfAircrafts}" 
-                    ItemDisplayBinding="{Binding ID}"
+                    ItemDisplayBinding="{Binding Name}"
                     SelectedItem="{Binding CurrentAircraft}"/>
-            <Label Grid.Column="0" Grid.Row="1" Text="Please select the Team" FontSize="Micro"/>
+            <Label Grid.Column="0" Grid.Row="1" Text="Please select the Team" FontSize="Medium"/>
             <Picker Grid.Column="1" Grid.Row="1" Title="--Select--" 
-                    ItemsSource="{Binding Teams}" 
-                    ItemDisplayBinding="{Binding ID}"
+                    ItemsSource="{Binding ListOfTeams}" 
+                    ItemDisplayBinding="{Binding Name}"
                     SelectedItem="{Binding CurrentTeam}"/>
-            <Entry Grid.Column="1" Grid.Row="2" Placeholder="Enter description here"/>
-            <Button VerticalOptions="End" Text="Finish" Command="{Binding GoToMainPage}"/>
+            <Button VerticalOptions="End" Text="Finish" Command="{Binding AddTeamCommand}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -15,18 +15,13 @@ namespace Client.ViewModels
 {
     public class CreateTasksPageViewModel : ViewModelBase
     {
-        private IFacade _facade;
-        private readonly IPageDialogService _dialogService;
+        private readonly IFacade _facade;
         private readonly INavigationService _navService;
+        private readonly IPageDialogService _dialogService;
+
         private ServiceTask currentTask;
         private Aircraft currentAircraft;
 
-        public string AircraftId;
-        public string Description;
-        public string Status;
-        public string Title;
-
-        public DelegateCommand GoToMainPage { get; set; }
         public DelegateCommand AddTaskCommand { get; set; }
 
         public ServiceTask CurrentTask
@@ -42,57 +37,39 @@ namespace Client.ViewModels
         }
 
         private ObservableCollection<Aircraft> listOfAircrafts;
-        public ObservableCollection<Aircraft> ListOfAircrafts;
-
-        public CreateTasksPageViewModel(INavigationService navigationService, IPageDialogService dialogService, IFacade facadeImplementation)
-            : base(navigationService)
+        public ObservableCollection<Aircraft> ListOfAircrafts
         {
-            Title = "Create Tasks";
-            this._navService = navigationService;
-            this.GoToMainPage = new DelegateCommand(async () => await this._navService.NavigateAsync(nameof(Views.MainPage)));
-            AddTaskCommand = new DelegateCommand(async () => await AddTask(AircraftId, Title, Status, Description));
-            this.GetAircraftsInfo();
+            get => this.listOfAircrafts;
+            set
+            {
+                this.listOfAircrafts = value;
+                RaisePropertyChanged();
+            }
+        }
 
-            this._facade = facadeImplementation;
+        public List<ServiceTask> ListOfTasks
+        {
+            get => this.listOfTasks;
+        }
+
+        public CreateTasksPageViewModel(IFacade facade, IPageDialogService dialogService, INavigationService navigationService) : base(navigationService)
+        {
+            this.Title = "Create Tasks";
+            this._facade = facade;
             this._dialogService = dialogService;
+            this._navService = navigationService;
+            this.GetAircraftsInfo();
+            this.AddTaskCommand = new DelegateCommand(async () => await this.AddTask());
         }
 
-        public List<Aircraft> Aircrafts
-        {
-            get
-            {
-                return new List<Aircraft>()
-                {
-                    new Aircraft() {Id="A Id 1"},
-                    new Aircraft() {Id="A Id 2"},
-                    new Aircraft() {Id="A Id 3"},
-                    new Aircraft() {Id="A Id 4"},
-                };
-            }
-        }
-
-        public List<ServiceTask> Tasks
-        {
-            get
-            {
-                return new List<ServiceTask>()
-                {
-                    new ServiceTask() {Id="1", Description="Oil Change", Status="Assigned", Title="Oil Change"},
-                    new ServiceTask() {Id="2", Description="Repair Wing", Status="Assigned", Title="Repair Wing"},
-                    new ServiceTask() {Id="3", Description="Clean Aircraft", Status="Assigned", Title="Clean Aircraft"},
-                    new ServiceTask() {Id="4", Description="Put Gas", Status="Assigned", Title="Put Gas"},
-                };
-            }
-        }
-
-        private async Task AddTask(string AircraftId, string Title, string Status, string Description)
+        private async Task AddTask()
         {
             try
             {
-                var result = await this._facade.AssignTaskToAircraft(CurrentAircraft.Id, CurrentTask.Title, CurrentTask.Status, CurrentTask.Description);
+                var result = await this._facade.AssignTaskToAircraft(CurrentAircraft.Id, CurrentTask.Title, CurrentTask.Description, CurrentTask.Status);
                 if (result.HasBeenSuccessful)
                 {
-                    await this._navService.NavigateAsync(nameof(Views.CreateTeamsPage));
+                    await this._navService.NavigateAsync(nameof(Views.MainPage));
                 }
             }
             catch (Exception e)
@@ -107,6 +84,7 @@ namespace Client.ViewModels
             try
             {
                 var result = await this._facade.GetAircrafts();
+                Console.WriteLine(result);
                 if (result.HasBeenSuccessful)
                 {
                     var listToObservable = new ObservableCollection<Aircraft>(result.Content.ToList());
@@ -126,6 +104,21 @@ namespace Client.ViewModels
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+            }
+        }
+
+        private List<ServiceTask> listOfTasks
+        {
+            get
+            {
+                return new List<ServiceTask>()
+                {
+                    new ServiceTask() {Id="1", Description="Oil Change is needed. Bring your won oil.", Status="Assigned", Title="Oil Change"},
+                    new ServiceTask() {Id="2", Description="Repair Wing. Critical damage has been taken 5 minutes after departure, hiting birds.", Status="Assigned", Title="Repair Wing"},
+                    new ServiceTask() {Id="3", Description="Clean Aircraft inside and out.", Status="Assigned", Title="Clean Aircraft"},
+                    new ServiceTask() {Id="4", Description="Put Gas in the backup container", Status="Assigned", Title="Put Gas"},
+                    new ServiceTask() {Id="5", Description="Fix Control Panel, one of the pilots droped food on it", Status="Assigned", Title="Control Panel Fix"},
+                };
             }
         }
     }
