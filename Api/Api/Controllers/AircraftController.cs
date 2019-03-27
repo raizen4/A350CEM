@@ -81,7 +81,7 @@ namespace Api.Controllers
 
         }
 
-        [HttpPost, AllowAnonymous, Route("GetTasksForAircraft")]
+        [HttpPost, Authorize, Route("GetTasksForAircraft")]
         public IActionResult GetTasksForAircraft([FromBody]RequireTasksForAircraftForm form)
         {
             List<TaskClass> result = new List<TaskClass>();
@@ -110,7 +110,7 @@ namespace Api.Controllers
         }
 
 
-        [HttpPut, Authorize, Route("MarkTaskAsCompleted")]
+        [HttpPut, AllowAnonymous, Route("MarkTaskAsCompleted")]
 
         public IActionResult MarkTaskAsCompleted([FromBody]MarkTaskRequest req)
         {

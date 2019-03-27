@@ -28,26 +28,26 @@
                     <ViewCell>
                         <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                             <StackLayout  Orientation="Horizontal">
-                                <Label Margin="10,0,0,0" FontSize="22"  HorizontalOptions="StartAndExpand" Text="{Binding Name}"></Label>
+                                <Label FontAttributes="Bold" Margin="10,0,0,0" FontSize="20"  HorizontalOptions="StartAndExpand" Text="{Binding Title}"></Label>
                                 <StackLayout HorizontalOptions="End" WidthRequest="40" 
                                              BackgroundColor="{Binding Status, Converter={StaticResource StringToColourConverter}}"></StackLayout>
                             </StackLayout>
                             <StackLayout Margin="10,0,0,0" IsVisible="{Binding IsExtendedView}" Orientation="Vertical">
                                 <StackLayout Orientation="Horizontal">
-                                    <Label  FontSize="21" Text="ID: "></Label>
-                                    <Label FontSize="19" Text="{Binding ID}"></Label>
+                                    <Label FontAttributes="Bold" FontSize="19" Text="ID: "></Label>
+                                    <Label FontSize="15" Text="{Binding Id}"></Label>
                                 </StackLayout>
                                 <StackLayout Orientation="Vertical">
-                                    <Label  FontSize="21" Text="Description: "></Label>
-                                    <Label  FontSize="19" Text="{Binding Description}"></Label>
+                                    <Label  FontAttributes="Bold" FontSize="19" Text="Description: "></Label>
+                                    <Label  FontSize="16" Text="{Binding Description}"></Label>
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal">
-                                    <Label  FontSize="21" Text="Status: "></Label>
-                                    <Label  FontSize="19" Text="{Binding Status}"></Label>
+                                    <Label FontAttributes="Bold"  FontSize="19" Text="Status: "></Label>
+                                    <Label  FontSize="16" Text="{Binding Status}"></Label>
                                 </StackLayout>
 
                                 <Button IsVisible="{Binding Status, Converter={StaticResource StringToBoolConverter}}"
-                                        Command="{Binding Path=BindingContext.NavigateToAircraftTasksCommand, 
+                                        Command="{Binding Path=BindingContext.MarkTaskAsCompletedCommand, 
                                         Source={x:Reference AircraftTasksPageLayout}}"
                                                         CommandParameter="{Binding}" 
                                                         HorizontalOptions="FillAndExpand" 

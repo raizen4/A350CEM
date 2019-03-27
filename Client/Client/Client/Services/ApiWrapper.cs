@@ -134,7 +134,7 @@ namespace Client.ApiWrapperImplementation
 
     
 
-        public async Task<HttpResponseMessage> MarkTaskAsCompleted(TaskRequest req)
+        public async Task<HttpResponseMessage> MarkTaskAsCompleted(MarkTaskAsCompletedRequest req)
         {
             this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Constants.Token);
             var jsonToSend = JsonConvert.SerializeObject(req);

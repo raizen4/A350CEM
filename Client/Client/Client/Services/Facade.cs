@@ -147,9 +147,9 @@ namespace Client.Services
 
         }
 
-        public async Task<ResponseData<IEnumerable<ServiceTask>>> GetAircraftTasks(string aircraftId)
+        public async Task<ResponseData<IEnumerable<MarlTaskAsCompleted>>> GetAircraftTasks(string aircraftId)
         {
-            var responseData = new ResponseData<IEnumerable<ServiceTask>>()
+            var responseData = new ResponseData<IEnumerable<MarlTaskAsCompleted>>()
             {
                 HasBeenSuccessful = false
             };
@@ -161,7 +161,7 @@ namespace Client.Services
             {
                 try
                 {
-                    var deserializedContent = JsonConvert.DeserializeObject<ResponseData<IEnumerable<ServiceTask>>>(content);
+                    var deserializedContent = JsonConvert.DeserializeObject<ResponseData<IEnumerable<MarlTaskAsCompleted>>>(content);
 
                     if (!deserializedContent.HasBeenSuccessful || !deserializedContent.Content.Any())
                     {
@@ -281,22 +281,21 @@ namespace Client.Services
             
         }
 
-        public async Task<ResponseData<IEnumerable<ServiceTask>>> GetTasksForAircraft(string aircraftId)
+        public async Task<ResponseData<IEnumerable<MarlTaskAsCompleted>>> GetTasksForAircraft(string aircraftId)
         {
-            var responseData = new ResponseData<IEnumerable<ServiceTask>>()
+            var responseData = new ResponseData<IEnumerable<MarlTaskAsCompleted>>()
             {
                 HasBeenSuccessful = false
             };
             var getTasksForAircraftReq = new GetTasksForAircraftRequest();
-            var newAircraft = new Aircraft();
-            newAircraft.Id = aircraftId;
+            getTasksForAircraftReq.AircraftId = aircraftId;
             var result = await this.apiWrapper.GetTasksForAircraft(getTasksForAircraftReq);
             string content = await result.Content.ReadAsStringAsync();
             if (result.StatusCode == HttpStatusCode.OK)
             {
                 try
                 {
-                    var deserializedContent = JsonConvert.DeserializeObject<ResponseData<IEnumerable<ServiceTask>>>(content);
+                    var deserializedContent = JsonConvert.DeserializeObject<ResponseData<IEnumerable<MarlTaskAsCompleted>>>(content);
 
                     if (!deserializedContent.HasBeenSuccessful || !deserializedContent.Content.Any())
                     {
@@ -459,15 +458,15 @@ namespace Client.Services
             return responseData;
         }
 
-        public async Task<ResponseBase> MarkTaskAsCompleted(ServiceTask taskToBeCompleted)
+        public async Task<ResponseBase> MarkTaskAsCompleted(string taskToBeCompleted)
         {
             var responseData = new ResponseBase
             {
                 HasBeenSuccessful = false
             };
 
-            var serviceTaskReq = new TaskRequest();
-            serviceTaskReq.Task = taskToBeCompleted;
+            var serviceTaskReq = new MarkTaskAsCompletedRequest();
+            serviceTaskReq.TaskId = taskToBeCompleted;
 
             var result = await this.apiWrapper.MarkTaskAsCompleted(serviceTaskReq);
             string content = await result.Content.ReadAsStringAsync();

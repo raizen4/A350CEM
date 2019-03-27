@@ -18,7 +18,7 @@ namespace Client.ViewModels
         private readonly IPageDialogService _dialogService;
         private readonly INavigationService _navService;
 
-        private ServiceTask currentTeam;
+        private MarlTaskAsCompleted currentTeam;
         private Aircraft currentAircraft;
 
         public string AircraftId;
@@ -28,7 +28,7 @@ namespace Client.ViewModels
         public List<Aircraft> RealAircrafts;
         public List<Team> RealTeams;
 
-        public ServiceTask CurrentTeam
+        public MarlTaskAsCompleted CurrentTeam
         {
             get => this.currentTeam;
             set => this.currentTeam = value;

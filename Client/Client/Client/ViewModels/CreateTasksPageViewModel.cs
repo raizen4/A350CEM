@@ -18,7 +18,7 @@ namespace Client.ViewModels
         private IFacade _facade;
         private readonly IPageDialogService _dialogService;
         private readonly INavigationService _navService;
-        private ServiceTask currentTask;
+        private MarlTaskAsCompleted currentTask;
         private Aircraft currentAircraft;
 
         public string AircraftId;
@@ -29,7 +29,7 @@ namespace Client.ViewModels
         public DelegateCommand GoToMainPage { get; set; }
         public DelegateCommand AddTaskCommand { get; set; }
 
-        public ServiceTask CurrentTask
+        public MarlTaskAsCompleted CurrentTask
         {
             get => this.currentTask;
             set => this.currentTask = value;
@@ -70,16 +70,16 @@ namespace Client.ViewModels
             }
         }
 
-        public List<ServiceTask> Tasks
+        public List<MarlTaskAsCompleted> Tasks
         {
             get
             {
-                return new List<ServiceTask>()
+                return new List<MarlTaskAsCompleted>()
                 {
-                    new ServiceTask() {Id="1", Description="Oil Change", Status="Assigned", Title="Oil Change"},
-                    new ServiceTask() {Id="2", Description="Repair Wing", Status="Assigned", Title="Repair Wing"},
-                    new ServiceTask() {Id="3", Description="Clean Aircraft", Status="Assigned", Title="Clean Aircraft"},
-                    new ServiceTask() {Id="4", Description="Put Gas", Status="Assigned", Title="Put Gas"},
+                    new MarlTaskAsCompleted() {Id="1", Description="Oil Change", Status="Assigned", Title="Oil Change"},
+                    new MarlTaskAsCompleted() {Id="2", Description="Repair Wing", Status="Assigned", Title="Repair Wing"},
+                    new MarlTaskAsCompleted() {Id="3", Description="Clean Aircraft", Status="Assigned", Title="Clean Aircraft"},
+                    new MarlTaskAsCompleted() {Id="4", Description="Put Gas", Status="Assigned", Title="Put Gas"},
                 };
             }
         }

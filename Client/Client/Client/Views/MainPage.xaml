@@ -46,7 +46,7 @@
             </StackLayout>
 
             <StackLayout  Grid.Row="3" Grid.Column="0"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                <Button VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Text="Logout"></Button>
+                <Button VerticalOptions="FillAndExpand" Command="{Binding LogoutCommand}" HorizontalOptions="FillAndExpand" Text="Logout"></Button>
             </StackLayout>
         </Grid>
       

@@ -4,13 +4,11 @@ using System.Text;
 
 namespace Client.Models
 {
-    public class ServiceTask
+    public class MarlTaskAsCompleted
     {
         private string _id;
-        private string _name;
         private string _description;
         private string _status;
-        private string _date;
         private string _title;
         private bool isExtendedView=false;
 
@@ -32,11 +30,7 @@ namespace Client.Models
             get => this._title;
             set => this._title = value;
         }
-        public string Name
-        {
-            get => this._name;
-            set => this._name = value;
-        }
+      
         public string Description
         {
             get => this._description;
@@ -48,10 +42,6 @@ namespace Client.Models
             get => this._status;
             set => this._status = value;
         }
-        public string Date
-        {
-            get => this._date;
-            set => this._date = value;
-        }
+       
     }
 }

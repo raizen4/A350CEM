@@ -23,11 +23,11 @@ namespace Client.Interfaces
 
         //Tasks methods
         Task<ResponseBase> CreateTask(string aircraftId, string teamId, string description);
-        Task<ResponseData<IEnumerable<ServiceTask>>> GetTasksForAircraft(string aircraftId);
+        Task<ResponseData<IEnumerable<MarlTaskAsCompleted>>> GetTasksForAircraft(string aircraftId);
        
         //Authenticate methods
         Task<ResponseData<User>> Login(string password);
-        Task<ResponseBase> MarkTaskAsCompleted(ServiceTask taskToBeCompleted);
+        Task<ResponseBase> MarkTaskAsCompleted(string taskToBeCompleted);
 
         Task<ResponseBase> AssignTeamToAircraft(string aircraftId, string teamId);
         Task<ResponseBase> AssignTaskToAircraft(string aircraftId, string title, string description, string status);

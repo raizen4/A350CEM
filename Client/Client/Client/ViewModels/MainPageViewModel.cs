@@ -38,7 +38,6 @@ namespace Client.ViewModels
             this.GoToAircraftManagement = new DelegateCommand(() => this._navigatoToAircraftManagement());
             this._navService = navigationService;
             this._facade = facade;
-            this._navService = navigationService;
             this._dialogService = dialogService;
             this.GoToEmployeesPage = new DelegateCommand(async () => await this._navService.NavigateAsync(nameof(Views.EmployeesPage)));
             this.GoToAircraftInfoPage = new DelegateCommand(async () => await this._navService.NavigateAsync(nameof(Views.AircraftInfoPage)));
@@ -87,5 +86,22 @@ namespace Client.ViewModels
                 await this._navService.NavigateAsync(nameof(Views.LoginPage));
             }
         }
+
+        public async Task<bool> OnBackButtonPressed()
+        {
+            var dialogResult = await this._dialogService.DisplayAlertAsync("Warning",
+                "You will now be logged out. Do you agree", "OK", "Cancel");
+            if (dialogResult)
+            {
+                Constants.LoggedUser = null;
+                Constants.Token = null;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
     }
 }

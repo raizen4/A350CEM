@@ -10,9 +10,9 @@
     <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
         <Image Source="logo.png" WidthRequest="200" HeightRequest="200"></Image>
         <StackLayout Orientation="Vertical" Margin="0,30,0,0">
-            <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Padding="0,20,0,0">
-                <Label   HorizontalOptions="Center" TextColor="Black" Text="Pin:" VerticalOptions="Center" FontSize="35" Margin="0,5,0,0" ></Label>
-                <Entry   FontSize="30" TextColor="Black"  Placeholder="Pin goes here" Text="{Binding Password}"></Entry>
+            <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Padding="0,10,0,0">
+                <Label   HorizontalOptions="Center" TextColor="Black" Text="Pin:" VerticalOptions="Center" FontSize="30" Margin="0,5,0,0" ></Label>
+                <Entry   FontSize="25" TextColor="Black"  Placeholder="Pin goes here" Text="{Binding Password}"></Entry>
             </StackLayout>
             
             <StackLayout   Margin="0,120,0,0">
