@@ -8,7 +8,7 @@ namespace Api.Interfaces
 {
     public interface ITaskManager
     {
-        bool CreateTask(TaskClass newTask);
+        bool CreateTask(string AircraftId, string Title, string Status, string Description);
 
         bool MarkTaskAsCompleted(string taskId, string status);
     }

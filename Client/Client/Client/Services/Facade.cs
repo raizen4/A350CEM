@@ -235,21 +235,21 @@ namespace Client.Services
 
         }
 
-        public async Task<ResponseData<IEnumerable<Team>>> GetMembers(string teamId)
+        public async Task<ResponseData<IEnumerable<Employee>>> GetTeamMembers(string teamId)
         {
-            var responseData = new ResponseData<IEnumerable<Team>>()
+            var responseData = new ResponseData<IEnumerable<Employee>>()
             {
                 HasBeenSuccessful = false
             };
-            var getMembersReq = new GetMembersRequest();
-            getMembersReq.EmployeeId.Add(teamId);
-            var result = await this.apiWrapper.GetMembers(getMembersReq);
+            var req = new GetTeamMembersRequest();
+            req.teamId = teamId;
+            var result = await this.apiWrapper.GetTeamMembers(req);
             string content = await result.Content.ReadAsStringAsync();
             if (result.StatusCode == HttpStatusCode.OK)
             {
                 try
                 {
-                    var deserializedContent = JsonConvert.DeserializeObject<ResponseData<IEnumerable<Team>>>(content);
+                    var deserializedContent = JsonConvert.DeserializeObject<ResponseData<IEnumerable<Employee>>>(content);
 
                     if (!deserializedContent.HasBeenSuccessful || !deserializedContent.Content.Any())
                     {
@@ -470,6 +470,88 @@ namespace Client.Services
             serviceTaskReq.Task = taskToBeCompleted;
 
             var result = await this.apiWrapper.MarkTaskAsCompleted(serviceTaskReq);
+            string content = await result.Content.ReadAsStringAsync();
+            if (result.StatusCode == HttpStatusCode.OK)
+            {
+                try
+                {
+                    var deserializedContent = JsonConvert.DeserializeObject<ResponseBase>(content);
+                    if (!deserializedContent.HasBeenSuccessful || deserializedContent.Error != null)
+                    {
+                        responseData.HasBeenSuccessful = false;
+                        responseData.Error = "Internal Server Error";
+                        return responseData;
+                    }
+                    responseData.HasBeenSuccessful = true;
+                    responseData.Error = null;
+                    return responseData;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.StackTrace);
+                    responseData.HasBeenSuccessful = false;
+                    responseData.Error = "Deserialization Error";
+                    return responseData;
+                }
+            }
+            responseData.HasBeenSuccessful = false;
+            responseData.Error = "Internal Error" + result.StatusCode.ToString();
+            return responseData;
+        }
+
+        public async Task<ResponseBase> AssignTaskToAircraft(string aircraftId, string title, string description, string status)
+        {
+            var responseData = new ResponseBase
+            {
+                HasBeenSuccessful = false
+            };
+
+            var serviceTaskReq = new AssignTaskRequest();
+            serviceTaskReq.AircraftId = aircraftId;
+            serviceTaskReq.Title = title;
+            serviceTaskReq.Description = description;
+            serviceTaskReq.Status = status;
+            var result = await this.apiWrapper.AssignTaskToAircraft(serviceTaskReq);
+            string content = await result.Content.ReadAsStringAsync();
+            if (result.StatusCode == HttpStatusCode.OK)
+            {
+                try
+                {
+                    var deserializedContent = JsonConvert.DeserializeObject<ResponseBase>(content);
+                    if (!deserializedContent.HasBeenSuccessful || deserializedContent.Error != null)
+                    {
+                        responseData.HasBeenSuccessful = false;
+                        responseData.Error = "Internal Server Error";
+                        return responseData;
+                    }
+                    responseData.HasBeenSuccessful = true;
+                    responseData.Error = null;
+                    return responseData;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.StackTrace);
+                    responseData.HasBeenSuccessful = false;
+                    responseData.Error = "Deserialization Error";
+                    return responseData;
+                }
+            }
+            responseData.HasBeenSuccessful = false;
+            responseData.Error = "Internal Error" + result.StatusCode.ToString();
+            return responseData;
+        }
+
+        public async Task<ResponseBase> AssignTeamToAircraft(string aircraftId, string teamId)
+        {
+            var responseData = new ResponseBase
+            {
+                HasBeenSuccessful = false
+            };
+
+            var serviceTeamReq = new AssignTeamRequest();
+            serviceTeamReq.AircraftId = aircraftId;
+            serviceTeamReq.TeamId = teamId;
+            var result = await this.apiWrapper.AssignTeamToAircraft(serviceTeamReq);
             string content = await result.Content.ReadAsStringAsync();
             if (result.StatusCode == HttpStatusCode.OK)
             {

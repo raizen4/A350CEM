@@ -21,8 +21,13 @@ namespace Client.Interfaces
         [Put("/api/Task/MarkTaskAsCompleted")]
         Task<HttpResponseMessage> MarkTaskAsCompleted([Header("Accept")] string applicationJson, [Body(BodySerializationMethod.Serialized)] StringContent body);
 
+        [Post("/api/Task/CreateTask")]
+        Task<HttpResponseMessage> AssignTaskToAircraft([Header("Accept")] string applicationJson, [Body(BodySerializationMethod.Serialized)] StringContent body);
+        [Put("/api/Team/AssignTeamToAircraft")]
+        Task<HttpResponseMessage> AssignTeamToAircraft([Header("Accept")] string applicationJson, [Body(BodySerializationMethod.Serialized)] StringContent body);
+
         // Aircraft endpoint
-        [Get("/api/Aircraft/GetAricrafts")]
+        [Get("/api/Aircraft/GetAircrafts")]
         Task<HttpResponseMessage> GetAircrafts();
 
         // Teams endpoint
@@ -31,9 +36,9 @@ namespace Client.Interfaces
         [Post("/api/Team/GetTeam")]
         // Task<HttpResponseMessage> GetTeam(string teamId);
         Task<HttpResponseMessage> GetTeam([Header("Accept")] string applicationJson, [Body(BodySerializationMethod.Serialized)] StringContent body);
-        [Post("/api/Team/GetMembers")]
-        // Task<HttpResponseMessage> GetMembers(string teamId);
-        Task<HttpResponseMessage> GetMembers([Header("Accept")] string applicationJson, [Body(BodySerializationMethod.Serialized)] StringContent body);
+        [Post("/api/Team/GetTeamMembers")]
+        // Task<HttpResponseMessage> GetTeamMembers(string teamId);
+        Task<HttpResponseMessage> GetTeamMembers([Header("Accept")] string applicationJson, [Body(BodySerializationMethod.Serialized)] StringContent body);
         [Put("/api/Team/AddMemberToTeam")]
         // Task<HttpResponseMessage> AddMemberToTeam(string teamId);
         Task<HttpResponseMessage> AddMemberToTeam([Header("Accept")] string applicationJson, [Body(BodySerializationMethod.Serialized)] StringContent body);

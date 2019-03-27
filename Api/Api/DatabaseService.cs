@@ -76,10 +76,15 @@ namespace Api
             }
         }
 
-        public TaskClass CreateTask(TaskClass task)
+        public TaskClass CreateTask(string aircraftId, string title, string status, string description)
         {
             try
             {
+                var task = new TaskClass();
+                task.AircraftId = aircraftId;
+                task.Title = title;
+                task.Status = ServiceTaskStatusesEnum.StatusAssigned;
+                task.Description = description;
                 tasks.InsertOne(task);
                 return task;
             }
@@ -87,6 +92,23 @@ namespace Api
             {
                 Console.WriteLine(e.Message);
                 return null;
+            }
+        }
+
+        public bool AssignTeamToAircraft(string aircraftId, string teamId)
+        {
+            try
+            {
+                var updateDef = Builders<Aircraft>.Update.Set(aircraft => aircraft.TeamId, teamId);
+                Console.WriteLine("updateDef is ", updateDef);
+                var dbResult = this.aircrafts.FindOneAndUpdate(aircraft => aircraft.Id == aircraftId, updateDef);
+                Console.WriteLine("dbResult is ", dbResult);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
             }
         }
 
@@ -110,12 +132,17 @@ namespace Api
             try
             {
                 var dbResult = this.aircrafts.Find(aircraft => true).ToEnumerable();
+                var normalizedList = new List<Aircraft>();
                 foreach(Aircraft aircraft in dbResult)
+                
                 {
+                    var aircraftTeam = this.teams.Find(team => team.Id == aircraft.TeamId).FirstOrDefault() as Team;
                     var aircraftTasks = this.tasks.Find(task => task.AircraftId == aircraft.Id).ToList();
                     aircraft.Tasks = aircraftTasks;
+                    aircraft.TeamName = aircraftTeam.Name;
+                    normalizedList.Add(aircraft);
                 }
-                return dbResult;
+                return normalizedList;
 
             }catch(Exception e)
             {

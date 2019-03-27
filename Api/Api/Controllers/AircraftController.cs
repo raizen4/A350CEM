@@ -22,7 +22,7 @@ namespace Api.Controllers
             this.manager = manager;
         }
 
-        [HttpPost, Route("CreateAircraft")]
+        [HttpPost,AllowAnonymous, Route("CreateAircraft")]
         public IActionResult CreateAircraft([FromBody] NewAircraftForm aircraftForm)
         {
             var aircraft = aircraftForm.NewAircraft;
@@ -81,13 +81,13 @@ namespace Api.Controllers
 
         }
 
-        [HttpGet, AllowAnonymous, Route("GetTasksForAircraft")]
-        public IActionResult GetTasksForAircraft([FromQuery]string aircraftId)
+        [HttpPost, AllowAnonymous, Route("GetTasksForAircraft")]
+        public IActionResult GetTasksForAircraft([FromBody]RequireTasksForAircraftForm form)
         {
             List<TaskClass> result = new List<TaskClass>();
             try
             {
-                result = manager.GetTasksForAircraft(aircraftId).ToList();
+                result = manager.GetTasksForAircraft(form.AircraftId).ToList();
                 ResponseData<List<TaskClass>> response = new ResponseData<List<TaskClass>>();
                 response.Content = result;
                 response.Code = 200;

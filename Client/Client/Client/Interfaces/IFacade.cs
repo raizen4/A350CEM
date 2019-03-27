@@ -18,7 +18,7 @@ namespace Client.Interfaces
         //Teams methods
         Task<ResponseData<IEnumerable<Team>>> GetTeams();
         Task<ResponseData<IEnumerable<Team>>> GetTeam(string teamId);
-        Task<ResponseData<IEnumerable<Team>>> GetMembers(string teamId);
+        Task<ResponseData<IEnumerable<Employee>>> GetTeamMembers(string teamId);
         Task<ResponseData<IEnumerable<Team>>> AddMemberToTeam(string teamId);
 
         //Tasks methods
@@ -28,5 +28,9 @@ namespace Client.Interfaces
         //Authenticate methods
         Task<ResponseData<User>> Login(string password);
         Task<ResponseBase> MarkTaskAsCompleted(ServiceTask taskToBeCompleted);
+
+        Task<ResponseBase> AssignTeamToAircraft(string aircraftId, string teamId);
+        Task<ResponseBase> AssignTaskToAircraft(string aircraftId, string title, string description, string status);
+
     }
 }

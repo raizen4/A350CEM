@@ -3,52 +3,142 @@ using Client.Models;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
+using Prism.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Client.ViewModels
 {
     public class CreateTeamsPageViewModel : ViewModelBase
     {
-        private IFacade _facade;
+        private readonly IFacade _facade;
         private readonly INavigationService _navService;
+        private readonly IPageDialogService _dialogService;
 
-        public DelegateCommand GoToMainPage { get; set; }
+        private Team currentTeam;
+        private Aircraft currentAircraft;
 
-        public List<Aircraft> Aircrafts
+        public DelegateCommand AddTeamCommand { get; set; }
+
+        public Team CurrentTeam
         {
-            get
+            get => this.currentTeam;
+            set => this.currentTeam = value;
+        }
+
+        public Aircraft CurrentAircraft
+        {
+            get => this.currentAircraft;
+            set => this.currentAircraft = value;
+        }
+
+        private ObservableCollection<Aircraft> listOfAircrafts;
+        public ObservableCollection<Aircraft> ListOfAircrafts
+        {
+            get => this.listOfAircrafts;
+            set
             {
-                return new List<Aircraft>()
-                {
-                    new Aircraft() {Id="A Id 1", Name="A Name 1"},
-                    new Aircraft() {Id="A Id 2", Name="A Name 2"},
-                    new Aircraft() {Id="A Id 3", Name="A Name 3"},
-                    new Aircraft() {Id="A Id 4", Name="A Name 4"},
-                };
+                this.listOfAircrafts = value;
+                RaisePropertyChanged();
             }
         }
 
-        public List<ServiceTask> Teams
+        private ObservableCollection<Team> listOfTeams;
+        public ObservableCollection<Team> ListOfTeams
         {
-            get
+            get => this.listOfTeams;
+            set
             {
-                return new List<ServiceTask>()
-                {
-                    new ServiceTask() {ID="T Id 1", Name="T Name 1"},
-                    new ServiceTask() {ID="T Id 2", Name="T Name 2"},
-                    new ServiceTask() {ID="T Id 3", Name="T Name 3"},
-                    new ServiceTask() {ID="T Id 4", Name="T Name 4"},
-                };
+                this.listOfTeams = value;
+                RaisePropertyChanged();
             }
         }
 
-        public CreateTeamsPageViewModel(INavigationService navigationService, IFacade facade) : base(navigationService)
+        public CreateTeamsPageViewModel(IFacade facade, IPageDialogService dialogService, INavigationService navigationService) : base(navigationService)
         {
-            Title = "Create Teams";
+            this.Title = "Create Teams";
             this._facade = facade;
-            this.GoToMainPage = new DelegateCommand(() => this._navService.NavigateAsync(nameof(Views.MainPage)));
+            this._dialogService = dialogService;
+            this._navService = navigationService;
+            this.GetAircraftsInfo();
+            this.GetTeamsInfo();
+            this.AddTeamCommand = new DelegateCommand(async () => await this.AddTeam());
+        }
+
+        private async Task AddTeam()
+        {
+            try
+            {
+                var result = await this._facade.AssignTeamToAircraft(CurrentAircraft.Id, CurrentTeam.ID);
+                if (result.HasBeenSuccessful)
+                {
+                    await this._navService.NavigateAsync(nameof(Views.MainPage));
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+
+            }
+        }
+
+        public async void GetAircraftsInfo()
+        {
+            try
+            {
+                var result = await this._facade.GetAircrafts();
+                Console.WriteLine(result);
+                if (result.HasBeenSuccessful)
+                {
+                    var listToObservable = new ObservableCollection<Aircraft>(result.Content.ToList());
+                    ListOfAircrafts = listToObservable;
+
+                }
+                else
+                {
+                    var dialogResult = await this._dialogService.DisplayAlertAsync("Error", "Something went wrong, couldn't retrieve the aircrafts' data", "Try again", "OK");
+                    if (dialogResult)
+                    {
+                        this.GetAircraftsInfo();
+                    }
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
+        public async void GetTeamsInfo()
+        {
+            try
+            {
+                var result = await this._facade.GetTeams();
+                Console.WriteLine(result);
+                if (result.HasBeenSuccessful)
+                {
+                    var listToObservable = new ObservableCollection<Team>(result.Content.ToList());
+                    ListOfTeams = listToObservable;
+
+                }
+                else
+                {
+                    var dialogResult = await this._dialogService.DisplayAlertAsync("Error", "Something went wrong, couldn't retrieve the aircrafts' data", "Try again", "OK");
+                    if (dialogResult)
+                    {
+                        this.GetTeamsInfo();
+                    }
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
     }
 }

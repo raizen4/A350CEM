@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Api.Interfaces;
 using Api.ServiceModels;
 using Client.Models;
+using Client.ServiceModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -51,6 +52,38 @@ namespace Api.Controllers
             }
 
         }
+
+        [HttpPut, AllowAnonymous, Route("AssignTeamToAircraft")]
+        public IActionResult AssignTeamToAircraft([FromBody] AssignTeamToAircraft form)
+        {
+            var aircraftId = form.AircraftId;
+            var teamId = form.TeamId;
+
+            var res = new BaseResponse();
+            try
+            {
+                var createdTask = manager.AssignTeamToAircraft(aircraftId, teamId);
+                if (createdTask)
+                {
+                    res.Code = 200;
+                    res.HasBeenSuccessful = true;
+                    return Ok(res);
+                }
+
+                res.Code = 501;
+                res.HasBeenSuccessful = false;
+                return Ok(res);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+
+                res.Code = 501;
+                res.HasBeenSuccessful = false;
+                return Ok(res);
+            }
+        }
+
         [HttpGet, AllowAnonymous, Route("GetTeams")]
         // GET: Gets all teams
         public IActionResult GetTeams()
@@ -78,13 +111,14 @@ namespace Api.Controllers
                 return httpResult;
             }
         }
-        [HttpGet, AllowAnonymous, Route("GetTeamMembers/{teamId}")]
+        [HttpPost, AllowAnonymous, Route("GetTeamMembers")]
         //GET: Gets all team members
-        public IActionResult GetTeamMembers(string teamId)
+        public IActionResult GetTeamMembers([FromBody] GetTeamMembersRequest req)
         {
             List<Employee> result = new List<Employee>();
             try
             {
+                var teamId = req.teamId;
                 result = manager.GetTeamMembers(teamId).ToList();
                 ResponseData<List<Employee>> response = new ResponseData<List<Employee>>();
                 response.Content = result;

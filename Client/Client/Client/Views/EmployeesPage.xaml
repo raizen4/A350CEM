@@ -8,7 +8,8 @@
              Title="{Binding Title}">
     <StackLayout VerticalOptions="FillAndExpand" Padding="20">
         <Label Font="20" Text="{Binding Name}" />
-        <ListView x:Name="Employees" ItemsSource="{Binding Employees}">
+        <Label Margin="0,0,0,24" Text="List of Current Employees" FontSize="Large"/>
+        <ListView x:Name="Employees" ItemsSource="{Binding ListOfEmployees}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

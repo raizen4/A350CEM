@@ -1,8 +1,10 @@
 ﻿using Client.Enums;
+using Client.Interfaces;
 using Client.Models;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
+using Prism.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,58 +14,53 @@ namespace Client.ViewModels
 {
     public class TeamDetailsPageViewModel : ViewModelBase
     {
+        private readonly IFacade facade;
+        private readonly INavigationService navService;
+        private readonly IPageDialogService dialogService;
+        private ObservableCollection<Employee> teamMembersList;
 
-        private Team currentTeamSeen;
-        private ObservableCollection<Employee> teamMembers;
-
-        public ObservableCollection<Employee> TeamMembers
+        public ObservableCollection<Employee> TeamMembersList
         {
-            get
-            {   if (CurrentTeamSeen != null)
-                {
-                    var observableCollection = new ObservableCollection<Employee>(CurrentTeamSeen.Members);
-                    return observableCollection;
-                }
-                else
-                {
-                    return new ObservableCollection<Employee>();
-                }
-            }
-            set {
-                this.CurrentTeamSeen.Members = value.ToList();
-                RaisePropertyChanged();
-                 }
-
-        }
-        public Team CurrentTeamSeen
-        {
-            get => this.currentTeamSeen;
+            get => this.teamMembersList;
             set
             {
-                this.currentTeamSeen = value;
-                var observableCollection = new ObservableCollection<Employee>(CurrentTeamSeen.Members);
-                this.TeamMembers = observableCollection;
+                this.teamMembersList = value;
+                RaisePropertyChanged();
             }
+
+           
         }
-
-
-        public TeamDetailsPageViewModel(INavigationService navigationService) : base(navigationService)
+       
+        public TeamDetailsPageViewModel(INavigationService navigationService, IFacade facadeImpl, IPageDialogService dialogServiceImpl) : base(navigationService)
         {
+            
+            this.facade = facadeImpl;
+            this.navService = navigationService;
+            this.dialogService = dialogServiceImpl;
           
         }
 
-        public override void OnNavigatedTo(INavigationParameters parameters)
+        public async override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
+            string teamId;
             try
             {
-                Team teamPassed;
-                parameters.TryGetValue("TeamDetail", out teamPassed);
-                if (teamPassed.Name != null)
+                parameters.TryGetValue("teamId", out teamId);
+                if (teamId != null)
                 {
-                    Title = teamPassed.Name;
-                    CurrentTeamSeen = teamPassed;
-                  
+                    var getMembersResult = await this.facade.GetTeamMembers(teamId);
+                    if (getMembersResult.HasBeenSuccessful)
+                    {
+                        var listToObservableCollection = new ObservableCollection<Employee>(getMembersResult.Content);
+                        TeamMembersList = listToObservableCollection;
+                        this.Title = "Team Members:" + TeamMembersList.Count.ToString();
+                    }
+                    else
+                    {
+                        await this.dialogService.DisplayAlertAsync("Failed", "Something went wrong, please try again", "OK");
+                        await this.navService.GoBackAsync();
+                    }
                 }
 
 

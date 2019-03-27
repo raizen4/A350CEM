@@ -101,12 +101,14 @@ namespace Client.ApiWrapperImplementation
         }
 
         /// <inheritdoc />
-        public async Task<HttpResponseMessage> GetMembers(GetMembersRequest req)
+        public async Task<HttpResponseMessage> GetTeamMembers(GetTeamMembersRequest req)
         {
+            var getTeamMembersForm = new GetTeamMembersRequest();
+            getTeamMembersForm.teamId = req.teamId;
             this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Constants.Token);
             var jsonToSend = JsonConvert.SerializeObject(req);
             var content = new StringContent(jsonToSend, Encoding.UTF8, Constants.Headers.ContentType);
-            var result = await this.API.GetMembers(Constants.Headers.ContentType, content);
+            var result = await this.API.GetTeamMembers(Constants.Headers.ContentType, content);
             return result;
         }
 
@@ -138,6 +140,24 @@ namespace Client.ApiWrapperImplementation
             var jsonToSend = JsonConvert.SerializeObject(req);
             var content = new StringContent(jsonToSend, Encoding.UTF8, Constants.Headers.ContentType);
             var result = await this.API.MarkTaskAsCompleted(Constants.Headers.ContentType, content);
+            return result;
+        }
+
+        public async Task<HttpResponseMessage> AssignTaskToAircraft(AssignTaskRequest req)
+        {
+            this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Constants.Token);
+            var jsonToSend = JsonConvert.SerializeObject(req);
+            var content = new StringContent(jsonToSend, Encoding.UTF8, Constants.Headers.ContentType);
+            var result = await this.API.AssignTaskToAircraft(Constants.Headers.ContentType, content);
+            return result;
+        }
+
+        public async Task<HttpResponseMessage> AssignTeamToAircraft(AssignTeamRequest req)
+        {
+            this.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Constants.Token);
+            var jsonToSend = JsonConvert.SerializeObject(req);
+            var content = new StringContent(jsonToSend, Encoding.UTF8, Constants.Headers.ContentType);
+            var result = await this.API.AssignTeamToAircraft(Constants.Headers.ContentType, content);
             return result;
         }
 

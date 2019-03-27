@@ -27,11 +27,15 @@ namespace Api.Controllers
         [HttpPost, AllowAnonymous, Route("CreateTask")]
         public IActionResult CreateTask([FromBody] NewTaskForm taskForm)
         {
-            var task = taskForm.NewTask;
+            var aircraftId = taskForm.AircraftId;
+            var title = taskForm.Title;
+            var status = taskForm.Staus;
+            var description = taskForm.Description;
+
             var res = new BaseResponse();
             try
             {
-                var createdTask = manager.CreateTask(taskForm.NewTask);
+                var createdTask = manager.CreateTask(aircraftId, title, status, description);
                 if (createdTask)
                 {
                     res.Code = 200;
