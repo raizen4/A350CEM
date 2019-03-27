@@ -14,21 +14,24 @@ namespace Client.ViewModels
 {
     public class CreateTeamsPageViewModel : ViewModelBase
     {
-        private IFacade _facade;
-        private readonly IPageDialogService _dialogService;
+        private readonly IFacade _facade;
         private readonly INavigationService _navService;
+        private readonly IPageDialogService _dialogService;
 
+<<<<<<< HEAD
         private MarlTaskAsCompleted currentTeam;
+=======
+        private Team currentTeam;
+>>>>>>> ad2f7252bf14a89be1554bcccd425b61cf1fde76
         private Aircraft currentAircraft;
 
-        public string AircraftId;
-        public string TeamId;
-        public string Description;
+        public DelegateCommand AddTeamCommand { get; set; }
 
-        public List<Aircraft> RealAircrafts;
-        public List<Team> RealTeams;
-
+<<<<<<< HEAD
         public MarlTaskAsCompleted CurrentTeam
+=======
+        public Team CurrentTeam
+>>>>>>> ad2f7252bf14a89be1554bcccd425b61cf1fde76
         {
             get => this.currentTeam;
             set => this.currentTeam = value;
@@ -41,59 +44,46 @@ namespace Client.ViewModels
         }
 
         private ObservableCollection<Aircraft> listOfAircrafts;
-        public ObservableCollection<Aircraft> ListOfAircrafts;
-
-        public DelegateCommand GoToMainPage { get; set; }
-        public DelegateCommand AddTeamCommand { get; set; }
-
-
-        public CreateTeamsPageViewModel(INavigationService navigationService, IPageDialogService dialogService, IFacade facadeImplementation)
-            : base(navigationService)
+        public ObservableCollection<Aircraft> ListOfAircrafts
         {
-            Title = "Create Teams";
+            get => this.listOfAircrafts;
+            set
+            {
+                this.listOfAircrafts = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private ObservableCollection<Team> listOfTeams;
+        public ObservableCollection<Team> ListOfTeams
+        {
+            get => this.listOfTeams;
+            set
+            {
+                this.listOfTeams = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public CreateTeamsPageViewModel(IFacade facade, IPageDialogService dialogService, INavigationService navigationService) : base(navigationService)
+        {
+            this.Title = "Create Teams";
+            this._facade = facade;
+            this._dialogService = dialogService;
             this._navService = navigationService;
-            this.GoToMainPage = new DelegateCommand(async () => await this._navService.NavigateAsync(nameof(Views.MainPage)));
-            AddTeamCommand = new DelegateCommand(async () => await AddTeam(AircraftId, TeamId, Description));
-            this._facade = facadeImplementation;
             this.GetAircraftsInfo();
+            this.GetTeamsInfo();
+            this.AddTeamCommand = new DelegateCommand(async () => await this.AddTeam());
         }
 
-        public List<Aircraft> Aircrafts
-        {
-            get
-            {
-                return new List<Aircraft>()
-                {
-                    new Aircraft() {Id="A Id 1"},
-                    new Aircraft() {Id="A Id 2"},
-                    new Aircraft() {Id="A Id 3"},
-                    new Aircraft() {Id="A Id 4"},
-                };
-            }
-        }
-
-        public List<Team> Teams
-        {
-            get
-            {
-                return new List<Team>()
-                {
-                    new Team() {ID="T Id 1"},
-                    new Team() {ID="T Id 2"},
-                    new Team() {ID="T Id 3"},
-                    new Team() {ID="T Id 4"},
-                };
-            }
-        }
-
-        private async Task AddTeam(string AircraftId, string TeamId, string Description)
+        private async Task AddTeam()
         {
             try
             {
-                var result = await this._facade.AssignTeamToAircraft(CurrentAircraft.Id, CurrentTeam.Id);
+                var result = await this._facade.AssignTeamToAircraft(CurrentAircraft.Id, CurrentTeam.ID);
                 if (result.HasBeenSuccessful)
                 {
-                    await this._navService.NavigateAsync(nameof(Views.CreateTeamsPage));
+                    await this._navService.NavigateAsync(nameof(Views.MainPage));
                 }
             }
             catch (Exception e)
@@ -108,6 +98,7 @@ namespace Client.ViewModels
             try
             {
                 var result = await this._facade.GetAircrafts();
+                Console.WriteLine(result);
                 if (result.HasBeenSuccessful)
                 {
                     var listToObservable = new ObservableCollection<Aircraft>(result.Content.ToList());
@@ -120,6 +111,34 @@ namespace Client.ViewModels
                     if (dialogResult)
                     {
                         this.GetAircraftsInfo();
+                    }
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
+        public async void GetTeamsInfo()
+        {
+            try
+            {
+                var result = await this._facade.GetTeams();
+                Console.WriteLine(result);
+                if (result.HasBeenSuccessful)
+                {
+                    var listToObservable = new ObservableCollection<Team>(result.Content.ToList());
+                    ListOfTeams = listToObservable;
+
+                }
+                else
+                {
+                    var dialogResult = await this._dialogService.DisplayAlertAsync("Error", "Something went wrong, couldn't retrieve the aircrafts' data", "Try again", "OK");
+                    if (dialogResult)
+                    {
+                        this.GetTeamsInfo();
                     }
                 }
 

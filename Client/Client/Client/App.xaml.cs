@@ -34,8 +34,8 @@ namespace Client
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.Register<IFacade, Facade>();
             containerRegistry.Register<IApiWrapper, ApiWrapper>();
-            containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
             containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
+            containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
             containerRegistry.RegisterForNavigation<AircraftInfoPage, AircraftInfoPageViewModel>();
             containerRegistry.RegisterForNavigation<EmployeesPage, EmployeesPageViewModel>();
             containerRegistry.RegisterForNavigation<CreateTasksPage, CreateTasksPageViewModel>();

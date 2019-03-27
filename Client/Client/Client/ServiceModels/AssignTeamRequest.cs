@@ -9,7 +9,5 @@ namespace Client.ServiceModels
         public string AircraftId { get; set; }
 
         public string TeamId { get; set; }
-
-        public string Description { get; set; }
     }
 }

@@ -53,7 +53,7 @@ namespace Api.Controllers
 
         }
 
-        [HttpPost, AllowAnonymous, Route("AssignTeamToAircraft")]
+        [HttpPut, AllowAnonymous, Route("AssignTeamToAircraft")]
         public IActionResult AssignTeamToAircraft([FromBody] AssignTeamToAircraft form)
         {
             var aircraftId = form.AircraftId;
