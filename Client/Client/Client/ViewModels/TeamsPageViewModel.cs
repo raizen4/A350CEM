@@ -41,18 +41,22 @@ namespace Client.ViewModels
                 {
                     this.onTeamSelected = value;
                     this.NavToTeamDetailsCommand.Execute(OnTeamSelected);
+                    this.onTeamSelected = null;
+                    value = null;
                     RaisePropertyChanged();
                 }
                 
             }
         }
 
+        
+
         public TeamsPageViewModel(INavigationService navigationService, IFacade facadeImpl, IPageDialogService dialogServiceImpl)
             : base(navigationService)
         {
             //this.OnTeamSelected = null;
             this.Title = "Teams Database";
-            
+            this.onTeamSelected = null;
             this.facade = facadeImpl;
             this.navService = navigationService;
             this.dialogService = dialogServiceImpl;
