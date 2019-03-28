@@ -19,7 +19,7 @@ namespace Client.Services
             this.apiWrapper = apiWrapper;
         }
 
-        public async Task<ResponseData<IEnumerable<Team>>> AddMemberToTeam(string teamId)
+        public async Task<ResponseData<IEnumerable<Team>>> AddMemberToTeam(string EmpID, string teamId)
         {
             var responseData = new ResponseData<IEnumerable<Team>>()
             {
@@ -27,6 +27,7 @@ namespace Client.Services
             };
             var addMemberReq = new AddMemberRequest();
             addMemberReq.TeamId = teamId;
+            addMemberReq.EmployeeId = EmpID;
             var result = await this.apiWrapper.AddMemberToTeam(addMemberReq);
             string content = await result.Content.ReadAsStringAsync();
             if(result.StatusCode == HttpStatusCode.OK)

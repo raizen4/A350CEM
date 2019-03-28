@@ -14,15 +14,18 @@
                  VerticalOptions="Center">
         
     <StackLayout>
-        <Label Text="Username" 
-               FontSize="20"/>
-            <Entry FontSize="15"/>
+            <Label Grid.Column="0" Grid.Row="1" Text="Please select the team member" FontSize="Medium"/>
+            <Picker Grid.Column="1" Grid.Row="1" Title="--Select--" 
+                    ItemsSource="{Binding ListOfEmployee}" 
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding CurrentEmployee}"/>
         </StackLayout>
 
         <Button BackgroundColor="Gray"
                 FontSize="20"
                 Text="Add"
                 TextColor="White"
+                Command="{Binding AddMember}"
          />
     </StackLayout>
 

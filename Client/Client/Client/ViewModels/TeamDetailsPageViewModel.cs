@@ -14,11 +14,16 @@ namespace Client.ViewModels
 {
     public class TeamDetailsPageViewModel : ViewModelBase
     {
+
+        private string teamId;
         private readonly IFacade facade;
         private readonly INavigationService navService;
         private readonly IPageDialogService dialogService;
         private ObservableCollection<Employee> teamMembersList;
-
+        public  DelegateCommand ShowPopUp {
+            get;
+            set;
+        }
         public ObservableCollection<Employee> TeamMembersList
         {
             get => this.teamMembersList;
@@ -33,17 +38,25 @@ namespace Client.ViewModels
        
         public TeamDetailsPageViewModel(INavigationService navigationService, IFacade facadeImpl, IPageDialogService dialogServiceImpl) : base(navigationService)
         {
-            
+            this.ShowPopUp = new DelegateCommand(()=>this.AddMember());
             this.facade = facadeImpl;
             this.navService = navigationService;
             this.dialogService = dialogServiceImpl;
           
         }
 
+        private async void AddMember()
+        {
+
+            NavigationParameters navPar = new NavigationParameters();
+            navPar.Add("TeamID", teamId);
+            await this.navService.NavigateAsync(nameof(Views.Popup), navPar);
+
+        }
+
         public async override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
-            string teamId;
             try
             {
                 parameters.TryGetValue("teamId", out teamId);

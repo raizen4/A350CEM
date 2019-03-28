@@ -8,6 +8,8 @@ namespace Client.ServiceModels
     public class ResponseData<T> : ResponseBase
     {
         public T Content;
+
+        public bool HasBeenSuccessFul { get; internal set; }
     }
 
 }

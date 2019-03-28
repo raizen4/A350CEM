@@ -46,14 +46,15 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+
             <Button 
-                Clicked="Button_Clicked"
+                Command="{Binding ShowPopUp}"
                 Font="Bold,11"
                 BackgroundColor="Aqua"
                 VerticalOptions="CenterAndExpand"
                 Text="Add Member"
                 Margin="0,0,0,0"
-                Command="{Binding GoToAddMemberToTeamPage}"
+                
                 HeightRequest="45"
                 ></Button>
         </StackLayout>
