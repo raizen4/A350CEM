@@ -46,6 +46,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <Label Font="Bold, 6" HorizontalOptions="Center" Text="Multa stima si respect si muie la toata lumea!(part 1/3)" Opacity="60" TextColor="BlueViolet"></Label>
             <Button 
                 Font="Bold,11"
                 BackgroundColor="Aqua"

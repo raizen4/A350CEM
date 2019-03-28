@@ -46,9 +46,12 @@ namespace Client.ViewModels
         {
             base.OnNavigatedTo(parameters);
             string teamId;
+            string teamName;
             try
             {
                 parameters.TryGetValue("teamId", out teamId);
+                parameters.TryGetValue("teamName", out teamName);
+
                 if (teamId != null)
                 {
                     var getMembersResult = await this.facade.GetTeamMembers(teamId);
@@ -56,7 +59,7 @@ namespace Client.ViewModels
                     {
                         var listToObservableCollection = new ObservableCollection<Employee>(getMembersResult.Content);
                         TeamMembersList = listToObservableCollection;
-                        this.Title = "Team Members:" + TeamMembersList.Count.ToString();
+                        this.Title = teamName + ",  Members: " + TeamMembersList.Count.ToString();
                     }
                     else
                     {
