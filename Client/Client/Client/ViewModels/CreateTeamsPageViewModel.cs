@@ -18,20 +18,12 @@ namespace Client.ViewModels
         private readonly INavigationService _navService;
         private readonly IPageDialogService _dialogService;
 
-<<<<<<< HEAD
-        private MarlTaskAsCompleted currentTeam;
-=======
         private Team currentTeam;
->>>>>>> ad2f7252bf14a89be1554bcccd425b61cf1fde76
         private Aircraft currentAircraft;
 
         public DelegateCommand AddTeamCommand { get; set; }
 
-<<<<<<< HEAD
-        public MarlTaskAsCompleted CurrentTeam
-=======
         public Team CurrentTeam
->>>>>>> ad2f7252bf14a89be1554bcccd425b61cf1fde76
         {
             get => this.currentTeam;
             set => this.currentTeam = value;

@@ -18,11 +18,11 @@ namespace Client.ViewModels
         private readonly IFacade _facade;
         private readonly INavigationService _navService;
         private readonly IPageDialogService _dialogService;
-        private ObservableCollection<MarlTaskAsCompleted> listOfTasksForCurrentAircraft;
+        private ObservableCollection<ServiceTask> listOfTasksForCurrentAircraft;
 
 
-        public DelegateCommand<MarlTaskAsCompleted> MarkTaskAsCompletedCommand { get; set; }
-        public ObservableCollection<MarlTaskAsCompleted> ListOfTasksForCurrentAircraft {
+        public DelegateCommand<ServiceTask> MarkTaskAsCompletedCommand { get; set; }
+        public ObservableCollection<ServiceTask> ListOfTasksForCurrentAircraft {
             get => this.listOfTasksForCurrentAircraft;
             set { this.listOfTasksForCurrentAircraft = value;
                 RaisePropertyChanged();
@@ -37,7 +37,7 @@ namespace Client.ViewModels
             this._facade = facade;
             this._navService = navigationService;
             this._dialogService = dialogService;
-            this.MarkTaskAsCompletedCommand = new DelegateCommand<MarlTaskAsCompleted>(async (taskPressed) => await this.MarkTaskAsCompleted(taskPressed));
+            this.MarkTaskAsCompletedCommand = new DelegateCommand<ServiceTask>(async (taskPressed) => await this.MarkTaskAsCompleted(taskPressed));
         }
 
 
@@ -55,7 +55,7 @@ namespace Client.ViewModels
                     var getTasksResult = await this._facade.GetTasksForAircraft(aircraftId);
                     if (getTasksResult.HasBeenSuccessful)
                     {
-                        var listToObservableCollection = new ObservableCollection<MarlTaskAsCompleted>(getTasksResult.Content);
+                        var listToObservableCollection = new ObservableCollection<ServiceTask>(getTasksResult.Content);
                         ListOfTasksForCurrentAircraft = listToObservableCollection;
                     }
                     else
@@ -73,7 +73,7 @@ namespace Client.ViewModels
             }
         }
 
-        public async Task MarkTaskAsCompleted(MarlTaskAsCompleted taskToBeCompleted)
+        public async Task MarkTaskAsCompleted(ServiceTask taskToBeCompleted)
         {
             try
             {
@@ -98,7 +98,7 @@ namespace Client.ViewModels
 
             }
         }
-        internal void ShowOrHideExtension(MarlTaskAsCompleted taskPressed)
+        internal void ShowOrHideExtension(ServiceTask taskPressed)
         {
             var currentTaskPressedIndex = ListOfTasksForCurrentAircraft.IndexOf(taskPressed);
             var currentTask = taskPressed;

@@ -16,19 +16,10 @@
     <Compile Update="Views\AircraftTasksPage.xaml.cs">
       <DependentUpon>AircraftTasksPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\CresteTasksPage.xaml.cs">
-      <DependentUpon>CresteTasksPage.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Views\AddMemberToTeamPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Update="Views\AircraftInfoPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\CreateTeamsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\LoginPage.xaml">
@@ -37,6 +28,8 @@
     <EmbeddedResource Update="Views\AircraftTasksPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Update="Views\TeamDetailsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

@@ -147,9 +147,9 @@ namespace Client.Services
 
         }
 
-        public async Task<ResponseData<IEnumerable<MarlTaskAsCompleted>>> GetAircraftTasks(string aircraftId)
+        public async Task<ResponseData<IEnumerable<ServiceTask>>> GetAircraftTasks(string aircraftId)
         {
-            var responseData = new ResponseData<IEnumerable<MarlTaskAsCompleted>>()
+            var responseData = new ResponseData<IEnumerable<ServiceTask>>()
             {
                 HasBeenSuccessful = false
             };
@@ -161,7 +161,7 @@ namespace Client.Services
             {
                 try
                 {
-                    var deserializedContent = JsonConvert.DeserializeObject<ResponseData<IEnumerable<MarlTaskAsCompleted>>>(content);
+                    var deserializedContent = JsonConvert.DeserializeObject<ResponseData<IEnumerable<ServiceTask>>>(content);
 
                     if (!deserializedContent.HasBeenSuccessful || !deserializedContent.Content.Any())
                     {
@@ -281,9 +281,9 @@ namespace Client.Services
             
         }
 
-        public async Task<ResponseData<IEnumerable<MarlTaskAsCompleted>>> GetTasksForAircraft(string aircraftId)
+        public async Task<ResponseData<IEnumerable<ServiceTask>>> GetTasksForAircraft(string aircraftId)
         {
-            var responseData = new ResponseData<IEnumerable<MarlTaskAsCompleted>>()
+            var responseData = new ResponseData<IEnumerable<ServiceTask>>()
             {
                 HasBeenSuccessful = false
             };
@@ -295,7 +295,7 @@ namespace Client.Services
             {
                 try
                 {
-                    var deserializedContent = JsonConvert.DeserializeObject<ResponseData<IEnumerable<MarlTaskAsCompleted>>>(content);
+                    var deserializedContent = JsonConvert.DeserializeObject<ResponseData<IEnumerable<ServiceTask>>>(content);
 
                     if (!deserializedContent.HasBeenSuccessful || !deserializedContent.Content.Any())
                     {

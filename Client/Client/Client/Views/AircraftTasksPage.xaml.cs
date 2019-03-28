@@ -15,7 +15,7 @@ namespace Client.Views
 
         private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            var taskPressed = e.Item as MarlTaskAsCompleted;
+            var taskPressed = e.Item as ServiceTask;
             vm.ShowOrHideExtension(taskPressed);
         }
     }

@@ -23,7 +23,7 @@ namespace Client.Interfaces
 
         //Tasks methods
         Task<ResponseBase> CreateTask(string aircraftId, string teamId, string description);
-        Task<ResponseData<IEnumerable<MarlTaskAsCompleted>>> GetTasksForAircraft(string aircraftId);
+        Task<ResponseData<IEnumerable<ServiceTask>>> GetTasksForAircraft(string aircraftId);
        
         //Authenticate methods
         Task<ResponseData<User>> Login(string password);

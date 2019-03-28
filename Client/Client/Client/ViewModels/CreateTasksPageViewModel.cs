@@ -17,18 +17,14 @@ namespace Client.ViewModels
     {
         private readonly IFacade _facade;
         private readonly INavigationService _navService;
-<<<<<<< HEAD
-        private MarlTaskAsCompleted currentTask;
-=======
         private readonly IPageDialogService _dialogService;
 
         private ServiceTask currentTask;
->>>>>>> ad2f7252bf14a89be1554bcccd425b61cf1fde76
         private Aircraft currentAircraft;
 
         public DelegateCommand AddTaskCommand { get; set; }
 
-        public MarlTaskAsCompleted CurrentTask
+        public ServiceTask CurrentTask
         {
             get => this.currentTask;
             set => this.currentTask = value;
@@ -56,20 +52,6 @@ namespace Client.ViewModels
             get => this.listOfTasks;
         }
 
-<<<<<<< HEAD
-        public List<MarlTaskAsCompleted> Tasks
-        {
-            get
-            {
-                return new List<MarlTaskAsCompleted>()
-                {
-                    new MarlTaskAsCompleted() {Id="1", Description="Oil Change", Status="Assigned", Title="Oil Change"},
-                    new MarlTaskAsCompleted() {Id="2", Description="Repair Wing", Status="Assigned", Title="Repair Wing"},
-                    new MarlTaskAsCompleted() {Id="3", Description="Clean Aircraft", Status="Assigned", Title="Clean Aircraft"},
-                    new MarlTaskAsCompleted() {Id="4", Description="Put Gas", Status="Assigned", Title="Put Gas"},
-                };
-            }
-=======
         public CreateTasksPageViewModel(IFacade facade, IPageDialogService dialogService, INavigationService navigationService) : base(navigationService)
         {
             this.Title = "Create Tasks";
@@ -78,7 +60,6 @@ namespace Client.ViewModels
             this._navService = navigationService;
             this.GetAircraftsInfo();
             this.AddTaskCommand = new DelegateCommand(async () => await this.AddTask());
->>>>>>> ad2f7252bf14a89be1554bcccd425b61cf1fde76
         }
 
         private async Task AddTask()
