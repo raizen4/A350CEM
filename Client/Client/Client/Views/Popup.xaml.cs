@@ -16,6 +16,12 @@ namespace Client.Views
 		public Popup ()
 		{
 			InitializeComponent ();
+            this.CloseWhenBackgroundIsClicked = true;
+		}
+
+		protected override bool OnBackgroundClicked() {
+			Navigation.PopAsync();
+			return false;
 		}
 	}
 }
