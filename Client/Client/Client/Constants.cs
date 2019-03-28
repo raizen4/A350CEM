@@ -8,7 +8,7 @@ namespace Client
     public static class Constants
     {
         public static User LoggedUser=null;
-        public static string WebApiEndpoint = "http://192.168.88.60:4000";
+        public static string WebApiEndpoint = "http://192.168.88.30:4000";
         public static string Token = "";
         public class Headers
         {
