@@ -43,6 +43,5 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Label Font="Bold, 6" HorizontalOptions="Center" Text="Muie Bogdan!(part 3/3)" Opacity="60" TextColor="BlueViolet"></Label>
     </StackLayout>
 </ContentPage>
