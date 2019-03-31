@@ -20,17 +20,17 @@ namespace Client.Interfaces
         Task<ResponseData<IEnumerable<Team>>> GetTeam(string teamId);
         Task<ResponseData<IEnumerable<Employee>>> GetTeamMembers(string teamId);
         Task<ResponseData<IEnumerable<Team>>> AddMemberToTeam(string teamId);
+        Task<ResponseBase> AssignTeamToAircraft(string aircraftId, string teamId);
 
         //Tasks methods
         Task<ResponseBase> CreateTask(string aircraftId, string teamId, string description);
         Task<ResponseData<IEnumerable<ServiceTask>>> GetTasksForAircraft(string aircraftId);
+        Task<ResponseBase> AssignTaskToAircraft(string aircraftId, string title, string description, string status);
        
         //Authenticate methods
         Task<ResponseData<User>> Login(string password);
         Task<ResponseBase> MarkTaskAsCompleted(string taskToBeCompleted);
 
-        Task<ResponseBase> AssignTeamToAircraft(string aircraftId, string teamId);
-        Task<ResponseBase> AssignTaskToAircraft(string aircraftId, string title, string description, string status);
 
     }
 }

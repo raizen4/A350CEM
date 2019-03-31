@@ -15,7 +15,7 @@ namespace Api.Controllers
     public class EmployeeController : ControllerBase
     {
         /// <summary>
-        /// The manager
+        /// The Employee Manager
         /// </summary>
         private readonly IEmployeeManager manager;
 
@@ -34,6 +34,7 @@ namespace Api.Controllers
             List<Employee> result = new List<Employee>();
             try
             {
+                // Assign the entire data to a list and return 200
                 result = manager.GetEmployees().ToList();
                 ResponseData<List<Employee>> response = new ResponseData<List<Employee>>();
                 response.Content = result;
@@ -45,6 +46,7 @@ namespace Api.Controllers
             }
             catch (Exception e)
             {
+                // Return 400, something went wrong
                 Console.WriteLine(e.Message);
                 ResponseData<List<Employee>> response = new ResponseData<List<Employee>>();
                 response.Content = null;
@@ -60,26 +62,28 @@ namespace Api.Controllers
         [HttpPost, AllowAnonymous, Route("CreateEmployee")]
         public IActionResult CreateEmployee([FromBody] NewEmployeeForm employeeForm)
         {
+            // Create a new employee Form 
             var employee = employeeForm.NewEmployee;
             var res = new BaseResponse();
             try
             {
+                // Send the employee body to the manager
                 var createdUser = manager.CreateEmployee(employeeForm.NewEmployee);
                 if (createdUser)
                 {
-
+                    // Send a 200 back + the full employee data
                     res.Code = 200;
                     res.HasBeenSuccessful = true;
                     return Ok(res);
                 }
-
-
+                // Send a 401, something went wrong
                 res.Code = 401;
                 res.HasBeenSuccessful = false;
                 return Ok(res);
             }
             catch (Exception e)
             {
+                // Send a 501, something went wrong internally
                 Console.WriteLine(e.Message);
                 res.Code = 501;
                 res.HasBeenSuccessful = false;
