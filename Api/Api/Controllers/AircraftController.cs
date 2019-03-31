@@ -81,7 +81,7 @@ namespace Api.Controllers
 
         }
 
-        [HttpPost, Authorize, Route("GetTasksForAircraft")]
+        [HttpPost, AllowAnonymous, Route("GetTasksForAircraft")]
         public IActionResult GetTasksForAircraft([FromBody]RequireTasksForAircraftForm form)
         {
             List<TaskClass> result = new List<TaskClass>();

@@ -26,9 +26,9 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        <StackLayout Padding="0,30,0,30" Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                             <StackLayout  Orientation="Horizontal">
-                                <Label FontAttributes="Bold" Margin="10,0,0,0" FontSize="20"  HorizontalOptions="StartAndExpand" Text="{Binding Title}"></Label>
+                                <Label FontAttributes="Bold" Margin="10,0,0,0" FontSize="23"  HorizontalOptions="StartAndExpand" Text="{Binding Title}"></Label>
                                 <StackLayout HorizontalOptions="End" WidthRequest="40" 
                                              BackgroundColor="{Binding Status, Converter={StaticResource StringToColourConverter}}"></StackLayout>
                             </StackLayout>
