@@ -13,7 +13,6 @@ namespace Client.Models
         [BsonElement("Name")]
         public string Name { get; set; }
        
-
         [BsonElement("Team")]
         public string TeamId { get; set; }
 

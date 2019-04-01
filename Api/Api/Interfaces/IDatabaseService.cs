@@ -13,6 +13,7 @@ namespace Api.Interfaces
         //User
         User GetUser(string password);
         User CreateUser(User user);
+
         //Employee
         Employee CreateEmployee(Employee employee);
         IEnumerable<Employee> GetEmployees();

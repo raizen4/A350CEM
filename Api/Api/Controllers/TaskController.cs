@@ -15,7 +15,7 @@ namespace Api.Controllers
     public class TaskController : ControllerBase
     {
         /// <summary>
-        /// The manager
+        /// The manager responsible for tasks
         /// </summary>
         private readonly ITaskManager manager;
 
@@ -24,33 +24,36 @@ namespace Api.Controllers
             this.manager = manager;
         }
 
+        // Create a new Task Request
         [HttpPost, AllowAnonymous, Route("CreateTask")]
         public IActionResult CreateTask([FromBody] NewTaskForm taskForm)
         {
+            // Assign the data from body to variables
             var aircraftId = taskForm.AircraftId;
             var title = taskForm.Title;
             var status = taskForm.Staus;
             var description = taskForm.Description;
-
+            // Create a new response body
             var res = new BaseResponse();
             try
             {
+                // Send the varisbles to the Task Manager to create a new Task
                 var createdTask = manager.CreateTask(aircraftId, title, status, description);
                 if (createdTask)
                 {
+                    // Respond with a 200 + the task body
                     res.Code = 200;
                     res.HasBeenSuccessful = true;
                     return Ok(res);
                 }
-
-                res.Code = 501;
+                // Repond with 401, something went wrong
+                res.Code = 401;
                 res.HasBeenSuccessful = false;
                 return Ok(res);
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
-
+                // Repond with 501, something went wrong internally
                 res.Code = 501;
                 res.HasBeenSuccessful = false;
                 return Ok(res);

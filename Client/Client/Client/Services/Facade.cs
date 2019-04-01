@@ -19,31 +19,49 @@ namespace Client.Services
             this.apiWrapper = apiWrapper;
         }
 
+<<<<<<< HEAD
         public async Task<ResponseBase> AddMemberToTeam(List<Employee> newEmployees,string teamId)
+=======
+        // Add new Members to a Team
+        public async Task<ResponseData<IEnumerable<Team>>> AddMemberToTeam(string teamId)
+>>>>>>> b837f944de513d6e2f6a98e9b32dda34716c915e
         {
+            // Resnpose Data object intiialise
             var responseData = new ResponseData<IEnumerable<Team>>()
             {
                 HasBeenSuccessful = false
             };
+
+            // Create a new Add Member Request
             var addMemberReq = new AddMemberRequest();
+<<<<<<< HEAD
             addMemberReq.NewMembers = newEmployees;
+=======
+            // Assign variables to the request
+>>>>>>> b837f944de513d6e2f6a98e9b32dda34716c915e
             addMemberReq.TeamId = teamId;
+            // Call the wrapper with the newly created add member request body
             var result = await this.apiWrapper.AddMemberToTeam(addMemberReq);
+            // Content - the response we get from the back end
             string content = await result.Content.ReadAsStringAsync();
+            // Compare the satus code we receive with the constant OK (201)
             if(result.StatusCode == HttpStatusCode.OK)
             {
                 try
                 {
+                    // If OK, deserialise the content using the JSON Library to a Team Object
                     var deserializedContent = JsonConvert.DeserializeObject<ResponseData<IEnumerable<Team>>>(content);
 
+                    // If deserialisation failed or it produced no content
                     if (!deserializedContent.HasBeenSuccessful || !deserializedContent.Content.Any())
                     {
+                        // Create the Reponse Data with failed, no content, Error message
                         responseData.HasBeenSuccessful = false;
        
                         responseData.Error = "Internal Server Error";
                         return responseData;
                     }
-
+                    // If deserialisation succeeded, create reseonse dat with succeded, content received, no Error message
                     responseData.HasBeenSuccessful = true;
                 
                     responseData.Error = null;
@@ -51,22 +69,26 @@ namespace Client.Services
                 }
                 catch(Exception e)
                 {
+                    // Catch a internal problem and print it
                     Console.WriteLine(e.StackTrace);
+                    // Create the Reponse Data with failed, no content, Error message
                     responseData.HasBeenSuccessful = false;
           
                     responseData.Error = "Deserialization Error";
                     return responseData;
                 }
             }
+            // If anything else goes wrong - Create the Reponse Data with failed, no content, Error message
             responseData.HasBeenSuccessful = false;
 
             responseData.Error = "Internal server Error";
             return responseData;
-
         }
 
+        // Create a new Task
         public async Task<ResponseBase> CreateTask(string aircraftId, string teamId, string description)
         {
+            // Resnpose Data object intiialise
             var responseData = new ResponseBase
             {
                 HasBeenSuccessful = false
@@ -105,8 +127,10 @@ namespace Client.Services
             return responseData;
         }
 
+        // Get all the aircrafts
         public async Task<ResponseData<IEnumerable<Aircraft>>> GetAircrafts()
         {
+            // Resnpose Data object intiialise
             var responseData = new ResponseData<IEnumerable<Aircraft>>()
             {
                 HasBeenSuccessful = false
@@ -147,9 +171,11 @@ namespace Client.Services
             return responseData;
 
         }
-
+        
+        // Get all the Tasks for one Aircraft
         public async Task<ResponseData<IEnumerable<ServiceTask>>> GetAircraftTasks(string aircraftId)
         {
+            // Resnpose Data object intiialise
             var responseData = new ResponseData<IEnumerable<ServiceTask>>()
             {
                 HasBeenSuccessful = false
@@ -193,8 +219,10 @@ namespace Client.Services
 
         }
 
+        // Get all the Employees
         public async Task<ResponseData<IEnumerable<Employee>>> GetEmployees()
         {
+            // Resnpose Data object intiialise
             var responseData = new ResponseData<IEnumerable<Employee>>()
             {
                 HasBeenSuccessful = false
@@ -236,8 +264,10 @@ namespace Client.Services
 
         }
 
+        // Get all the team Members for a Team ID
         public async Task<ResponseData<IEnumerable<Employee>>> GetTeamMembers(string teamId)
         {
+            // Resnpose Data object intiialise
             var responseData = new ResponseData<IEnumerable<Employee>>()
             {
                 HasBeenSuccessful = false
@@ -282,8 +312,10 @@ namespace Client.Services
             
         }
 
+        // Get all the Tasks for an Aircraft
         public async Task<ResponseData<IEnumerable<ServiceTask>>> GetTasksForAircraft(string aircraftId)
         {
+            // Resnpose Data object intiialise
             var responseData = new ResponseData<IEnumerable<ServiceTask>>()
             {
                 HasBeenSuccessful = false
@@ -327,8 +359,10 @@ namespace Client.Services
             return responseData;
         }
 
+        // Get the team based on a Team ID
         public async Task<ResponseData<IEnumerable<Team>>> GetTeam(string teamId)
         {
+            // Resnpose Data object intiialise
             var responseData = new ResponseData<IEnumerable<Team>>()
             {
                 HasBeenSuccessful = false
@@ -374,8 +408,10 @@ namespace Client.Services
             return responseData;
         }
 
+        // Get all the Teams
         public async Task<ResponseData<IEnumerable<Team>>> GetTeams()
         {
+            // Resnpose Data object intiialise
             var responseData = new ResponseData<IEnumerable<Team>>()
             {
                 HasBeenSuccessful = false
@@ -417,8 +453,10 @@ namespace Client.Services
             return responseData;
         }
 
+        // Login
         public async Task<ResponseData<User>> Login(string password)
         {
+            // Resnpose Data object intiialise
             var responseData = new ResponseData<User>()
             {
                 HasBeenSuccessful = false
@@ -459,8 +497,10 @@ namespace Client.Services
             return responseData;
         }
 
+        // Mark a Task as Completed
         public async Task<ResponseBase> MarkTaskAsCompleted(string taskToBeCompleted)
         {
+            // Resnpose Base object intiialise
             var responseData = new ResponseBase
             {
                 HasBeenSuccessful = false
@@ -499,8 +539,10 @@ namespace Client.Services
             return responseData;
         }
 
+        // Assign a Task to an Aircraft
         public async Task<ResponseBase> AssignTaskToAircraft(string aircraftId, string title, string description, string status)
         {
+            // Resnpose Base object intiialise
             var responseData = new ResponseBase
             {
                 HasBeenSuccessful = false
@@ -541,8 +583,10 @@ namespace Client.Services
             return responseData;
         }
 
+        // Assign a team to an Aircraft
         public async Task<ResponseBase> AssignTeamToAircraft(string aircraftId, string teamId)
         {
+            // Resnpose Base object intiialise
             var responseData = new ResponseBase
             {
                 HasBeenSuccessful = false

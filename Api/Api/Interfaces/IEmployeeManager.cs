@@ -15,8 +15,5 @@ namespace Api.Interfaces
         bool CreateEmployee(Employee newEmployee);
 
         IEnumerable<Employee> GetEmployees();
-
-
-       
     }
 }
