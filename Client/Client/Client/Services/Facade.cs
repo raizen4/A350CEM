@@ -19,12 +19,10 @@ namespace Client.Services
             this.apiWrapper = apiWrapper;
         }
 
-<<<<<<< HEAD
+
         public async Task<ResponseBase> AddMemberToTeam(List<Employee> newEmployees,string teamId)
-=======
-        // Add new Members to a Team
-        public async Task<ResponseData<IEnumerable<Team>>> AddMemberToTeam(string teamId)
->>>>>>> b837f944de513d6e2f6a98e9b32dda34716c915e
+
+
         {
             // Resnpose Data object intiialise
             var responseData = new ResponseData<IEnumerable<Team>>()
@@ -34,11 +32,7 @@ namespace Client.Services
 
             // Create a new Add Member Request
             var addMemberReq = new AddMemberRequest();
-<<<<<<< HEAD
             addMemberReq.NewMembers = newEmployees;
-=======
-            // Assign variables to the request
->>>>>>> b837f944de513d6e2f6a98e9b32dda34716c915e
             addMemberReq.TeamId = teamId;
             // Call the wrapper with the newly created add member request body
             var result = await this.apiWrapper.AddMemberToTeam(addMemberReq);
