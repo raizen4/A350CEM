@@ -16,7 +16,7 @@ namespace Api.Interfaces
         //Employee
         Employee CreateEmployee(Employee employee);
         IEnumerable<Employee> GetEmployees();
-        bool AssignEmployeeToTeam(string employeeId, string teamId);
+        bool AssignEmployeeToTeam(List<Employee> newEmployees, string teamId);
 
         //Team
         Team CreateTeam(Team team);

@@ -44,11 +44,11 @@ namespace Api.Managers
             }
         }
 
-        public bool AssignEmployeeToTeam(string employeeId ,string teamId)
+        public bool AssignEmployeeToTeam(List<Employee> newEmployees ,string teamId)
         {
             try
             {
-                var result = dbService.AssignEmployeeToTeam(employeeId, teamId);
+                var result = dbService.AssignEmployeeToTeam(newEmployees, teamId);
                 if (result)
                 {
                     return true;

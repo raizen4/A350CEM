@@ -19,7 +19,7 @@ namespace Client.Interfaces
         Task<ResponseData<IEnumerable<Team>>> GetTeams();
         Task<ResponseData<IEnumerable<Team>>> GetTeam(string teamId);
         Task<ResponseData<IEnumerable<Employee>>> GetTeamMembers(string teamId);
-        Task<ResponseData<IEnumerable<Team>>> AddMemberToTeam(string teamId);
+        Task<ResponseBase> AddMemberToTeam(List<Employee> newEmployees, string teamId);
 
         //Tasks methods
         Task<ResponseBase> CreateTask(string aircraftId, string teamId, string description);

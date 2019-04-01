@@ -80,7 +80,7 @@ namespace Client.ViewModels
                 var result = await this._facade.MarkTaskAsCompleted(taskToBeCompleted.Id);
                 if (result.HasBeenSuccessful)
                 {
-                    await this._dialogService.DisplayAlertAsync("Succedded", "Task marked as completed", "OK");
+                    await this._dialogService.DisplayAlertAsync("Succeeded", "Task marked as completed", "OK");
                     var currentTaskPressedIndex = ListOfTasksForCurrentAircraft.IndexOf(taskToBeCompleted);
                     var currentTask = taskToBeCompleted;
                     currentTask.Status = ServiceTaskStatusesEnum.StatusCompleted;

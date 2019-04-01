@@ -48,8 +48,7 @@
             </ListView>
             <Button 
                 Font="Bold,11"
-                BackgroundColor="Aqua"
-                VerticalOptions="CenterAndExpand"
+                VerticalOptions="EndAndExpand"
                 Text="Add Member"
                 Margin="0,0,0,0"
                 Command="{Binding GoToAddMemberToTeamPage}"

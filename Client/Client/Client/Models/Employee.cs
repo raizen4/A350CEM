@@ -19,7 +19,7 @@ namespace Client.Models
             get => this._token;
             set => this._token = value;
         }
-        public string ID
+        public string Id
         {
             get => this._id;
             set => this._id = value;

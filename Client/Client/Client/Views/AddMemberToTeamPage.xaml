@@ -2,7 +2,91 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:dataControls="clr-namespace:Telerik.XamarinForms.DataControls;assembly=Telerik.XamarinForms.DataControls"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="Client.Views.AddMemberToTeamPage">
-  
+             xmlns:listView="clr-namespace:Telerik.XamarinForms.DataControls.ListView;assembly=Telerik.XamarinForms.DataControls"
+             x:Class="Client.Views.AddMemberToTeamPage"
+             Title="{Binding Title}">
+    <StackLayout VerticalOptions="FillAndExpand" Padding="20">
+        <Label Margin="10,0,0,0" Text="List of Current Employees" FontSize="Large"/>
+
+        <Grid>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100*" />
+
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="90*"/>
+                <RowDefinition Height="10*"/>
+            </Grid.RowDefinitions>
+            <dataControls:RadListView  x:Name="ListView"
+                                       IsItemSwipeEnabled="False"
+                                       Grid.Column="0" Grid.Row="0" 
+                                       VerticalOptions="FillAndExpand"
+                                       HorizontalOptions="FillAndExpand"
+                                       SelectionMode="Multiple"
+                                       ItemsSource="{Binding ListOfEmployees}"
+                                       SelectedItems="{Binding SelectedItems}"
+                                     >
+                <dataControls:RadListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50*" />
+                                    <ColumnDefinition Width="50*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="100*"/>
+                                </Grid.RowDefinitions>
+
+                                <StackLayout Grid.Row="0" Grid.Column="0">
+                                    <Grid>
+
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="50*" />
+                                            <RowDefinition Height="50*" />
+                                        </Grid.RowDefinitions>
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="100*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Label Grid.Column="0" Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Start" Text="{Binding Name}"></Label>
+                                        <Label Grid.Column="0" Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Start" Text="{Binding Team}"></Label>
+
+                                    </Grid>
+                                </StackLayout>
+
+                                <StackLayout Grid.Row="0" Grid.Column="1">
+                                    <Grid>
+
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="50*" />
+                                            <RowDefinition Height="50*" />
+                                        </Grid.RowDefinitions>
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="100*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Label Grid.Column="0" Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Start" Text="{Binding Spec}"></Label>
+                                        <Label Grid.Column="0" Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Start" Text="{Binding ManHours}"></Label>
+
+                                    </Grid>
+                                </StackLayout>
+
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </dataControls:RadListView.ItemTemplate>
+            </dataControls:RadListView>
+
+            <Button Grid.Row="1" Grid.Column="0" Text="Add members to this team"></Button>
+        </Grid>
+          
+    </StackLayout>
 </ContentPage>

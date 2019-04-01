@@ -98,7 +98,7 @@ namespace Api.Controllers
 
             try
             {
-                var result = manager.AssignEmployeeToTeam(assignEmployeeForm.EmployeeId, assignEmployeeForm.TeamId);
+                var result = manager.AssignEmployeeToTeam(assignEmployeeForm.newEmployees, assignEmployeeForm.TeamId);
                 if (result)
                 {
                     response.HasBeenSuccessful = true;

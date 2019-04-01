@@ -18,6 +18,15 @@ namespace Client.ViewModels
         private readonly INavigationService navService;
         private readonly IPageDialogService dialogService;
         private ObservableCollection<Employee> teamMembersList;
+        private string teamIdPassed;
+
+
+        public string TeamIdPassed
+        {
+            get => this.teamIdPassed;
+            set => this.teamIdPassed = value;
+        }
+
         public DelegateCommand GoToAddMemberToTeamPage { get; set; }
 
         public ObservableCollection<Employee> TeamMembersList
@@ -38,7 +47,12 @@ namespace Client.ViewModels
             this.facade = facadeImpl;
             this.navService = navigationService;
             this.dialogService = dialogServiceImpl;
-            this.GoToAddMemberToTeamPage = new DelegateCommand(async () => await this.navService.NavigateAsync(nameof(Views.AddMemberToTeamPage)));
+            this.GoToAddMemberToTeamPage = new DelegateCommand(async () => {
+                NavigationParameters navParams = new NavigationParameters();
+                navParams.Add("teamId", TeamIdPassed);
+                await this.navService.NavigateAsync(nameof(Views.AddMemberToTeamPage), navParams);
+            });
+         
 
         }
 
@@ -51,6 +65,7 @@ namespace Client.ViewModels
                 parameters.TryGetValue("teamId", out teamId);
                 if (teamId != null)
                 {
+                    TeamIdPassed = teamId;
                     var getMembersResult = await this.facade.GetTeamMembers(teamId);
                     if (getMembersResult.HasBeenSuccessful)
                     {

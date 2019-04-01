@@ -250,20 +250,18 @@ namespace Api
             }
         }
 
-        public bool AssignEmployeeToTeam(string employeeId, string teamId)
+        public bool AssignEmployeeToTeam(List<Employee> newEmployees, string teamId)
         {
             try
             {
-                var updateDef = Builders<Employee>.Update.Set(employee => employee.TeamId, teamId);
-                Console.WriteLine("updateDef is ", updateDef);
-                var dbResult = this.employees.FindOneAndUpdate(employee => employee.Id == employeeId, updateDef);
-                Console.WriteLine("dbResult is ", dbResult);
-
-                if (dbResult != null)
+                foreach (Employee employee in newEmployees)
                 {
-                    return true;
+                    var updateDef = Builders<Employee>.Update.Set(currentEmployee => employee.TeamId, teamId);
+                    var dbResult = this.employees.FindOneAndUpdate(foundEmployee => foundEmployee.Id == employee.Id, updateDef);
+                    Console.WriteLine("dbResult is ", dbResult);
                 }
-                return false;
+
+                return true;
             }
             catch (Exception e)
             {

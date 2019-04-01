@@ -19,13 +19,14 @@ namespace Client.Services
             this.apiWrapper = apiWrapper;
         }
 
-        public async Task<ResponseData<IEnumerable<Team>>> AddMemberToTeam(string teamId)
+        public async Task<ResponseBase> AddMemberToTeam(List<Employee> newEmployees,string teamId)
         {
             var responseData = new ResponseData<IEnumerable<Team>>()
             {
                 HasBeenSuccessful = false
             };
             var addMemberReq = new AddMemberRequest();
+            addMemberReq.NewMembers = newEmployees;
             addMemberReq.TeamId = teamId;
             var result = await this.apiWrapper.AddMemberToTeam(addMemberReq);
             string content = await result.Content.ReadAsStringAsync();
@@ -38,13 +39,13 @@ namespace Client.Services
                     if (!deserializedContent.HasBeenSuccessful || !deserializedContent.Content.Any())
                     {
                         responseData.HasBeenSuccessful = false;
-                        responseData.Content = null;
+       
                         responseData.Error = "Internal Server Error";
                         return responseData;
                     }
 
                     responseData.HasBeenSuccessful = true;
-                    responseData.Content = deserializedContent.Content;
+                
                     responseData.Error = null;
                     return responseData;
                 }
@@ -52,13 +53,13 @@ namespace Client.Services
                 {
                     Console.WriteLine(e.StackTrace);
                     responseData.HasBeenSuccessful = false;
-                    responseData.Content = null;
+          
                     responseData.Error = "Deserialization Error";
                     return responseData;
                 }
             }
             responseData.HasBeenSuccessful = false;
-            responseData.Content = null;
+
             responseData.Error = "Internal server Error";
             return responseData;
 
@@ -251,7 +252,7 @@ namespace Client.Services
                 {
                     var deserializedContent = JsonConvert.DeserializeObject<ResponseData<IEnumerable<Employee>>>(content);
 
-                    if (!deserializedContent.HasBeenSuccessful || !deserializedContent.Content.Any())
+                    if (!deserializedContent.HasBeenSuccessful || deserializedContent.Content==null)
                     {
                         responseData.HasBeenSuccessful = false;
                         responseData.Content = null;
@@ -297,7 +298,7 @@ namespace Client.Services
                 {
                     var deserializedContent = JsonConvert.DeserializeObject<ResponseData<IEnumerable<ServiceTask>>>(content);
 
-                    if (!deserializedContent.HasBeenSuccessful || !deserializedContent.Content.Any())
+                    if (!deserializedContent.HasBeenSuccessful || deserializedContent.Content == null)
                     {
                         responseData.HasBeenSuccessful = false;
                         responseData.Content = null;
@@ -344,7 +345,7 @@ namespace Client.Services
                 {
                     var deserializedContent = JsonConvert.DeserializeObject<ResponseData<IEnumerable<Team>>>(content);
 
-                    if (!deserializedContent.HasBeenSuccessful || !deserializedContent.Content.Any())
+                    if (!deserializedContent.HasBeenSuccessful || deserializedContent.Content == null)
                     {
                         responseData.HasBeenSuccessful = false;
                         responseData.Content = null;
@@ -387,7 +388,7 @@ namespace Client.Services
                 {
                     var deserializedContent = JsonConvert.DeserializeObject<ResponseData<IEnumerable<Team>>>(content);
 
-                    if (!deserializedContent.HasBeenSuccessful || !deserializedContent.Content.Any())
+                    if (!deserializedContent.HasBeenSuccessful || deserializedContent.Content == null)
                     {
                         responseData.HasBeenSuccessful = false;
                         responseData.Content = null;
