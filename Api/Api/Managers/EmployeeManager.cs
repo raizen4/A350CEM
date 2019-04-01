@@ -49,21 +49,11 @@ namespace Api.Managers
             }
         }
 
-<<<<<<< HEAD
         public bool AssignEmployeeToTeam(List<Employee> newEmployees ,string teamId)
         {
             try
             {
                 var result = dbService.AssignEmployeeToTeam(newEmployees, teamId);
-=======
-        // Assign an Employee to a Team Manager
-        public bool AssignEmployeeToTeam(string employeeId ,string teamId)
-        {
-            try
-            {
-                // Request DB connection to assign an Employee to a Team
-                var result = dbService.AssignEmployeeToTeam(employeeId, teamId);
->>>>>>> b837f944de513d6e2f6a98e9b32dda34716c915e
                 if (result)
                 {
                     // Return success

@@ -11,6 +11,6 @@ namespace Api.ServiceModels
     {
         public string TeamId { get; set; }
 
-        public List<Employee> newEmployees { get; set; }
+        public List<Employee> NewMembers { get; set; }
     }
 }

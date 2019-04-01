@@ -15,9 +15,8 @@ namespace Client.ViewModels
 
 	public class AddMemberToTeamPageViewModel : ViewModelBase
 	{
-		private List<Employee> listOfEmployess;
+		private ObservableCollection<Employee> listOfEmployess;
         private readonly INavigationService navService;
-		private ObservableCollection<Employee> selectedEmployees;
 		private readonly IFacade facade;
 		private readonly IPageDialogService dialogService;
 		private string teamId;
@@ -29,16 +28,16 @@ namespace Client.ViewModels
 			set => this.teamId = value;
 		}
         public DelegateCommand FinishAdddingMembersCommand { get; set; }
-		public List<Employee> ListOfEmployees
+		public ObservableCollection<Employee>  ListOfEmployees
 		{
 			get => this.listOfEmployess;
 			set
 			{
-				if (this.selectedEmployees == null && value == null)
+				if (this.listOfEmployess == null && value == null)
 				{
-					ListOfEmployees = new List<Employee>();
+                    ListOfEmployees = new ObservableCollection<Employee>();
 
-				}
+                }
 				else
 				{
 					this.listOfEmployess = value;
@@ -46,22 +45,6 @@ namespace Client.ViewModels
                 }
                
 			}
-		}
-		public ObservableCollection<Employee> SelectedEmployees
-		{
-			get => this.selectedEmployees;
-			set
-			{
-				if (this.selectedEmployees == null && value==null)
-				{
-					SelectedEmployees=new ObservableCollection<Employee>();
-				}
-				else
-				{
-				this.selectedEmployees = value;
-				RaisePropertyChanged();
-				}
-            }
 		}
        
 		
@@ -71,7 +54,7 @@ namespace Client.ViewModels
 		{
 			Title = "Add members to team";
             this.facade = facade;
-			FinishAdddingMembersCommand=new DelegateCommand(async ()=>await AddMembersTask());
+			FinishAdddingMembersCommand=new DelegateCommand(AddMembersTask);
 			this.navService = navigationService;
 			this.dialogService = dialogService;
 		
@@ -85,10 +68,11 @@ namespace Client.ViewModels
 				var result = await this.facade.GetEmployees();
 				if (result.HasBeenSuccessful)
 				{
-					//var listToObservable = new ObservableCollection<Employee>(result.Content.ToList());
-					ListOfEmployees = result.Content.ToList();
+					var listToObservable = new ObservableCollection<Employee>(result.Content.ToList());
+                    ListOfEmployees = listToObservable;
 
-				}
+
+                }
 				else
 				{
 					var dialogResult = await this.dialogService.DisplayAlertAsync("Error", "Something went wrong, couldn't retrieve the employees data", "Try again", "OK");
@@ -106,12 +90,19 @@ namespace Client.ViewModels
 		}
 
 
-		public async Task AddMembersTask()
+		public async void AddMembersTask()
 		{
 			try
 			{
-
-				var result = await this.facade.AddMemberToTeam(SelectedEmployees.ToList(), TeamId);
+                var selectedEmployees = new List<Employee>();
+                foreach(Employee emp in ListOfEmployees)
+                {
+                    if (emp.IsSelected)
+                    {
+                        selectedEmployees.Add(emp);
+                    }
+                }
+				var result = await this.facade.AddMemberToTeam(selectedEmployees, TeamId);
 				if (result.HasBeenSuccessful)
 				{
 
@@ -124,7 +115,7 @@ namespace Client.ViewModels
 					var dialogResult = await this.dialogService.DisplayAlertAsync("Error", "Something went wrong, couldn't retrieve the employees data", "Try again", "OK");
 					if (dialogResult)
 					{
-						await this.AddMembersTask();
+						 this.AddMembersTask();
 					}
 				}
 
@@ -152,6 +143,19 @@ namespace Client.ViewModels
 				Console.WriteLine(e.Message);
 			}
 		}
+        internal void ShowOrHideExtension(Employee employeePressed)
+        {
+            var currentTaskPressedIndex = ListOfEmployees.IndexOf(employeePressed);
+            var currentEmployee = employeePressed;
+            if (currentTaskPressedIndex == -1)
+            {
+                currentTaskPressedIndex++;
+            }
+            currentEmployee.IsSelected = !currentEmployee.IsSelected;
+            ListOfEmployees.RemoveAt(currentTaskPressedIndex);
+            ListOfEmployees.Insert(currentTaskPressedIndex, currentEmployee);
+
+        }
 
     }
 

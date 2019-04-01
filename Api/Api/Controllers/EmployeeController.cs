@@ -102,7 +102,7 @@ namespace Api.Controllers
 
             try
             {
-                var result = manager.AssignEmployeeToTeam(assignEmployeeForm.newEmployees, assignEmployeeForm.TeamId);
+                var result = manager.AssignEmployeeToTeam(assignEmployeeForm.NewMembers, assignEmployeeForm.TeamId);
                 if (result)
                 {
                     response.HasBeenSuccessful = true;

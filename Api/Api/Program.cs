@@ -20,6 +20,6 @@ namespace Api
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
-                .UseUrls("http://localhost:4000");
+                .UseUrls("http://10.1.157.130:4000");
     }
 }

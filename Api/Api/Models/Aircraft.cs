@@ -19,7 +19,7 @@ namespace Client.Models
         [BsonElement("FlyingHours")]
         public string FlyingHours { get; set; }
 
-        [BsonElement("TeamId")]
+        [BsonElement("Team")]
         public string TeamId { get; set; }
 
         [BsonIgnore]

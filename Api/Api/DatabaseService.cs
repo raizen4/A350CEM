@@ -202,7 +202,7 @@ namespace Api
         {
             try
             {
-                var dbResult = this.employees.Find(employee => employee.TeamId == teamId).ToEnumerable();
+                var dbResult = this.employees.Find(employee => employee.Team == teamId).ToEnumerable();
                 Console.WriteLine(dbResult);
                 return dbResult;
             }
@@ -256,8 +256,8 @@ namespace Api
             {
                 foreach (Employee employee in newEmployees)
                 {
-                    var updateDef = Builders<Employee>.Update.Set(currentEmployee => employee.TeamId, teamId);
-                    var dbResult = this.employees.FindOneAndUpdate(foundEmployee => foundEmployee.Id == employee.Id, updateDef);
+                    var updateDef = Builders<Employee>.Update.Set(currentEmployee => currentEmployee.Team, teamId.Trim());
+                    var dbResult = this.employees.FindOneAndUpdate(foundEmployee => foundEmployee.Id == employee.Id.Trim(), updateDef);
                     Console.WriteLine("dbResult is ", dbResult);
                 }
 

@@ -14,7 +14,7 @@ namespace Client.Models
         public string Name { get; set; }
        
         [BsonElement("Team")]
-        public string TeamId { get; set; }
+        public string Team { get; set; }
 
         [BsonElement("ManHours")]
         public string ManHours { get; set; }

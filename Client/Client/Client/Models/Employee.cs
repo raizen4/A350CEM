@@ -12,6 +12,14 @@ namespace Client.Models
         private string _name;
         private string _manHours;
         private string _token;
+        private bool isSelected=false;
+
+
+        public bool IsSelected
+        {
+            get => this.isSelected;
+            set => this.isSelected = value;
+        }
 
 
         public string Token
