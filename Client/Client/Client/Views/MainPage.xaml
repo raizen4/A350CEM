@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Client.Views.MainPage"
+             Title="{Binding Title}"
+             BackgroundColor="FloralWhite">
+                
+    <Grid HorizontalOptions="FillAndExpand"   VerticalOptions="FillAndExpand">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*"></RowDefinition>
+                <RowDefinition Height="50*"></RowDefinition>
+                <RowDefinition Height="20*"></RowDefinition>
+                <RowDefinition Height="10*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <StackLayout   Grid.Row="0" Grid.Column="0" Orientation="Horizontal"  HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                <Label FontSize="25" TextColor="Black" Text="Welcome, "></Label>
+                <Label FontSize="25" TextColor="Black" Text="{Binding UserName}"></Label>
+            </StackLayout>
+            
+            <StackLayout  Grid.Row="1" Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+                <Grid   HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50*"></RowDefinition>
+                        <RowDefinition Height="50*"></RowDefinition>
+                        
+                    </Grid.RowDefinitions>
+                    
+                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50*"></ColumnDefinition>
+                        <ColumnDefinition Width="50*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+
+                    <Button Grid.Column="0"  Grid.Row="0" Text="View Employees" Command="{Binding GoToEmployeesPage}"></Button>
+                    <Button  Grid.Column="0" Grid.Row="1" Text="Get Aircrafts" Command="{Binding GoToAircraftInfoPage}"></Button>
+                    <Button  Grid.Column="1" Grid.Row="0" Text="View Teams" Command="{Binding GoToTeamsListPage}"></Button>
+                    <Button  Grid.Column="1" Grid.Row="1" Text="Aircraft Management" Command="{Binding DisplayAircraftManagementPopup}"></Button>
+
+                </Grid>
+            </StackLayout>
+
+            <StackLayout  Grid.Row="3" Grid.Column="0"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <Button VerticalOptions="FillAndExpand" Command="{Binding LogoutCommand}" HorizontalOptions="FillAndExpand" Text="Logout"></Button>
+            </StackLayout>
+        </Grid>
+      
+    </Grid>
+
+</ContentPage>

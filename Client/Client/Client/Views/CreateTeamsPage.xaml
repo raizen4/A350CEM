@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="Client.Views.CreateTeamsPage"
+             x:Name="TeamsCreationPageLayout"
+             Title="{Binding Title}">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand" Padding="20">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="25*"></ColumnDefinition>
+                    <ColumnDefinition Width="75*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20*"></RowDefinition>
+                    <RowDefinition Height="20*"></RowDefinition>
+                    <RowDefinition Height="40*"></RowDefinition>
+                </Grid.RowDefinitions>
+            </Grid>
+            <Label Grid.Column="0" Grid.Row="0" Text="Please select the Aircraft" FontSize="Medium"/>
+            <Picker Grid.Column="1" Grid.Row="0" Title="--Select--" 
+                    ItemsSource="{Binding ListOfAircrafts}" 
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding CurrentAircraft}"/>
+            <Label Grid.Column="0" Grid.Row="1" Text="Please select the Team" FontSize="Medium"/>
+            <Picker Grid.Column="1" Grid.Row="1" Title="--Select--" 
+                    ItemsSource="{Binding ListOfTeams}" 
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding CurrentTeam}"/>
+            <Button VerticalOptions="End" Text="Finish" Command="{Binding AddTeamCommand}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
